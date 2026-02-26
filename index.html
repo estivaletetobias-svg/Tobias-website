@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap"
         rel="stylesheet">
 
     <!-- Tailwind CSS (CDN) -->
@@ -35,6 +35,7 @@
                         sans: ['Inter', 'sans-serif'],
                         mono: ['JetBrains Mono', 'monospace'],
                         display: ['Space Grotesk', 'sans-serif'],
+                        serif: ['Libre Baskerville', 'serif'],
                     },
                     colors: {
                         stone: {
@@ -109,6 +110,24 @@
             outline-offset: 2px;
         }
 
+        /* Flashlight Effect */
+        .flashlight-card::before {
+            content: "";
+            position: absolute;
+            inset: 0px;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
+                    rgba(255, 255, 255, 0.08),
+                    transparent 40%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .flashlight-card:hover::before {
+            opacity: 1;
+        }
+
         /* Animations: prefers reduced motion fallback */
         @media (prefers-reduced-motion: reduce) {
             * {
@@ -117,10 +136,22 @@
             }
         }
 
+        /* Animação de Scroll Down Line */
+        @keyframes scrollAnim {
+            0% {
+                transform: translateY(-100%);
+            }
+
+            100% {
+                transform: translateY(100%);
+            }
+        }
+
         /* Animação Inicial Oculta (Evita o Pop in antes do carregamento completo do animador) */
         #hero-badge,
         #hero-desc,
         #hero-buttons,
+        #scroll-indicator,
         #video-container,
         .reveal-text {
             opacity: 0;
@@ -162,7 +193,8 @@
             <span class="text-stone-300">|</span>
             <a href="#sobre" class="hover:text-stone-900 transition-colors">Sobre</a>
             <span class="text-stone-300">|</span>
-            <a href="#contato" class="hover:text-stone-900 transition-colors">Contato</a>
+            <a href="https://wa.me/5548999165612" target="_blank" rel="noopener noreferrer"
+                class="hover:text-stone-900 transition-colors">Contato</a>
         </div>
 
         <button
@@ -248,7 +280,7 @@
 
                 <h2 class="text-base md:text-lg text-stone-600 max-w-md leading-relaxed font-light mb-10 overflow-hidden"
                     id="hero-desc">
-                    E construo sistemas inteligentes para escalar disciplina e autoridade.
+                    Construo sistemas inteligentes para escalar disciplina e autoridade.
                 </h2>
 
                 <div class="flex flex-col sm:flex-row gap-4" id="hero-buttons">
@@ -266,16 +298,127 @@
                 </div>
 
             </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-30"
+                id="scroll-indicator">
+                <span class="text-[10px] tracking-[0.3em] font-mono text-stone-500 uppercase">Scroll to control</span>
+                <div class="w-[1px] h-8 bg-stone-300 relative overflow-hidden">
+                    <div
+                        class="absolute top-0 left-0 w-full h-full bg-stone-500 animate-[scrollAnim_1.5s_ease-in-out_infinite]">
+                    </div>
+                </div>
+            </div>
+
         </main>
 
-        <!-- SEÇÃO DE RODAPÉ/CONTINUAÇÃO PARA TESTAR O SCROLL -->
-        <!-- O scroll-scrub exige espaço para rolar, esta seção e o pin criarão esse espaço -->
-        <section
-            class="h-screen flex items-center justify-center text-center p-8 bg-stone-900 text-white border-t border-stone-300 relative z-10">
-            <div>
-                <span class="text-xs font-mono uppercase tracking-widest text-stone-400 mb-4 block">Próxima
-                    Geração</span>
-                <h2 class="text-4xl md:text-6xl font-display font-medium tracking-tighter">Escreva o futuro.</h2>
+        <!-- SEÇÃO DE PROJETOS -->
+        <!-- SEÇÃO DE PROJETOS -->
+        <section id="projetos" class="relative z-10 w-full bg-[#EAEAE5] py-32 px-6 md:px-12 lg:px-24">
+            <div class="max-w-7xl mx-auto relative z-10">
+
+                <!-- Header da Seção -->
+                <div class="mb-20 pb-8 border-b border-stone-300">
+                    <h2 class="font-serif text-4xl md:text-5xl lg:text-5xl text-stone-900 mb-6 tracking-tight">
+                        Projetos
+                    </h2>
+                    <p class="text-stone-600 max-w-2xl text-base md:text-lg font-sans font-light leading-relaxed">
+                        Sistemas aplicados à performance humana, tecnologia e escala.
+                    </p>
+                </div>
+
+                <!-- Grid Responsivo -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-8">
+
+                    <!-- Projeto 1 -->
+                    <a href="https://chk.eduzz.com/1W3ZVP8DW2" target="_blank" rel="noopener noreferrer"
+                        class="group relative bg-[#F9F9F8] flex flex-col justify-between p-8 md:p-10 transition-transform duration-500 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] sm:rounded-sm">
+                        <div>
+                            <div class="w-10 h-10 bg-[#EAEAE5] rounded-lg flex items-center justify-center mb-8">
+                                <i data-lucide="cpu" class="w-[18px] h-[18px] text-[#1c1917]"></i>
+                            </div>
+                            <h3
+                                class="text-[#1c1917] font-sans font-medium text-[1.15rem] leading-tight mb-3 tracking-tight">
+                                IA Personal Coach
+                            </h3>
+                            <p class="text-[#78716C] font-sans text-[14px] leading-[1.6] max-w-sm">
+                                Sistema de acompanhamento inteligente 24/7 com supervisão humana estratégica.
+                            </p>
+                        </div>
+                        <div class="mt-12 w-full h-[1px] bg-[#EAEAE5] relative overflow-hidden rounded-full">
+                            <div
+                                class="absolute inset-y-0 left-0 bg-[#A8A29E] w-0 group-hover:w-full transition-all duration-[800ms] ease-out">
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Projeto 2 -->
+                    <a href="#"
+                        class="group relative bg-[#F9F9F8] flex flex-col justify-between p-8 md:p-10 transition-transform duration-500 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] sm:rounded-sm">
+                        <div>
+                            <div class="w-10 h-10 bg-[#EAEAE5] rounded-lg flex items-center justify-center mb-8">
+                                <i data-lucide="copy" class="w-[18px] h-[18px] text-[#1c1917]"></i>
+                            </div>
+                            <h3
+                                class="text-[#1c1917] font-sans font-medium text-[1.15rem] leading-tight mb-3 tracking-tight">
+                                Clone Pronto™
+                            </h3>
+                            <p class="text-[#78716C] font-sans text-[14px] leading-[1.6] max-w-sm">
+                                Presença e autoridade assíncrona para profissionais que querem escalar impacto.
+                            </p>
+                        </div>
+                        <div class="mt-12 w-full h-[1px] bg-[#EAEAE5] relative overflow-hidden rounded-full">
+                            <div
+                                class="absolute inset-y-0 left-0 bg-[#A8A29E] w-0 group-hover:w-full transition-all duration-[800ms] ease-out">
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Projeto 3 -->
+                    <a href="#"
+                        class="group relative bg-[#F9F9F8] flex flex-col justify-between p-8 md:p-10 transition-transform duration-500 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] sm:rounded-sm">
+                        <div>
+                            <div class="w-10 h-10 bg-[#EAEAE5] rounded-lg flex items-center justify-center mb-8">
+                                <i data-lucide="database" class="w-[18px] h-[18px] text-[#1c1917]"></i>
+                            </div>
+                            <h3
+                                class="text-[#1c1917] font-sans font-medium text-[1.15rem] leading-tight mb-3 tracking-tight">
+                                Vault
+                            </h3>
+                            <p class="text-[#78716C] font-sans text-[14px] leading-[1.6] max-w-sm">
+                                Centro de inteligência com frameworks, aulas e estruturas aplicáveis.
+                            </p>
+                        </div>
+                        <div class="mt-12 w-full h-[1px] bg-[#EAEAE5] relative overflow-hidden rounded-full">
+                            <div
+                                class="absolute inset-y-0 left-0 bg-[#A8A29E] w-0 group-hover:w-full transition-all duration-[800ms] ease-out">
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Projeto 4 -->
+                    <a href="#"
+                        class="group relative bg-[#F9F9F8] flex flex-col justify-between p-8 md:p-10 transition-transform duration-500 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] sm:rounded-sm">
+                        <div>
+                            <div class="w-10 h-10 bg-[#EAEAE5] rounded-lg flex items-center justify-center mb-8">
+                                <i data-lucide="briefcase" class="w-[18px] h-[18px] text-[#1c1917]"></i>
+                            </div>
+                            <h3
+                                class="text-[#1c1917] font-sans font-medium text-[1.15rem] leading-tight mb-3 tracking-tight">
+                                Projetos Especiais
+                            </h3>
+                            <p class="text-[#78716C] font-sans text-[14px] leading-[1.6] max-w-sm">
+                                Parcerias, keynotes e sistemas sob medida para contextos estratégicos.
+                            </p>
+                        </div>
+                        <div class="mt-12 w-full h-[1px] bg-[#EAEAE5] relative overflow-hidden rounded-full">
+                            <div
+                                class="absolute inset-y-0 left-0 bg-[#A8A29E] w-0 group-hover:w-full transition-all duration-[800ms] ease-out">
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
             </div>
         </section>
 
@@ -309,7 +452,7 @@
             // que em GSAP mapeia de forma mais elegante para "expo.out" ou "power4.out".
 
             // Setup inicial: translateY e blur, usando autoAlpha (que mapeia visibilidade tbm)
-            gsap.set(["#hero-badge", "#hero-desc", "#hero-buttons"], { filter: "blur(10px)", y: 32 });
+            gsap.set(["#hero-badge", "#hero-desc", "#hero-buttons", "#scroll-indicator"], { filter: "blur(10px)", y: 32 });
             gsap.set("#video-container", { scale: 0.95, filter: "blur(15px)" });
 
             const introTl = gsap.timeline({ delay: 0.1 });
@@ -319,10 +462,11 @@
                 .to("#hero-badge", { autoAlpha: 1, filter: "blur(0px)", y: 0, duration: 1.2, ease: "power4.out" }, "-=1.5")
                 .to(".reveal-text", { y: "0%", autoAlpha: 1, filter: "blur(0px)", stagger: 0.15, duration: 1.2, ease: "power4.out" }, "-=1.0")
                 .to("#hero-desc", { autoAlpha: 1, filter: "blur(0px)", y: 0, duration: 1.2, ease: "power4.out" }, "-=1.0")
-                .to("#hero-buttons", { autoAlpha: 1, filter: "blur(0px)", y: 0, duration: 1.2, ease: "power4.out" }, "-=1.0");
+                .to("#hero-buttons", { autoAlpha: 1, filter: "blur(0px)", y: 0, duration: 1.2, ease: "power4.out" }, "-=1.0")
+                .to("#scroll-indicator", { autoAlpha: 1, filter: "blur(0px)", y: 0, duration: 1.2, ease: "power4.out" }, "-=0.8");
 
             // Timeline de Saída baseada no Scroll (Fade + Blur OUT com a Mesma Física)
-            gsap.to(["#hero-badge", "#hero-title", "#hero-desc", "#hero-buttons"], {
+            gsap.to(["#hero-badge", "#hero-title", "#hero-desc", "#hero-buttons", "#scroll-indicator"], {
                 scrollTrigger: {
                     trigger: "#hero-section",
                     start: "top top", // Começa quando rola
