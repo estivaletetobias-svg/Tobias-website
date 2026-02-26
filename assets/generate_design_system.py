@@ -1,0 +1,743 @@
+import os
+
+html_content = """<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Design System - Premium UI</title>
+    <!-- Scripts from original files -->
+    <script src="assets/resource_3fa48481346f.js"></script>
+    <script src="assets/iconify-icon_d39ffc6e4c56.js"></script>
+    <link href="assets/css2_19fd9cc6b396.css" rel="stylesheet" />
+    <style>
+        :root {
+            --bg-main: #FFFFFF;
+            --bg-secondary: #F5F5F0;
+            --text-primary: #1C1C1C;
+            --text-secondary: #6B6B6B;
+            --border-color: #E0E0E0;
+            --accent: #1C1C1C;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* Essential Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(2rem);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .text-reveal-wrapper {
+            overflow: hidden;
+            display: inline-block;
+            vertical-align: bottom;
+        }
+
+        .text-reveal-content {
+            transform: translateY(110%);
+            opacity: 0;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease;
+            display: block;
+        }
+
+        .reveal-active .text-reveal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Delays */
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+        .delay-500 { transition-delay: 0.5s; }
+        .delay-700 { transition-delay: 0.7s; }
+
+        /* Beam Button Animation */
+        @keyframes shimmer {
+            from { transform: translateX(-100%) skewX(-15deg); }
+            to { transform: translateX(200%) skewX(-15deg); }
+        }
+
+        .beam-button {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .beam-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .beam-button:hover::before {
+            left: 100%;
+        }
+
+        /* Flashlight Effect */
+        .flashlight-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .flashlight-card-dark {
+            position: relative;
+            background: rgba(28, 28, 28, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        .flashlight-card::before, .flashlight-card-dark::before {
+            content: "";
+            position: absolute;
+            inset: 0px;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
+                    rgba(255, 255, 255, 0.15),
+                    transparent 40%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        .flashlight-card::before {
+             background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y),
+                    rgba(28, 28, 28, 0.08),
+                    transparent 40%);
+        }
+
+        .flashlight-card:hover::before, .flashlight-card-dark:hover::before {
+            opacity: 1;
+        }
+
+        /* Transparent Lettering */
+        .transparent-text {
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(28, 28, 28, 0.3);
+            transition: all 0.5s ease;
+        }
+
+        .transparent-text:hover {
+            -webkit-text-stroke: 1px rgba(28, 28, 28, 0.8);
+            color: rgba(28, 28, 28, 0.05);
+        }
+
+        /* Carousel Image */
+        .carousel-slide {
+            position: absolute;
+            inset: 0;
+            transition: opacity 1.5s ease-in-out;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide img {
+            transform: scale(1);
+            transition: transform 10s ease-out;
+        }
+
+        .carousel-slide.active img {
+            transform: scale(1.1);
+        }
+        
+        /* Blur background shape */
+        .bg-shape-blur {
+            position: absolute;
+            filter: blur(80px);
+            z-index: 0;
+            border-radius: 50%;
+            animation: floatShape 15s infinite alternate ease-in-out;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        @keyframes floatShape {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 30px) scale(1.1); }
+            100% { transform: translate(-30px, 60px) scale(0.9); }
+        }
+    </style>
+</head>
+
+<body class="antialiased min-h-screen selection:bg-stone-800 selection:text-white pb-10">
+    <!-- Main Container -->
+    <div class="max-w-[1400px] mx-auto border-x border-gray-200 relative bg-white">
+
+        <!-- Navigation -->
+        <header class="relative z-50 border-b border-gray-200 sticky top-0 bg-white/80 backdrop-blur-md">
+            <div class="flex justify-between items-center px-6 py-5">
+                <div class="flex items-center gap-6">
+                    <a class="text-xs font-medium tracking-widest uppercase hover:text-gray-500 transition-colors" href="#hero">Overview</a>
+                    <a class="text-xs font-medium tracking-widest uppercase hover:text-gray-500 transition-colors" href="#typography">Typography</a>
+                    <a class="text-xs font-medium tracking-widest uppercase hidden md:block hover:text-gray-500 transition-colors" href="#colors">Colors</a>
+                </div>
+                <div class="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 group cursor-pointer">
+                    <iconify-icon class="text-xl group-hover:rotate-180 transition-transform duration-700" icon="solar:atom-linear"></iconify-icon>
+                    <span class="font-bold tracking-tighter text-lg">SYSTEM.NOVO1</span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <a class="text-xs font-medium tracking-widest uppercase hidden md:block hover:text-gray-500 transition-colors" href="#components">Components</a>
+                    <a class="text-xs font-medium tracking-widest uppercase hover:text-gray-500 transition-colors" href="#motion">Motion</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- 1) Hero Section Demo -->
+        <section id="hero" class="relative z-10 grid grid-cols-1 md:grid-cols-12 border-b border-gray-200 min-h-[700px] overflow-hidden bg-white">
+            <!-- Animated Background Glows -->
+            <div class="bg-shape-blur bg-gray-200 w-96 h-96 top-[-100px] left-[-100px]"></div>
+            <div class="bg-shape-blur bg-gray-100 w-80 h-80 bottom-0 right-10" style="animation-delay: -5s;"></div>
+
+            <!-- Left Space (Hero Text) -->
+            <div class="col-span-1 md:col-span-8 p-12 flex flex-col justify-center relative z-20">
+                <span class="text-xs uppercase tracking-[0.25em] font-mono text-gray-500 mb-6 block reveal active">v2.0 / Experimental</span>
+                
+                <h1 class="text-7xl md:text-9xl font-semibold tracking-tighter leading-[0.9] mb-6" id="hero-title">
+                    <span class="text-reveal-wrapper"><span class="text-reveal-content delay-100">Design</span></span><br/>
+                    <span class="text-reveal-wrapper"><span class="text-reveal-content delay-200 transparent-text">System</span></span>
+                </h1>
+                
+                <p class="text-lg md:text-xl text-gray-600 max-w-lg mb-10 reveal delay-300">
+                    A creative combination of pure aesthetics, emerging animations, and solid design foundations. Built to impress and scale.
+                </p>
+
+                <div class="flex flex-wrap gap-4 items-center reveal delay-500">
+                    <button class="beam-button px-8 py-4 bg-black text-white rounded-full text-sm font-medium hover:bg-gray-800 transition-all flex items-center gap-2 group shadow-xl">
+                        Explore Components
+                        <iconify-icon class="text-lg group-hover:translate-x-1 transition-transform" icon="solar:arrow-right-linear"></iconify-icon>
+                    </button>
+                    <button class="px-8 py-4 border border-gray-300 text-black rounded-full text-sm font-medium hover:bg-gray-50 transition-all flex items-center gap-2">
+                        Get Guidelines
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Space (Interactive Model / Images) -->
+            <div class="col-span-1 md:col-span-4 border-l border-gray-200 relative group overflow-hidden bg-gray-50">
+                <div class="w-full h-full relative" id="hero-carousel">
+                    <!-- The user asked to use images found in the templates -->
+                    <div class="carousel-slide active">
+                        <img class="w-full h-full object-cover grayscale opacity-90 transition-all duration-700 hover:grayscale-0" src="templates/digital-architect.aura.build/assets/c7fa69dd-d7fb-48f2-a866-ef3663_f6b789593f38.webp" alt="Inspiration 1" />
+                    </div>
+                </div>
+                <!-- Interactive Overlay -->
+                <div class="absolute bottom-10 right-10 z-30 flex flex-col gap-4 reveal delay-700">
+                    <div class="w-16 h-16 rounded-full bg-white/30 backdrop-blur-md border border-white/40 flex items-center justify-center animate-bounce shadow-lg cursor-pointer hover:bg-white/50 transition-colors">
+                        <iconify-icon class="text-2xl text-black" icon="solar:mouse-linear"></iconify-icon>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2) Typography -->
+        <section id="typography" class="relative z-10 border-b border-gray-200 bg-white">
+            <div class="p-8 md:p-12 border-b border-gray-200 bg-gray-50/50">
+                <span class="text-xs font-mono uppercase text-gray-500 block mb-2">01 / Foundations</span>
+                <h2 class="text-4xl font-medium tracking-tight flex items-center gap-3">
+                    <iconify-icon icon="solar:text-bold-duotone"></iconify-icon> Typography
+                </h2>
+                <p class="text-sm text-gray-500 font-mono mt-4 max-w-3xl">Font Family: 'Inter', sans-serif | Strategy: Google Fonts CDN | Type Scale Ratio: 1.250</p>
+            </div>
+
+            <div class="grid grid-cols-1 select-text">
+                <!-- H1 -->
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-200 p-8 md:p-12 items-baseline group hover:bg-gray-50 transition-colors">
+                    <div class="col-span-3 text-xs font-mono text-gray-400 uppercase tracking-widest mb-4 md:mb-0">Display H1</div>
+                    <div class="col-span-7">
+                        <h1 class="text-6xl md:text-8xl font-semibold tracking-tighter leading-none text-black">
+                             Excellence
+                        </h1>
+                    </div>
+                    <div class="col-span-2 text-right text-xs font-mono text-gray-400 flex flex-col gap-1 items-end">
+                        <span>Size: 6rem (96px)</span>
+                        <span>Weight: 600</span>
+                        <span>LH: 1</span>
+                        <span>Letter-spacing: -0.05em</span>
+                    </div>
+                </div>
+
+                <!-- H2 -->
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-200 p-8 md:p-12 items-baseline group hover:bg-gray-50 transition-colors">
+                    <div class="col-span-3 text-xs font-mono text-gray-400 uppercase tracking-widest mb-4 md:mb-0">Heading H2</div>
+                    <div class="col-span-7">
+                        <h2 class="text-5xl font-medium tracking-tighter text-black">
+                            Design System
+                        </h2>
+                    </div>
+                    <div class="col-span-2 text-right text-xs font-mono text-gray-400 flex flex-col gap-1 items-end">
+                        <span>Size: 3rem (48px)</span>
+                        <span>Weight: 500</span>
+                        <span>LH: 1.1</span>
+                        <span>Letter-spacing: -0.03em</span>
+                    </div>
+                </div>
+                
+                <!-- H3 -->
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-200 p-8 md:p-12 items-baseline group hover:bg-gray-50 transition-colors">
+                    <div class="col-span-3 text-xs font-mono text-gray-400 uppercase tracking-widest mb-4 md:mb-0">Heading H3</div>
+                    <div class="col-span-7">
+                        <h3 class="text-4xl font-medium tracking-tight text-black">
+                            User Interface
+                        </h3>
+                    </div>
+                    <div class="col-span-2 text-right text-xs font-mono text-gray-400 flex flex-col gap-1 items-end">
+                        <span>Size: 2.25rem (36px)</span>
+                        <span>Weight: 500</span>
+                        <span>LH: 1.2</span>
+                        <span>Letter-spacing: -0.02em</span>
+                    </div>
+                </div>
+
+                <!-- Body Large -->
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-200 p-8 md:p-12 items-baseline group hover:bg-gray-50 transition-colors">
+                    <div class="col-span-3 text-xs font-mono text-gray-400 uppercase tracking-widest mb-4 md:mb-0">Body Large</div>
+                    <div class="col-span-7">
+                        <p class="text-lg leading-relaxed text-gray-800">
+                            Clear, legible typography forms the foundation of our interface. It creates hierarchy and guides the user effortlessly through the digital experience.
+                        </p>
+                    </div>
+                    <div class="col-span-2 text-right text-xs font-mono text-gray-400 flex flex-col gap-1 items-end">
+                        <span>Size: 1.125rem (18px)</span>
+                        <span>Weight: 400</span>
+                        <span>LH: 1.6</span>
+                        <span>Letter-spacing: normal</span>
+                    </div>
+                </div>
+                
+                <!-- Body Base -->
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-200 p-8 md:p-12 items-baseline group hover:bg-gray-50 transition-colors">
+                    <div class="col-span-3 text-xs font-mono text-gray-400 uppercase tracking-widest mb-4 md:mb-0">Body Base</div>
+                    <div class="col-span-7">
+                        <p class="text-base leading-relaxed text-gray-700">
+                            The standard text size used for most paragraphs and descriptions across the platform, maintaining optimal readability.
+                        </p>
+                    </div>
+                    <div class="col-span-2 text-right text-xs font-mono text-gray-400 flex flex-col gap-1 items-end">
+                        <span>Size: 1rem (16px)</span>
+                        <span>Weight: 400</span>
+                        <span>LH: 1.5</span>
+                        <span>Letter-spacing: normal</span>
+                    </div>
+                </div>
+
+                <!-- Label / Helper -->
+                <div class="grid grid-cols-1 md:grid-cols-12 p-8 md:p-12 items-baseline group hover:bg-gray-50 transition-colors">
+                    <div class="col-span-3 text-xs font-mono text-gray-400 uppercase tracking-widest mb-4 md:mb-0">Label / Caption</div>
+                    <div class="col-span-7">
+                        <span class="text-xs font-mono uppercase tracking-widest text-gray-500">
+                            Helper Text & Labels
+                        </span>
+                    </div>
+                    <div class="col-span-2 text-right text-xs font-mono text-gray-400 flex flex-col gap-1 items-end">
+                        <span>Size: 0.75rem (12px)</span>
+                        <span>Weight: 500</span>
+                        <span>LH: 1.4</span>
+                        <span>Text-transform: uppercase</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3) Colors -->
+        <section id="colors" class="relative z-10 border-b border-gray-200">
+            <div class="p-8 md:p-12 border-b border-gray-200 bg-gray-50/50">
+                <span class="text-xs font-mono uppercase text-gray-500 block mb-2">02 / System</span>
+                <h2 class="text-4xl font-medium tracking-tight flex items-center gap-3">
+                    <iconify-icon icon="solar:palette-bold-duotone"></iconify-icon> Color Palette
+                </h2>
+                <p class="text-sm text-gray-500 font-mono mt-4">Semantic intent aligned with WCAG AAA accessibility standards.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 border-b border-gray-200">
+                <!-- White -->
+                <div class="col-span-1 p-6 md:p-8 border-r border-b lg:border-b-0 border-gray-200 bg-white flex flex-col justify-between aspect-square group">
+                    <div>
+                        <div class="text-black font-bold">White (Base)</div>
+                        <div class="text-xs text-gray-500 mt-1">Background / Surface</div>
+                    </div>
+                    <div class="font-mono text-xs text-gray-400 group-hover:text-black transition-colors">#FFFFFF / HSL(0,0%,100%)</div>
+                </div>
+                
+                <!-- Gray 50 -->
+                <div class="col-span-1 p-6 md:p-8 border-r border-b lg:border-b-0 border-gray-200 bg-gray-50 flex flex-col justify-between aspect-square group">
+                    <div>
+                        <div class="text-black font-bold">Gray 50</div>
+                        <div class="text-xs text-gray-500 mt-1">Secondary Surface</div>
+                    </div>
+                    <div class="font-mono text-xs text-gray-400 group-hover:text-black transition-colors">#F9FAFB / HSL(210,20%,98%)</div>
+                </div>
+
+                <!-- Gray 200 -->
+                <div class="col-span-1 p-6 md:p-8 border-r border-b lg:border-b-0 border-gray-200 bg-gray-200 flex flex-col justify-between aspect-square group">
+                    <div>
+                        <div class="text-black font-bold">Gray 200</div>
+                        <div class="text-xs text-gray-500 mt-1">Borders / Dividers</div>
+                    </div>
+                    <div class="font-mono text-xs text-gray-500 group-hover:text-black transition-colors">#E5E7EB / HSL(210,16%,93%)</div>
+                </div>
+
+                <!-- Gray 500 -->
+                <div class="col-span-1 p-6 md:p-8 border-r border-b lg:border-b-0 border-gray-200 bg-gray-500 flex flex-col justify-between aspect-square group">
+                    <div>
+                        <div class="text-white font-bold">Gray 500</div>
+                        <div class="text-xs text-gray-200 mt-1">Secondary Text / Icons</div>
+                    </div>
+                    <div class="font-mono text-xs text-gray-300 group-hover:text-white transition-colors">#6B7280 / HSL(215,16%,47%)</div>
+                </div>
+                
+                <!-- Black Primary -->
+                <div class="col-span-1 p-6 md:p-8 border-r border-b lg:border-b-0 border-gray-200 bg-black flex flex-col justify-between aspect-square group text-white">
+                    <div>
+                        <div class="text-white font-bold">Black Primary</div>
+                        <div class="text-xs text-gray-300 mt-1">Primary Text / Actions</div>
+                    </div>
+                    <div class="font-mono text-xs text-gray-400 group-hover:text-white transition-colors">#000000 / HSL(0,0%,0%)</div>
+                </div>
+                
+                <!-- Gradient Accent -->
+                <div class="col-span-1 p-6 md:p-8 border-b lg:border-b-0 border-gray-200 bg-gradient-to-br from-gray-200 to-white flex flex-col justify-between aspect-square group">
+                    <div>
+                        <div class="text-black font-bold">Glass Gradient</div>
+                        <div class="text-xs text-gray-600 mt-1">Overlays / Highlights</div>
+                    </div>
+                    <div class="font-mono text-xs text-gray-500 group-hover:text-black transition-colors">Linear 135deg</div>
+                </div>
+            </div>
+            
+            <!-- Usage Rules Info -->
+            <div class="p-8 md:p-12 bg-white grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
+                <div>
+                    <h4 class="font-bold mb-2">Contrast Rules</h4>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Black text on White/Gray 50 (AAA)</li>
+                        <li>• White text on Black (AAA)</li>
+                        <li>• Gray 500 on White (AA)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-2">Interactive States</h4>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Hover context: opacity 80% or scale down 0.98</li>
+                        <li>• Disabled: opacity 50% + cursor-not-allowed</li>
+                        <li>• Active: background darker offset</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-2">Feedback Roles</h4>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Information: Contextual Iconography</li>
+                        <li>• Primary Action: Solid Black Fill</li>
+                        <li>• Secondary Action: Transparent Outline</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4) UI Components -->
+        <section id="components" class="relative z-10 border-b border-gray-200 bg-white">
+            <div class="p-8 md:p-12 border-b border-gray-200 bg-gray-50/50">
+                <span class="text-xs font-mono uppercase text-gray-500 block mb-2">03 / Interaction</span>
+                <h2 class="text-4xl font-medium tracking-tight flex items-center gap-3">
+                    <iconify-icon icon="solar:widget-bold-duotone"></iconify-icon> Components
+                </h2>
+            </div>
+
+            <!-- Components Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+                
+                <!-- Buttons & Actions -->
+                <div class="p-8 md:p-12 border-b md:border-b-0 md:border-r border-gray-200 reveal">
+                    <h3 class="text-sm font-bold uppercase tracking-widest text-black mb-8 flex items-center gap-2">
+                        <iconify-icon icon="solar:mouse-circle-linear"></iconify-icon> Buttons & Inputs
+                    </h3>
+                    
+                    <div class="space-y-10">
+                        <!-- Shimmer Button -->
+                        <div>
+                            <div class="flex items-center gap-4 mb-3">
+                                <button class="beam-button px-6 py-3 bg-black text-white rounded-md text-sm font-medium hover:bg-gray-900 transition-all flex items-center gap-2 group">
+                                    Primary Shimmer
+                                    <iconify-icon class="text-xl group-hover:translate-x-1 transition-transform" icon="solar:arrow-right-linear"></iconify-icon>
+                                </button>
+                            </div>
+                            <span class="text-xs font-mono text-gray-500">.beam-button / Hover for beam effect</span>
+                        </div>
+
+                        <!-- Outline Glow Button -->
+                        <div>
+                            <div class="flex items-center gap-4 mb-3">
+                                <button class="px-6 py-3 border border-gray-300 rounded-full text-sm font-medium hover:border-black hover:shadow-[0_0_15px_rgba(0,0,0,0.1)] transition-all flex items-center gap-2">
+                                    Secondary Glass
+                                    <iconify-icon icon="solar:star-linear"></iconify-icon>
+                                </button>
+                            </div>
+                            <span class="text-xs font-mono text-gray-500">Outline with hover glow</span>
+                        </div>
+
+                        <!-- Input Field -->
+                        <div>
+                            <div class="relative max-w-sm mb-3 group">
+                                <iconify-icon class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-black transition-colors" icon="solar:magnifier-linear"></iconify-icon>
+                                <input type="text" placeholder="Search the system..." class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-transparent focus:border-black focus:bg-white focus:outline-none rounded-md transition-all text-sm font-medium" />
+                            </div>
+                            <span class="text-xs font-mono text-gray-500">Input variant: Filled to Outline</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modals, Badges, Tooltips -->
+                <div class="p-8 md:p-12 border-b lg:border-b-0 border-gray-200 reveal delay-200 bg-gray-50">
+                    <h3 class="text-sm font-bold uppercase tracking-widest text-black mb-8 flex items-center gap-2">
+                        <iconify-icon icon="solar:layers-linear"></iconify-icon> Elements & Status
+                    </h3>
+
+                    <div class="space-y-10">
+                        <!-- Badges -->
+                        <div>
+                            <div class="flex flex-wrap gap-3 mb-3">
+                                <span class="px-3 py-1 bg-black text-white rounded-full text-xs font-mono uppercase tracking-widest">Active</span>
+                                <span class="px-3 py-1 bg-gray-200 text-gray-600 rounded-full text-xs font-mono uppercase tracking-widest border border-gray-300">Draft</span>
+                                <span class="px-3 py-1 bg-white backdrop-blur-md border border-gray-200 shadow-sm text-black rounded-full text-xs font-mono uppercase tracking-widest relative overflow-hidden group">
+                                    <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-100 animate-[shimmer_2s_infinite]"></span>
+                                    <span class="relative z-10 flex items-center gap-1"><iconify-icon icon="solar:gem-linear"></iconify-icon> Premium</span>
+                                </span>
+                            </div>
+                            <span class="text-xs font-mono text-gray-500">Solid, Outlined, and Animated Badges</span>
+                        </div>
+
+                        <!-- Tooltip Area -->
+                        <div>
+                            <div class="flex items-center gap-4 mb-3">
+                                <div class="relative group inline-block">
+                                    <iconify-icon class="text-3xl text-gray-400 hover:text-black cursor-pointer transition-colors" icon="solar:info-circle-linear"></iconify-icon>
+                                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all pointer-events-none z-10">
+                                        <div class="bg-black text-white text-xs px-3 py-2 rounded shadow-xl font-medium">
+                                            Interactive Tooltip
+                                        </div>
+                                        <div class="w-3 h-3 bg-black rotate-45 absolute -bottom-1 left-1/2 -translate-x-1/2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="text-xs font-mono text-gray-500">Hover trigger animated tooltip</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- Cards Row -->
+            <div class="border-t border-gray-200">
+                <div class="p-8 md:p-12 bg-white">
+                    <h3 class="text-sm font-bold uppercase tracking-widest text-black mb-8">Flashlight Hover Cards</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Light Flashlight Card -->
+                        <div class="flashlight-card p-8 min-h-[250px] flex flex-col justify-between cursor-pointer group reveal"
+                             onmousemove="const rect = this.getBoundingClientRect(); this.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`); this.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);">
+                            <iconify-icon class="text-4xl text-gray-400 group-hover:text-black transition-colors" icon="solar:cpu-bold-duotone"></iconify-icon>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Systems Architecture</h4>
+                                <p class="text-sm text-gray-500">Hover me to see the flashlight tracking effect over a light theme surface.</p>
+                            </div>
+                        </div>
+
+                        <!-- Dark Flashlight Card -->
+                        <div class="flashlight-card-dark p-8 min-h-[250px] flex flex-col justify-between cursor-pointer group reveal delay-200"
+                             onmousemove="const rect = this.getBoundingClientRect(); this.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`); this.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);">
+                            <iconify-icon class="text-4xl text-gray-400 group-hover:text-white transition-colors" icon="solar:database-bold-duotone"></iconify-icon>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2 text-white">Data Structures</h4>
+                                <p class="text-sm text-gray-400">Hover me to see the immersive beam effect over a dark theme surface.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5) Icons -->
+        <section id="icons" class="relative z-10 border-b border-gray-200 pb-24 bg-gray-50">
+            <div class="p-8 md:p-12 border-b border-gray-200 bg-white">
+                <span class="text-xs font-mono uppercase text-gray-500 block mb-2">04 / Assets</span>
+                <h2 class="text-4xl font-medium tracking-tight">Iconography (Solar Icons)</h2>
+            </div>
+
+            <div class="p-8 md:p-12 grid grid-cols-3 md:grid-cols-6 gap-y-12 gap-x-8 justify-items-center">
+                <!-- Group 1 -->
+                <div class="flex flex-col items-center gap-4 reveal">
+                    <div class="w-16 h-16 rounded-xl bg-white border border-gray-200 flex items-center justify-center hover:scale-110 hover:shadow-lg transition-all cursor-pointer">
+                        <iconify-icon class="text-2xl text-black" icon="solar:atom-bold-duotone"></iconify-icon>
+                    </div>
+                    <span class="text-xs font-mono text-gray-500">atom</span>
+                </div>
+                <!-- Group 2 -->
+                <div class="flex flex-col items-center gap-4 reveal delay-100">
+                    <div class="w-16 h-16 rounded-xl bg-white border border-gray-200 flex items-center justify-center hover:scale-110 hover:shadow-lg transition-all cursor-pointer">
+                        <iconify-icon class="text-2xl text-black" icon="solar:layers-minimalistic-bold-duotone"></iconify-icon>
+                    </div>
+                    <span class="text-xs font-mono text-gray-500">layers</span>
+                </div>
+                <!-- Group 3 -->
+                <div class="flex flex-col items-center gap-4 reveal delay-200">
+                    <div class="w-16 h-16 rounded-xl bg-white border border-gray-200 flex items-center justify-center hover:scale-110 hover:shadow-lg transition-all cursor-pointer">
+                        <iconify-icon class="text-2xl text-black" icon="solar:cpu-bold-duotone"></iconify-icon>
+                    </div>
+                    <span class="text-xs font-mono text-gray-500">cpu</span>
+                </div>
+                <!-- Group 4 -->
+                <div class="flex flex-col items-center gap-4 reveal delay-300">
+                    <div class="w-16 h-16 rounded-xl bg-white border border-gray-200 flex items-center justify-center hover:scale-110 hover:shadow-lg transition-all cursor-pointer">
+                        <iconify-icon class="text-2xl text-black" icon="solar:database-bold-duotone"></iconify-icon>
+                    </div>
+                    <span class="text-xs font-mono text-gray-500">database</span>
+                </div>
+                <!-- Group 5 -->
+                <div class="flex flex-col items-center gap-4 reveal delay-500">
+                    <div class="w-16 h-16 rounded-xl bg-white border border-gray-200 flex items-center justify-center hover:scale-110 hover:shadow-lg transition-all cursor-pointer">
+                        <iconify-icon class="text-2xl text-black" icon="solar:mouse-circle-bold-duotone"></iconify-icon>
+                    </div>
+                    <span class="text-xs font-mono text-gray-500">mouse</span>
+                </div>
+                <!-- Group 6 -->
+                <div class="flex flex-col items-center gap-4 reveal delay-700">
+                    <div class="w-16 h-16 rounded-xl bg-white border border-gray-200 flex items-center justify-center hover:scale-110 hover:shadow-lg transition-all cursor-pointer">
+                        <iconify-icon class="text-2xl text-black" icon="solar:ruler-pen-bold-duotone"></iconify-icon>
+                    </div>
+                    <span class="text-xs font-mono text-gray-500">design</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marquee Before Footer -->
+        <div class="border-t border-b border-gray-200 overflow-hidden py-4 bg-white">
+            <div class="marquee-container">
+                <div class="marquee-content gap-8 items-center">
+                    <span class="text-xs font-mono uppercase tracking-widest text-black/40">Clean Code</span>
+                    <iconify-icon class="text-black/20" icon="solar:star-fall-linear"></iconify-icon>
+                    <span class="text-xs font-mono uppercase tracking-widest text-black/40">Aesthetic Driven</span>
+                    <iconify-icon class="text-black/20" icon="solar:star-fall-linear"></iconify-icon>
+                    <span class="text-xs font-mono uppercase tracking-widest text-black/40">Micro-animations</span>
+                    <iconify-icon class="text-black/20" icon="solar:star-fall-linear"></iconify-icon>
+                    <span class="text-xs font-mono uppercase tracking-widest text-black/40">Component Based</span>
+                    <iconify-icon class="text-black/20" icon="solar:star-fall-linear"></iconify-icon>
+                    <span class="text-xs font-mono uppercase tracking-widest text-black/40">Responsive</span>
+                    <iconify-icon class="text-black/20" icon="solar:star-fall-linear"></iconify-icon>
+                    <span class="text-xs font-mono uppercase tracking-widest text-black/40">Systematic</span>
+                    <iconify-icon class="text-black/20" icon="solar:star-fall-linear"></iconify-icon>
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="marquee-content gap-8 items-center">
+                    <span class="text-xs font-mono uppercase tracking-widest text-black/40">Clean Code</span>
+                    <iconify-icon class="text-black/20" icon="solar:star-fall-linear"></iconify-icon>
+                    <span class="text-xs font-mono uppercase tracking-widest text-black/40">Aesthetic Driven</span>
+                    <iconify-icon class="text-black/20" icon="solar:star-fall-linear"></iconify-icon>
+                    <span class="text-xs font-mono uppercase tracking-widest text-black/40">Micro-animations</span>
+                    <iconify-icon class="text-black/20" icon="solar:star-fall-linear"></iconify-icon>
+                    <span class="text-xs font-mono uppercase tracking-widest text-black/40">Component Based</span>
+                    <iconify-icon class="text-black/20" icon="solar:star-fall-linear"></iconify-icon>
+                    <span class="text-xs font-mono uppercase tracking-widest text-black/40">Responsive</span>
+                    <iconify-icon class="text-black/20" icon="solar:star-fall-linear"></iconify-icon>
+                    <span class="text-xs font-mono uppercase tracking-widest text-black/40">Systematic</span>
+                    <iconify-icon class="text-black/20" icon="solar:star-fall-linear"></iconify-icon>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="relative z-10 bg-white border-t border-gray-200 py-16 text-center overflow-hidden">
+            <h1 class="text-[8rem] md:text-[12rem] font-bold tracking-tighter text-gray-50 select-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center z-0 pointer-events-none">NOVO1</h1>
+            <div class="relative z-10">
+                <iconify-icon class="text-3xl text-black mb-4" icon="solar:atom-bold-duotone"></iconify-icon>
+                <p class="text-xs font-mono uppercase text-gray-500 tracking-widest">Built with precision for the modern web.</p>
+                <div class="mt-8">
+                     <button class="px-6 py-2 bg-black text-white text-xs font-mono uppercase tracking-widest transition-transform hover:scale-105 rounded">Back to Top</button>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Initial Animations
+            setTimeout(() => {
+                document.querySelector('header').classList.add('loaded');
+            }, 100);
+
+            // Text Reveal
+            setTimeout(() => {
+                const heroTitle = document.getElementById('hero-title');
+                if (heroTitle) heroTitle.classList.add('reveal-active');
+            }, 500);
+
+            // 2. Scroll Observer
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        const textWrappers = entry.target.querySelectorAll('.text-reveal-wrapper');
+                        if (textWrappers.length > 0 || entry.target.classList.contains('text-reveal-wrapper')) {
+                            entry.target.classList.add('reveal-active');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            // Observe explicit text reveals
+            document.querySelectorAll('h1, h2, h3').forEach(el => {
+                if (el.querySelector('.text-reveal-content')) observer.observe(el);
+            });
+            
+            // Back to top
+            const backToTop = document.querySelector('footer button');
+            if(backToTop) {
+                backToTop.addEventListener('click', () => {
+                   window.scrollTo({top: 0, behavior: 'smooth'}); 
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+"""
+
+with open('/Users/tobiasestivalete/Downloads/Construindo site estáticos com IA/artools/assets/design_system.html_NOVO1', 'w') as f:
+    f.write(html_content)
+
+print("File generated successfully")
+
