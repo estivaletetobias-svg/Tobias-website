@@ -828,8 +828,18 @@
         <!-- SEÇÃO CONTATO -->
         <section id="contato"
             class="relative z-10 w-full bg-[#EAEAE5] py-24 md:py-32 px-6 md:px-12 lg:px-24 border-t border-[#d4d4d0]/50 overflow-hidden">
-            <!-- Fundo decorativo sutil -->
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#F9F9F8]/20 pointer-events-none"></div>
+            <!-- Fundo de Vídeo e Efeitos (Inspirado no Hero) -->
+            <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                <video src="tobias_celular.mp4" autoplay loop muted playsinline
+                    class="w-full h-full object-cover transform scale-105 select-none"></video>
+
+                <!-- Overlays Claros para Leitura Premium -->
+                <!-- Fundo geral um pouco mais fosco para garantir leitura perfeita do form centralizado -->
+                <div class="absolute inset-0 bg-[#EAEAE5]/80 backdrop-blur-[4px]"></div>
+                <!-- Gradientes copiados do hero para manter a coerência de luz -->
+                <div class="absolute inset-0 bg-gradient-to-r from-[#EAEAE5]/50 via-transparent to-[#EAEAE5]/50"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#EAEAE5] via-transparent to-[#EAEAE5]/80"></div>
+            </div>
 
             <div class="max-w-7xl mx-auto flex flex-col items-center relative z-10">
                 <!-- Título e Âncora -->
@@ -849,13 +859,14 @@
                 </div>
 
                 <div class="w-full max-w-lg mx-auto mb-20 md:mb-28">
-                    <!-- Formulário Neumórfico (Soft UI) -->
-                    <form class="flex flex-col gap-6">
+                    <!-- Formulário Neumórfico (Soft UI) ativado com Formspree -->
+                    <form action="https://formspree.io/f/SEU_ID_FORMSPREE_AQUI" method="POST"
+                        class="flex flex-col gap-6">
                         <!-- Nome -->
                         <div class="flex flex-col gap-2">
                             <label for="name"
                                 class="font-sans text-[10px] uppercase tracking-[0.15em] text-[#A8A29E] font-semibold ml-2">Nome</label>
-                            <input type="text" id="name" placeholder="Como devemos chamar você?"
+                            <input type="text" id="name" name="name" required placeholder="Como devemos chamar você?"
                                 class="w-full bg-[#F9F9F8]/60 backdrop-blur-md border border-white/80 shadow-[inset_0_1px_3px_rgba(255,255,255,0.7),0_4px_10px_rgba(0,0,0,0.02)] rounded-[20px] px-6 py-[18px] font-sans text-[14px] text-[#1c1917] placeholder-[#A8A29E]/60 focus:outline-none focus:bg-white focus:shadow-[inset_0_1px_3px_rgba(255,255,255,1),0_8px_20px_rgba(0,0,0,0.04)] transition-all duration-500">
                         </div>
 
@@ -863,7 +874,7 @@
                         <div class="flex flex-col gap-2">
                             <label for="email"
                                 class="font-sans text-[10px] uppercase tracking-[0.15em] text-[#A8A29E] font-semibold ml-2">Email</label>
-                            <input type="email" id="email" placeholder="Onde respondemos?"
+                            <input type="email" id="email" name="email" required placeholder="Onde respondemos?"
                                 class="w-full bg-[#F9F9F8]/60 backdrop-blur-md border border-white/80 shadow-[inset_0_1px_3px_rgba(255,255,255,0.7),0_4px_10px_rgba(0,0,0,0.02)] rounded-[20px] px-6 py-[18px] font-sans text-[14px] text-[#1c1917] placeholder-[#A8A29E]/60 focus:outline-none focus:bg-white focus:shadow-[inset_0_1px_3px_rgba(255,255,255,1),0_8px_20px_rgba(0,0,0,0.04)] transition-all duration-500">
                         </div>
 
@@ -872,7 +883,8 @@
                             <label for="subject"
                                 class="font-sans text-[10px] uppercase tracking-[0.15em] text-[#A8A29E] font-semibold ml-2">Tipo
                                 de demanda</label>
-                            <input type="text" id="subject" placeholder="Ex: Arquitetura Sistêmica, Consultoria..."
+                            <input type="text" id="subject" name="subject" required
+                                placeholder="Ex: Arquitetura Sistêmica, Consultoria..."
                                 class="w-full bg-[#F9F9F8]/60 backdrop-blur-md border border-white/80 shadow-[inset_0_1px_3px_rgba(255,255,255,0.7),0_4px_10px_rgba(0,0,0,0.02)] rounded-[20px] px-6 py-[18px] font-sans text-[14px] text-[#1c1917] placeholder-[#A8A29E]/60 focus:outline-none focus:bg-white focus:shadow-[inset_0_1px_3px_rgba(255,255,255,1),0_8px_20px_rgba(0,0,0,0.04)] transition-all duration-500">
                         </div>
 
@@ -880,7 +892,8 @@
                         <div class="flex flex-col gap-2">
                             <label for="message"
                                 class="font-sans text-[10px] uppercase tracking-[0.15em] text-[#A8A29E] font-semibold ml-2">Mensagem</label>
-                            <textarea id="message" rows="4" placeholder="Detalhe a visão geral..."
+                            <textarea id="message" name="message" required rows="4"
+                                placeholder="Detalhe a visão geral..."
                                 class="w-full bg-[#F9F9F8]/60 backdrop-blur-md border border-white/80 shadow-[inset_0_1px_3px_rgba(255,255,255,0.7),0_4px_10px_rgba(0,0,0,0.02)] rounded-[20px] px-6 py-[18px] font-sans text-[14px] text-[#1c1917] placeholder-[#A8A29E]/60 focus:outline-none focus:bg-white focus:shadow-[inset_0_1px_3px_rgba(255,255,255,1),0_8px_20px_rgba(0,0,0,0.04)] transition-all duration-500 resize-none"></textarea>
                         </div>
 
@@ -901,59 +914,117 @@
 
                 <!-- Footer details (Contato & Redes) -->
                 <div
-                    class="w-full grid grid-cols-1 md:grid-cols-2 gap-12 pt-16 border-t border-stone-300/60 max-w-3xl mx-auto">
+                    class="w-full flex flex-col md:flex-row justify-between pt-16 border-t border-stone-300/60 max-w-5xl mx-auto z-10 gap-16 md:gap-0">
 
                     <!-- Contato Direto -->
-                    <div class="flex flex-col gap-4">
+                    <div class="flex flex-col gap-5">
                         <span
                             class="font-sans font-semibold text-[10px] uppercase tracking-[0.2em] text-[#A8A29E] mb-2">Contato
                             Direto</span>
-                        <a href="mailto:contato@tobiasestivalete.com"
-                            class="font-sans text-[#1c1917] text-[15px] font-medium transition-all duration-300 ease-out w-max border-b border-transparent hover:border-stone-400">
-                            contato@tobiasestivalete.com
+
+                        <!-- Hover Reveal: E-mail -->
+                        <a href="mailto:estivaletetobias@gmail.com"
+                            class="group flex flex-col items-start font-sans text-[#1c1917] text-[15px] font-medium w-max overflow-hidden h-[24px] cursor-pointer">
+                            <span
+                                class="flex items-center gap-2 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full h-[24px] shrink-0">
+                                E-mail
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="w-3.5 h-3.5 text-stone-400 group-hover:text-stone-600 transition-colors"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                        transform="rotate(-45 12 12)" />
+                                </svg>
+                            </span>
+                            <span
+                                class="flex items-center gap-2 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full h-[24px] shrink-0 text-stone-500">
+                                estivaletetobias@gmail.com
+                            </span>
                         </a>
+
+                        <!-- Hover Reveal: Telefone -->
                         <a href="https://wa.me/5548999165612" target="_blank" rel="noopener noreferrer"
-                            class="font-sans text-[#1c1917] text-[15px] font-medium transition-all duration-300 ease-out w-max border-b border-transparent hover:border-stone-400">
-                            +55 (48) 99916-5612
+                            class="group flex flex-col items-start font-sans text-[#1c1917] text-[15px] font-medium w-max overflow-hidden h-[24px] cursor-pointer">
+                            <span
+                                class="flex items-center gap-2 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full h-[24px] shrink-0">
+                                Telefone
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="w-3.5 h-3.5 text-stone-400 group-hover:text-stone-600 transition-colors"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                        transform="rotate(-45 12 12)" />
+                                </svg>
+                            </span>
+                            <span
+                                class="flex items-center gap-2 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full h-[24px] shrink-0 text-stone-500">
+                                +55 (48) 99916-5612
+                            </span>
                         </a>
                     </div>
 
                     <!-- Redes Sociais Institucionais -->
-                    <div class="flex flex-col gap-4 md:items-end md:text-right">
+                    <div class="flex flex-col gap-4 md:items-start text-left md:ml-auto">
                         <span
                             class="font-sans font-semibold text-[10px] uppercase tracking-[0.2em] text-[#A8A29E] mb-2">Social</span>
 
-                        <!-- Hover Textual Animado: Instagram -->
                         <a href="#" target="_blank" rel="noopener noreferrer"
-                            class="group inline-flex items-center gap-3 font-sans text-[15px] text-[#1c1917] transition-colors w-max">
-                            <span class="relative">
-                                Instagram
-                                <span
-                                    class="absolute left-0 bottom-0 w-full h-[1px] bg-[#1c1917] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"></span>
-                            </span>
-                            <span
-                                class="text-[#78716C] font-light opacity-0 -translate-x-4 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-x-0">
-                                → @tobiaspersonal
-                            </span>
+                            class="group flex items-center gap-2 font-sans text-[15px] text-[#1c1917] transition-colors w-max hover:text-stone-500">
+                            Instagram
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-3.5 h-3.5 text-stone-400 group-hover:text-stone-600 transition-colors"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                    transform="rotate(-45 12 12)" />
+                            </svg>
                         </a>
 
-                        <!-- Hover Textual Animado: LinkedIn -->
                         <a href="#" target="_blank" rel="noopener noreferrer"
-                            class="group inline-flex items-center gap-3 font-sans text-[15px] text-[#1c1917] transition-colors w-max">
-                            <span class="relative">
-                                LinkedIn
-                                <span
-                                    class="absolute left-0 bottom-0 w-full h-[1px] bg-[#1c1917] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"></span>
-                            </span>
-                            <span
-                                class="text-[#78716C] font-light opacity-0 -translate-x-4 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-x-0">
-                                → Tobias Estivalete
-                            </span>
+                            class="group flex items-center gap-2 font-sans text-[15px] text-[#1c1917] transition-colors w-max hover:text-stone-500">
+                            LinkedIn
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-3.5 h-3.5 text-stone-400 group-hover:text-stone-600 transition-colors"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                    transform="rotate(-45 12 12)" />
+                            </svg>
+                        </a>
+
+                        <a href="#" target="_blank" rel="noopener noreferrer"
+                            class="group flex items-center gap-2 font-sans text-[15px] text-[#1c1917] transition-colors w-max hover:text-stone-500">
+                            Youtube
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-3.5 h-3.5 text-stone-400 group-hover:text-stone-600 transition-colors"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                    transform="rotate(-45 12 12)" />
+                            </svg>
+                        </a>
+
+                        <a href="#" target="_blank" rel="noopener noreferrer"
+                            class="group flex items-center gap-2 font-sans text-[15px] text-[#1c1917] transition-colors w-max hover:text-stone-500">
+                            Spotify
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-3.5 h-3.5 text-stone-400 group-hover:text-stone-600 transition-colors"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                    transform="rotate(-45 12 12)" />
+                            </svg>
                         </a>
                     </div>
-
                 </div>
 
+            </div>
+
+            <!-- Tipografia Gigante em 2 Linhas com Deslize Horizontal -->
+            <div
+                class="mt-16 md:mt-24 mb-6 md:mb-12 opacity-[0.08] pointer-events-none select-none overflow-hidden w-full z-0 px-4 md:px-12 max-w-screen-2xl mx-auto flex flex-col items-center">
+                <span id="footer-name-tobias"
+                    class="text-[20vw] md:text-[14vw] lg:text-[11.5vw] font-bold font-serif leading-[0.7] tracking-tighter uppercase block w-full text-[#1c1917] text-left">
+                    Tobias
+                </span>
+                <span id="footer-name-estivalete"
+                    class="text-[17vw] md:text-[14vw] lg:text-[11.5vw] font-bold font-serif leading-[0.7] tracking-tighter uppercase block w-full text-[#1c1917] text-right mt-1 md:mt-0">
+                    Estivalete
+                </span>
             </div>
         </section>
 
@@ -1040,6 +1111,31 @@
                     },
                     once: true // Anima apenas 1 vez para performance da página
                 });
+            });
+
+            // --- NOVA ANIMAÇÃO: Deslize Horizontal no Rodapé (Nome) ---
+            gsap.from("#footer-name-tobias", {
+                scrollTrigger: {
+                    trigger: "#contato",
+                    start: "top 80%", // Dispara quando a seção Contato entra 20% na tela
+                    end: "bottom bottom",
+                    scrub: 1.5 // Atrito premium na animação
+                },
+                x: "-10vw", // Nasce mais à esquerda e desliza pro eixo 0
+                opacity: 0,
+                ease: "power2.out"
+            });
+
+            gsap.from("#footer-name-estivalete", {
+                scrollTrigger: {
+                    trigger: "#contato",
+                    start: "top 80%",
+                    end: "bottom bottom",
+                    scrub: 1.5
+                },
+                x: "10vw", // Nasce mais à direita e desliza pro eixo 0
+                opacity: 0,
+                ease: "power2.out"
             });
 
         });
