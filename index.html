@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aura Pen | A caneta mais tecnológica do mundo</title>
+    <title>Tobias Estivalete | Estruturo performance humana</title>
 
     <!-- Google Fonts conforme Design System -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -139,16 +139,30 @@
     <nav class="fixed top-0 left-0 w-full z-50 py-4 px-6 md:px-12 flex justify-between items-center bg-white/50 backdrop-blur-md border-b border-stone-300 shadow-sm transition-all duration-300"
         aria-label="Navegação principal">
         <div class="font-display font-medium tracking-tight text-lg text-stone-900 flex items-center gap-2">
-            <div class="w-8 h-8 bg-stone-900 text-white flex items-center justify-center rounded-sm">
-                <i data-lucide="pen-tool" class="w-4 h-4" aria-hidden="true"></i>
+            <div class="flex items-center justify-center">
+                <img src="assets/raw_files/logo_novo.jpeg" alt="Logo Tobias"
+                    class="w-8 h-8 rounded-sm mix-blend-multiply" />
             </div>
-            AURA<span class="text-stone-400">.PEN</span>
+            Tobias <span class="text-stone-400">Estivalete</span>
         </div>
 
-        <div class="hidden md:flex items-center gap-8 text-xs font-mono uppercase tracking-widest text-stone-600">
-            <a href="#design" class="hover:text-stone-900 transition-colors">Design</a>
-            <a href="#tecnologia" class="hover:text-stone-900 transition-colors">Tecnologia</a>
-            <a href="#review" class="hover:text-stone-900 transition-colors">Reviews</a>
+        <div
+            class="hidden md:flex items-center gap-6 text-[10px] lg:text-xs font-mono uppercase tracking-widest text-stone-600">
+            <a href="#home" class="hover:text-stone-900 transition-colors">Home</a>
+            <span class="text-stone-300">|</span>
+            <a href="#projetos" class="hover:text-stone-900 transition-colors">Projetos</a>
+            <span class="text-stone-300">|</span>
+            <a href="#vault" class="hover:text-stone-900 transition-colors">Vault</a>
+            <span class="text-stone-300">|</span>
+            <a href="#newsletter" class="hover:text-stone-900 transition-colors">Newsletter</a>
+            <span class="text-stone-300">|</span>
+            <a href="#comunidade" class="hover:text-stone-900 transition-colors">Comunidade</a>
+            <span class="text-stone-300">|</span>
+            <a href="#loja" class="hover:text-stone-900 transition-colors">Loja</a>
+            <span class="text-stone-300">|</span>
+            <a href="#sobre" class="hover:text-stone-900 transition-colors">Sobre</a>
+            <span class="text-stone-300">|</span>
+            <a href="#contato" class="hover:text-stone-900 transition-colors">Contato</a>
         </div>
 
         <button
@@ -189,22 +203,26 @@
         </div>
 
         <!-- HERO SECTION (Pin Container) -->
+        <!-- HERO SECTION (Pin Container) -->
         <main id="hero-section"
-            class="relative z-10 w-full h-[100dvh] flex flex-col border-b border-stone-300 overflow-hidden bg-stone-900">
+            class="relative z-10 w-full h-[100dvh] flex flex-col border-b border-stone-300 overflow-hidden bg-[#EAEAE5]">
 
             <!-- Vídeo de Fundo Fullscreen -->
             <div class="absolute inset-0 w-full h-full z-0 overflow-hidden" id="video-container">
-                <video id="product-video" src="assets/raw_files/video2.mp4" class="hidden w-full h-full object-cover"
-                    playsinline webkit-playsinline muted preload="auto"></video>
+                <video id="product-video" src="Tobias_vídeo.mp4" class="hidden w-full h-full object-cover" playsinline
+                    webkit-playsinline muted preload="auto"></video>
 
                 <!-- Canvas para desenho hiper fluido estilo Apple -->
                 <canvas id="video-canvas"
-                    class="absolute inset-0 w-full h-full object-cover transform scale-105 z-0"></canvas><!-- Overlays para contraste do texto -->
-                <div class="absolute inset-0 bg-stone-900/30"></div>
-                <!-- Gradiente escuro à esquerda para leitura -->
-                <div class="absolute inset-0 bg-gradient-to-r from-stone-900/90 via-stone-900/40 to-transparent"></div>
-                <!-- Escurece um pouco do topo para a navbar se for o caso -->
-                <div class="absolute inset-0 bg-gradient-to-t from-stone-900/60 via-transparent to-stone-900/20"></div>
+                    class="absolute inset-0 w-full h-full object-cover transform scale-105 z-0"></canvas>
+
+                <!-- Overlays Claro para Leitura Premium -->
+                <!-- Gradiente claro à esquerda para a leitura do texto -->
+                <div class="absolute inset-0 bg-gradient-to-r from-[#EAEAE5]/90 via-[#EAEAE5]/50 to-transparent"></div>
+                <!-- Escurece suavemente as bordas inferiores ou superiores pro caso do navbar se cruzar com o vídeo brilhante -->
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-[#EAEAE5]/30 via-transparent to-[#EAEAE5]/50 pointer-events-none">
+                </div>
             </div>
 
             <!-- Coluna de Texto: Sobreposta ao Vídeo -->
@@ -212,47 +230,38 @@
                 class="relative z-20 flex-1 px-6 py-12 md:px-16 flex flex-col justify-center h-full max-w-4xl pt-[72px] md:pt-0">
 
                 <div class="inline-flex items-center gap-2 mb-6" id="hero-badge">
-                    <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                    <span class="text-xs font-mono uppercase tracking-widest text-stone-300">Engenharia de
+                    <span class="w-2 h-2 bg-stone-900 rounded-full animate-pulse"></span>
+                    <span class="text-xs font-mono uppercase tracking-widest text-stone-500">Engenharia de
                         Precisão</span>
                 </div>
 
-                <h1 class="font-display text-[11vw] sm:text-6xl md:text-[4.5rem] lg:text-[5.5rem] font-bold tracking-tighter leading-[0.85] mb-6 flex flex-col text-white"
+                <h1 class="font-display text-[11vw] sm:text-6xl md:text-[4.5rem] lg:text-[5.5rem] font-bold tracking-tighter leading-[0.85] mb-6 flex flex-col text-stone-900"
                     id="hero-title">
-                    <span class="block overflow-hidden pb-2 -mb-2"><span class="block reveal-text translate-y-[110%]">A
-                            caneta</span></span>
+                    <span class="block overflow-hidden pb-2 -mb-2"><span
+                            class="block reveal-text translate-y-[110%]">Estruturo</span></span>
                     <span class="block overflow-hidden pb-3 -mb-3"><span
                             class="block reveal-text text-transparent translate-y-[110%]"
-                            style="-webkit-text-stroke: 1.5px rgba(255,255,255,0.95);">mais tecnológica</span></span>
+                            style="-webkit-text-stroke: 1.5px #1C1917;">performance</span></span>
                     <span class="block overflow-hidden"><span
-                            class="block reveal-text text-stone-300 translate-y-[110%]">do
-                            mundo.</span></span>
+                            class="block reveal-text text-stone-900 translate-y-[110%]">humana.</span></span>
                 </h1>
 
-                <p class="text-base md:text-lg text-stone-300 max-w-md leading-relaxed font-light mb-10 overflow-hidden"
+                <h2 class="text-base md:text-lg text-stone-600 max-w-md leading-relaxed font-light mb-10 overflow-hidden"
                     id="hero-desc">
-                    Peso perfeitamente equilibrado, fluxo ininterrupto e uma ponta de safira polida. Experimente a fusão
-                    entre o design premium contemporâneo e a mais alta engenharia fluida.
-                </p>
+                    E construo sistemas inteligentes para escalar disciplina e autoridade.
+                </h2>
 
                 <div class="flex flex-col sm:flex-row gap-4" id="hero-buttons">
                     <button
-                        class="group relative px-8 py-4 bg-white text-stone-900 overflow-hidden rounded-sm transition-all hover:-translate-y-1 hover:shadow-2xl shadow-black/30 flex items-center justify-center gap-3 w-full sm:w-auto"
-                        aria-label="Comprar edição limitada">
+                        class="group relative px-8 py-4 bg-white/80 backdrop-blur-md text-stone-900 overflow-hidden rounded-full transition-all hover:-translate-y-1 hover:shadow-2xl shadow-stone-900/10 flex items-center justify-center gap-3 w-full sm:w-auto"
+                        aria-label="Explorar detalhes">
                         <div
-                            class="absolute inset-0 w-full h-full bg-stone-200 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-0">
+                            class="absolute inset-0 w-full h-full bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-0">
                         </div>
-                        <span class="relative z-10 font-mono text-xs uppercase tracking-widest font-semibold">
-                            Adquirir Agora
+                        <span
+                            class="relative z-10 font-mono text-xs uppercase tracking-widest font-semibold flex items-center gap-2">
+                            Explorar <i data-lucide="arrow-down" class="w-4 h-4"></i>
                         </span>
-                        <i data-lucide="arrow-right"
-                            class="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform"></i>
-                    </button>
-
-                    <button
-                        class="px-8 py-4 border border-white/30 hover:bg-white/10 hover:border-white transition-colors rounded-sm text-white font-mono text-xs uppercase tracking-widest w-full sm:w-auto center backdrop-blur-sm"
-                        aria-label="Explorar os detalhes da caneta">
-                        Ver Detalhes
                     </button>
                 </div>
 
@@ -347,17 +356,19 @@
             }
         }
 
-        // Engine de renderização contínua separada do ScrollTrigger
+        // Engine de renderização contínua atrelada puramente ao requestAnimationFrame da tela
         function tick() {
-            // Lerp (interpolação linear) para suavizar a transição de tempo ainda mais
-            currentTime += (targetTime - currentTime) * 0.1;
+            // Em vez de suavizar a transição com matemática manual pesada (double-lerp), 
+            // confiamos no Lenis para mandar a posição de scroll suave, 
+            // evitando desconexão entre o mouse e o vídeo (responsividade instantânea).
+            currentTime = targetTime;
 
-            // Limitador de casa decimal e atualização do player
-            if (Math.abs(targetTime - currentTime) > 0.001) {
+            // Verifica se o tempo real mudou o suficiente para gastar decodificação do vídeo
+            if (Math.abs(video.currentTime - currentTime) > 0.01) {
                 video.currentTime = currentTime;
+                renderCanvas();
             }
 
-            renderCanvas();
             requestAnimationFrame(tick);
         }
 
@@ -372,7 +383,7 @@
             ScrollTrigger.create({
                 trigger: "#hero-section",
                 start: "top top",
-                end: "+=250%", // Uma área maior de scroll para scrub mais alongado e suave
+                end: "+=120%", // ROLAGEM CUSTA MENOS ESFORÇO: o vídeo passa super rápido de forma ágil com pouco scroll
                 pin: true,
                 anticipatePin: 1,
                 onUpdate: (self) => {
