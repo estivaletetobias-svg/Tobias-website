@@ -1068,8 +1068,9 @@
         </div>
 
         <!-- Modal Scrollable Content -->
-        <div data-lenis-prevent
-            class="flex-1 overflow-y-auto overflow-x-hidden overscroll-contain touch-pan-y p-6 md:p-10 flex flex-col pb-32">
+        <div id="modal-scroll-container"
+            class="flex-1 overflow-y-auto overflow-x-hidden p-6 md:p-10 flex flex-col pb-32"
+            style="-webkit-overflow-scrolling: touch; overscroll-behavior: contain; touch-action: pan-y;">
             <h3 id="modal-title"
                 class="text-3xl md:text-[2.75rem] font-serif leading-[1.1] tracking-tight mb-8 text-[#1c1917]">Título
             </h3>
@@ -1597,6 +1598,11 @@
             modalPanel.classList.add('translate-x-0');
 
             document.body.style.overflow = 'hidden'; // Trava o site de fundo
+            if (typeof lenis !== 'undefined') lenis.stop(); // Desliga a engine e libera scroll do desktop
+
+            // Força o iOS a reconhecer a rolagem resetando o scroll
+            const scrollContainer = document.getElementById('modal-scroll-container');
+            if (scrollContainer) scrollContainer.scrollTop = 0;
 
             lucide.createIcons();
         }
@@ -1609,6 +1615,7 @@
             modalVeil.classList.add('opacity-0', 'pointer-events-none');
 
             document.body.style.overflow = ''; // Destrava o fundo
+            if (typeof lenis !== 'undefined') lenis.start(); // Religa a engine Lenis
         }
 
         // --- ENGENHARIA DE MODAis EMBED (Puxar Google Docs para tela cheia) ---
@@ -1629,6 +1636,7 @@
             panel.classList.add('scale-100', 'opacity-100');
 
             document.body.style.overflow = 'hidden';
+            if (typeof lenis !== 'undefined') lenis.stop();
 
             if (window.lucide) lucide.createIcons();
         }
@@ -1647,6 +1655,7 @@
             panel.classList.add('scale-95', 'opacity-0');
 
             document.body.style.overflow = '';
+            if (typeof lenis !== 'undefined') lenis.start();
 
             // Derruba a banda após transição (Evita som de youtubes continuar tocando)
             setTimeout(() => { iframe.src = ''; }, 600);
