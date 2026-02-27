@@ -1072,7 +1072,7 @@
         <!-- Modal Scrollable Content -->
         <div id="modal-scroll-container" data-lenis-prevent
             class="flex-1 overflow-y-auto overflow-x-hidden p-6 md:p-10 flex flex-col pb-32"
-            style="-webkit-overflow-scrolling: touch; overscroll-behavior: contain; touch-action: pan-y;">
+            style="-webkit-overflow-scrolling: touch; overscroll-behavior: contain;">
             <h3 id="modal-title"
                 class="text-3xl md:text-[2.75rem] font-serif leading-[1.1] tracking-tight mb-8 text-[#1c1917]">Título
             </h3>
@@ -1154,6 +1154,7 @@
             smoothTouch: false, // Touch é nativo e perfeito
             touchMultiplier: 2,
         });
+        window.lenis = lenis;
 
         // Lenis Engine Initialize
 
@@ -1384,11 +1385,13 @@
                 mobileMenu.classList.add('translate-y-0');
                 menuIcon.setAttribute('data-lucide', 'x');
                 document.body.style.overflow = 'hidden';
+                if (window.lenis) window.lenis.stop();
             } else {
                 mobileMenu.classList.remove('translate-y-0');
                 mobileMenu.classList.add('translate-y-[-100%]');
                 menuIcon.setAttribute('data-lucide', 'menu');
                 document.body.style.overflow = '';
+                if (window.lenis) window.lenis.start();
             }
             lucide.createIcons(); // Recarrega o ícone alterado
         }
@@ -1603,6 +1606,7 @@
             modalPanel.classList.add('translate-x-0');
 
             document.body.style.overflow = 'hidden';
+            if (window.lenis) window.lenis.stop();
 
             // Força o iOS a reconhecer a rolagem resetando o scroll
             const scrollContainer = document.getElementById('modal-scroll-container');
@@ -1619,6 +1623,7 @@
             modalVeil.classList.add('opacity-0', 'pointer-events-none');
 
             document.body.style.overflow = '';
+            if (window.lenis) window.lenis.start();
         }
 
         // --- ENGENHARIA DE MODAis EMBED (Puxar Google Docs para tela cheia) ---
@@ -1639,6 +1644,7 @@
             panel.classList.add('scale-100', 'opacity-100');
 
             document.body.style.overflow = 'hidden';
+            if (window.lenis) window.lenis.stop();
 
             if (window.lucide) lucide.createIcons();
         }
@@ -1657,6 +1663,7 @@
             panel.classList.add('scale-95', 'opacity-0');
 
             document.body.style.overflow = '';
+            if (window.lenis) window.lenis.start();
 
             // Derruba a banda após transição (Evita som de youtubes continuar tocando)
             setTimeout(() => { iframe.src = ''; }, 600);
