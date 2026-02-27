@@ -1169,23 +1169,23 @@
 
         // 2. Inicializar Lenis (Tratamento para Smooth Scroll)
         const lenis = new Lenis({
-            lerp: 0.08, // Suavidade extrema e responsiva
+            lerp: 0.1, // Suavidade padrão estável
             smoothWheel: true,
-            wheelMultiplier: 1.1, // Mac/Mouse ficará mais ágil
-            smoothTouch: false, // Touch é nativo e perfeito
+            wheelMultiplier: 1, // Retornado ao default para evitar saltos quebrados no Chrome
+            smoothTouch: false,
             touchMultiplier: 2,
         });
         window.lenis = lenis;
 
-        // Lenis Engine Initialize
+        // Lenis puro: não atrelado ao GSAP Ticker, quebrava o Chrome
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
 
+        // Somente notifica o scroll trigger de rolagens, não domina o ciclo.
         lenis.on('scroll', ScrollTrigger.update);
-
-        gsap.ticker.add((time) => {
-            lenis.raf(time * 1000);
-        });
-
-        gsap.ticker.lagSmoothing(0);
 
         // 3. Registrar GSAP
         gsap.registerPlugin(ScrollTrigger);
