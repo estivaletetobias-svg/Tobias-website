@@ -536,16 +536,31 @@
                     Agentes, Artigos & Repertório
                 </h2>
 
-                <p class="font-sans text-[#78716C] text-[15px] md:text-[17px] max-w-xl leading-[1.6] font-light mb-16">
+                <p class="font-sans text-[#78716C] text-[15px] md:text-[17px] max-w-xl leading-[1.6] font-light mb-10">
                     Modelos pré-treinados, análises e materiais desenvolvidos para estruturar a sua visão e escalar sua
                     execução de forma acessível.
                 </p>
 
+                <!-- Controle Customizado: Indicação de Scroll Otimizada -->
+                <div
+                    class="flex items-center justify-center gap-5 text-[10px] uppercase font-mono tracking-widest text-[#a8a29e] mb-12">
+                    <button id="scroll-left-btn" aria-label="Rolar para esquerda"
+                        class="p-3 border border-stone-300 rounded-full hover:bg-white hover:border-[#1c1917] hover:text-[#1c1917] transition-all bg-[#F9F9F8] shadow-sm">
+                        <i data-lucide="arrow-left" class="w-4 h-4 pointer-events-none"></i>
+                    </button>
+                    <span class="cursor-default select-none hidden sm:block">Deslize para explorar</span>
+                    <span class="cursor-default select-none sm:hidden">Arraste para o lado</span>
+                    <button id="scroll-right-btn" aria-label="Rolar para direita"
+                        class="p-3 border border-stone-300 rounded-full hover:bg-white hover:border-[#1c1917] hover:text-[#1c1917] transition-all bg-[#F9F9F8] shadow-sm">
+                        <i data-lucide="arrow-right" class="w-4 h-4 pointer-events-none"></i>
+                    </button>
+                </div>
+
                 <!-- Open Ecosystem GPTs Grid (Agora Dinâmico via Google Sheets) -->
-                <!-- No mobile usa Scroll Lateral Snapped. No Desktop volta pro Grid Padrão -->
-                <div id="vault-grid"
-                    class="w-full max-w-5xl mx-auto flex gap-6 text-left relative z-20 min-h-[300px] overflow-x-auto overflow-y-hidden snap-x snap-mandatory px-6 md:px-0 pb-8 hide-scroll-mobile"
-                    style="touch-action: pan-x;">
+                <!-- Carrossel Deslizante de Ponta a Ponta -->
+                <div id="vault-grid" data-lenis-prevent
+                    class="w-full max-w-5xl mx-auto flex gap-6 text-left relative z-20 min-h-[300px] overflow-x-auto overflow-y-hidden snap-x snap-mandatory px-6 lg:px-8 pb-8 hide-scroll-mobile"
+                    style="touch-action: pan-x; scroll-behavior: smooth;">
 
                     <!-- Estado de Carregamento Elevado (Loading) -->
                     <!-- Flex-shrink garante que cards no celular não fiquem esmagados -->
@@ -1757,6 +1772,23 @@
                         console.error('Erro de sincronia Vault:', err);
                     }
                 });
+
+                // Ativar os Botões Interativos do Carrossel (Esquerda / Direita)
+                const leftBtn = document.getElementById('scroll-left-btn');
+                const rightBtn = document.getElementById('scroll-right-btn');
+
+                if (leftBtn && rightBtn && vaultGrid) {
+                    leftBtn.addEventListener('click', () => {
+                        // Recuar tamanho equivalente a um card + gap
+                        vaultGrid.scrollBy({ left: -360, behavior: 'smooth' });
+                    });
+
+                    rightBtn.addEventListener('click', () => {
+                        // Avançar tamanho equivalente a um card + gap
+                        vaultGrid.scrollBy({ left: 360, behavior: 'smooth' });
+                    });
+                }
+
             }
         });
     </script>
