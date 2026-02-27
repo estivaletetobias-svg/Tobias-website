@@ -1068,7 +1068,7 @@
         </div>
 
         <!-- Modal Scrollable Content -->
-        <div id="modal-scroll-container"
+        <div id="modal-scroll-container" data-lenis-prevent
             class="flex-1 overflow-y-auto overflow-x-hidden p-6 md:p-10 flex flex-col pb-32"
             style="-webkit-overflow-scrolling: touch; overscroll-behavior: contain; touch-action: pan-y;">
             <h3 id="modal-title"
@@ -1149,6 +1149,20 @@
             lerp: 0.1, // Suavidade (mais baixo = mais suave)
             smoothWheel: true,
         });
+
+        // 2.1 Blindagem de Scroll para Modais (Evita Lenis de roubar a rodinha do mouse ou touch)
+        function secureModalScroll(selector) {
+            const el = document.querySelector(selector);
+            if (!el) return;
+            const stop = (e) => e.stopPropagation();
+            el.addEventListener('wheel', stop, { passive: false });
+            el.addEventListener('touchstart', stop, { passive: false });
+            el.addEventListener('touchmove', stop, { passive: false });
+        }
+
+        // Aplica blindagem tática na gaveta da esquerda e no artigo/youtube
+        secureModalScroll('#project-modal-panel');
+        secureModalScroll('#iframe-modal-panel');
 
         lenis.on('scroll', ScrollTrigger.update);
 
@@ -1598,7 +1612,6 @@
             modalPanel.classList.add('translate-x-0');
 
             document.body.style.overflow = 'hidden'; // Trava o site de fundo
-            if (typeof lenis !== 'undefined') lenis.stop(); // Desliga a engine e libera scroll do desktop
 
             // Força o iOS a reconhecer a rolagem resetando o scroll
             const scrollContainer = document.getElementById('modal-scroll-container');
@@ -1615,7 +1628,6 @@
             modalVeil.classList.add('opacity-0', 'pointer-events-none');
 
             document.body.style.overflow = ''; // Destrava o fundo
-            if (typeof lenis !== 'undefined') lenis.start(); // Religa a engine Lenis
         }
 
         // --- ENGENHARIA DE MODAis EMBED (Puxar Google Docs para tela cheia) ---
@@ -1636,7 +1648,6 @@
             panel.classList.add('scale-100', 'opacity-100');
 
             document.body.style.overflow = 'hidden';
-            if (typeof lenis !== 'undefined') lenis.stop();
 
             if (window.lucide) lucide.createIcons();
         }
@@ -1655,7 +1666,6 @@
             panel.classList.add('scale-95', 'opacity-0');
 
             document.body.style.overflow = '';
-            if (typeof lenis !== 'undefined') lenis.start();
 
             // Derruba a banda após transição (Evita som de youtubes continuar tocando)
             setTimeout(() => { iframe.src = ''; }, 600);
