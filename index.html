@@ -24,7 +24,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <!-- Lenis para Smooth Scroll (Opcional premium) -->
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
     <!-- Tailwind Configuration (Design System Tokens) -->
     <script>
@@ -1056,7 +1056,7 @@
         class="fixed inset-0 bg-[#1c1917]/20 backdrop-blur-sm z-[90] opacity-0 pointer-events-none transition-opacity duration-500"
         onclick="closeProjectModal()"></div>
 
-    <aside id="project-modal-panel" data-lenis-prevent
+    <aside id="project-modal-panel"
         class="fixed top-0 right-0 w-full md:w-[600px] lg:w-[700px] h-[100dvh] bg-[#EAEAE5] shadow-2xl z-[100] translate-x-full transition-transform duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col border-l border-stone-300/50">
         <!-- Modal Header -->
         <div class="flex items-center justify-between p-6 md:p-10 border-b border-stone-300">
@@ -1099,8 +1099,8 @@
         class="fixed inset-0 bg-[#1c1917]/70 backdrop-blur-md z-[110] opacity-0 pointer-events-none transition-opacity duration-500 flex items-center justify-center pt-24 pb-8 px-4 sm:px-8"
         onclick="closeIframeModal()">
 
-        <div id="iframe-modal-panel" data-lenis-prevent
-            class="bg-[#F9F9F8] w-full max-w-5xl h-full rounded-2xl shadow-2xl flex flex-col scale-95 opacity-0 transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] relative overflow-hidden ring-1 ring-white/20 overscroll-contain touch-pan-y"
+        <div id="iframe-modal-panel"
+            class="bg-[#F9F9F8] w-full max-w-5xl h-full rounded-2xl shadow-2xl flex flex-col scale-95 opacity-0 transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] relative overflow-hidden ring-1 ring-white/20"
             onclick="event.stopPropagation()">
 
             <!-- Header moderno -->
@@ -1146,23 +1146,12 @@
 
         // 2. Inicializar Lenis (Tratamento para Smooth Scroll)
         const lenis = new Lenis({
-            lerp: 0.1, // Suavidade (mais baixo = mais suave)
+            lerp: 0.08, // Suavidade extrema e responsiva
             smoothWheel: true,
+            wheelMultiplier: 1.1, // Mac/Mouse ficará mais ágil
+            smoothTouch: false, // Touch é nativo e perfeito
+            touchMultiplier: 2,
         });
-
-        // 2.1 Blindagem de Scroll para Modais (Evita Lenis de roubar a rodinha do mouse ou touch)
-        function secureModalScroll(selector) {
-            const el = document.querySelector(selector);
-            if (!el) return;
-            const stop = (e) => e.stopPropagation();
-            el.addEventListener('wheel', stop, { passive: false });
-            el.addEventListener('touchstart', stop, { passive: false });
-            el.addEventListener('touchmove', stop, { passive: false });
-        }
-
-        // Aplica blindagem tática na gaveta da esquerda e no artigo/youtube
-        secureModalScroll('#project-modal-panel');
-        secureModalScroll('#iframe-modal-panel');
 
         lenis.on('scroll', ScrollTrigger.update);
 
