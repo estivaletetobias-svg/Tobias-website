@@ -521,12 +521,12 @@
 
                 <h2
                     class="font-serif text-[#1c1917] text-2xl md:text-[2rem] leading-tight mb-6 font-normal tracking-tight">
-                    Agentes Inteligentes de Acesso Aberto.
+                    Agentes, Artigos & Repertório
                 </h2>
 
                 <p class="font-sans text-[#78716C] text-[15px] md:text-[17px] max-w-xl leading-[1.6] font-light mb-16">
-                    Sistemas pré-treinados disponíveis gratuitamente para alavancar sua performance. Acesse, teste e
-                    escale sua própria inteligência.
+                    Modelos pré-treinados, análises e materiais desenvolvidos para estruturar a sua visão e escalar sua
+                    execução de forma acessível.
                 </p>
 
                 <!-- Open Ecosystem GPTs Grid (Agora Dinâmico via Google Sheets) -->
@@ -1092,6 +1092,49 @@
         </div>
     </aside>
 
+    <!-- CONTENT IFRAME MODAL (Para Artigos, Google Docs e Manuais no Site) -->
+    <div id="iframe-modal-veil"
+        class="fixed inset-0 bg-[#1c1917]/70 backdrop-blur-md z-[110] opacity-0 pointer-events-none transition-opacity duration-500 flex items-center justify-center pt-24 pb-8 px-4 sm:px-8"
+        onclick="closeIframeModal()">
+
+        <div id="iframe-modal-panel" data-lenis-prevent
+            class="bg-[#F9F9F8] w-full max-w-5xl h-full rounded-2xl shadow-2xl flex flex-col scale-95 opacity-0 transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] relative overflow-hidden ring-1 ring-white/20"
+            onclick="event.stopPropagation()">
+
+            <!-- Header moderno -->
+            <div class="flex items-center justify-between p-4 px-6 border-b border-stone-300/50 shrink-0 bg-[#EAEAE5]">
+                <div class="flex items-center gap-3 w-3/4">
+                    <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <div class="font-serif text-xl tracking-tight text-[#1c1917] truncate" id="iframe-modal-title">
+                        Lendo...</div>
+                </div>
+                <div class="flex items-center gap-4 shrink-0">
+                    <a id="iframe-modal-external" href="#" target="_blank"
+                        class="text-[10px] font-mono uppercase tracking-[0.15em] text-stone-500 hover:text-[#1c1917] transition-colors hidden sm:block">Abrir
+                        num Mestre</a>
+                    <button type="button" onclick="closeIframeModal()"
+                        class="p-2 bg-stone-200 hover:bg-stone-300 hover:rotate-90 transition-all rounded-full group cursor-pointer inline-flex items-center justify-center">
+                        <i data-lucide="x"
+                            class="w-4 h-4 text-stone-900 group-hover:scale-110 transition-transform"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Corpo Iframe -->
+            <div class="flex-1 w-full bg-white relative">
+                <!-- Fallback Loading visual enquanto a porta serial responde -->
+                <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-0">
+                    <i data-lucide="loader-2" class="w-8 h-8 animate-spin text-stone-300 mb-3"></i>
+                    <span class="text-[10px] uppercase tracking-widest text-stone-400 font-mono">Buscando na
+                        rede...</span>
+                </div>
+                <!-- O Iframe encobre a layer de trás assim que o GDocs renderiza -->
+                <iframe id="iframe-modal-content" src=""
+                    class="absolute inset-0 w-full h-full border-none z-10 bg-transparent rounded-b-2xl"></iframe>
+            </div>
+        </div>
+    </div>
+
     </div>
 
     <!-- SCRIPTS -->
@@ -1565,6 +1608,46 @@
 
             document.body.style.overflow = ''; // Destrava o fundo
         }
+
+        // --- ENGENHARIA DE MODAis EMBED (Puxar Google Docs para tela cheia) ---
+        window.openIframeModal = function (url, title) {
+            const veil = document.getElementById('iframe-modal-veil');
+            const panel = document.getElementById('iframe-modal-panel');
+
+            document.getElementById('iframe-modal-title').textContent = title || "Documento";
+            document.getElementById('iframe-modal-external').href = url;
+            document.getElementById('iframe-modal-content').src = url;
+
+            // Fade background in
+            veil.classList.remove('opacity-0', 'pointer-events-none');
+            veil.classList.add('opacity-100', 'pointer-events-auto');
+
+            // Float modal in
+            panel.classList.remove('scale-95', 'opacity-0');
+            panel.classList.add('scale-100', 'opacity-100');
+
+            document.body.style.overflow = 'hidden';
+            if (window.lucide) lucide.createIcons();
+        }
+
+        window.closeIframeModal = function () {
+            const veil = document.getElementById('iframe-modal-veil');
+            const panel = document.getElementById('iframe-modal-panel');
+            const iframe = document.getElementById('iframe-modal-content');
+
+            // Fade out
+            veil.classList.remove('opacity-100', 'pointer-events-auto');
+            veil.classList.add('opacity-0', 'pointer-events-none');
+
+            // Un-float
+            panel.classList.remove('scale-100', 'opacity-100');
+            panel.classList.add('scale-95', 'opacity-0');
+
+            document.body.style.overflow = '';
+
+            // Derruba a banda após transição (Evita som de youtubes continuar tocando)
+            setTimeout(() => { iframe.src = ''; }, 600);
+        }
     </script>
 
     <!-- Motor de Sincronia de Banco de Dados via Planilha do Google (PapaParse) -->
@@ -1597,9 +1680,17 @@
                                 const link = row.link ? row.link : '#';
                                 const rotulo = row.rotulo ? row.rotulo : 'Acessar';
 
+                                // Inteligência Autônoma para Rota de Iframe vs Pop-out:
+                                // OpenAI bloqueia iframes. Google Docs/Sheets libera via "Published". 
+                                // O código julga o destino pela URL, permitindo embutir na interface o q for compatível.
+                                const isEmbeddable = link.includes('docs.google.com') || link.includes('youtube.com/embed') || link.includes('drive.google.com') || link.includes('notion.site');
+                                const clickBehavior = isEmbeddable
+                                    ? `onclick="event.preventDefault(); window.openIframeModal('${link}', '${titulo.replace(/'/g, "\\'")}');"`
+                                    : `target="_blank" rel="noopener noreferrer"`;
+
                                 // DNA Visual do Card criado do zero
                                 const cardHTML = `
-                                    <a href="${link}" target="_blank" rel="noopener noreferrer"
+                                    <a href="${link}" ${clickBehavior}
                                         class="group bg-white border border-stone-200 p-8 flex flex-col justify-between min-h-[260px] transition-all duration-500 hover:border-stone-400 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 relative overflow-hidden reveal-up">
                                         <div class="absolute top-0 left-0 w-full h-[3px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500"></div>
                                         <div>
@@ -1609,7 +1700,7 @@
                                         </div>
                                         <div class="mt-8 flex items-center justify-between">
                                             <span class="text-[11px] font-sans font-medium uppercase tracking-widest text-[#1c1917]">${rotulo}</span>
-                                            <i data-lucide="external-link" class="w-4 h-4 text-stone-300 group-hover:text-[#1c1917] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"></i>
+                                            <i data-lucide="${isEmbeddable ? 'maximize-2' : 'external-link'}" class="w-4 h-4 text-stone-300 group-hover:text-[#1c1917] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"></i>
                                         </div>
                                     </a>
                                 `;
