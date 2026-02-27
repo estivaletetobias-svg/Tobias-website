@@ -156,7 +156,18 @@
         .reveal-text {
             opacity: 0;
             visibility: hidden;
-            will-change: transform, opacity;
+        }
+
+        /* Hide scrollbar for Vault horizontal scroll */
+        .hide-scroll-mobile::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scroll-mobile {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
         }
     </style>
 </head>
@@ -531,14 +542,17 @@
                 </p>
 
                 <!-- Open Ecosystem GPTs Grid (Agora Dinâmico via Google Sheets) -->
+                <!-- No mobile usa Scroll Lateral Snapped. No Desktop volta pro Grid Padrão -->
                 <div id="vault-grid"
-                    class="w-full max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left relative z-20 min-h-[300px]">
+                    class="w-full max-w-5xl mx-auto flex lg:grid lg:grid-cols-3 gap-6 text-left relative z-20 min-h-[300px] overflow-x-auto overflow-y-hidden lg:overflow-visible snap-x snap-mandatory px-6 md:px-0 pb-8 hide-scroll-mobile">
 
                     <!-- Estado de Carregamento Elevado (Loading) -->
-                    <div class="col-span-full flex flex-col items-center justify-center p-16 text-stone-400">
+                    <!-- Flex-shrink garante que cards no celular não fiquem esmagados -->
+                    <div
+                        class="w-full flex-shrink-0 lg:flex-shrink flex flex-col items-center justify-center p-16 text-stone-400">
                         <i data-lucide="loader-2" class="w-8 h-8 animate-spin mb-4 text-[#1c1917]"></i>
-                        <span class="font-mono text-[10px] uppercase tracking-widest">Sincronizando Vault via
-                            Inteligência Externa...</span>
+                        <span class="font-mono text-[10px] uppercase tracking-widest text-center">Sincronizando Vault
+                            via Inteligência Externa...</span>
                     </div>
 
                 </div>
@@ -1706,9 +1720,10 @@
                                     : `target="_blank" rel="noopener noreferrer"`;
 
                                 // DNA Visual do Card criado do zero
+                                // No mobile, cada card assume 85% da tela pra induzir o slide.
                                 const cardHTML = `
                                     <a href="${link}" ${clickBehavior}
-                                        class="group bg-white border border-stone-200 p-8 flex flex-col justify-between min-h-[260px] transition-all duration-500 hover:border-stone-400 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 relative overflow-hidden reveal-up">
+                                        class="group bg-white border border-stone-200 p-8 flex flex-col justify-between min-h-[260px] w-[85vw] sm:w-[45vw] lg:w-auto flex-shrink-0 snap-center transition-all duration-500 hover:border-stone-400 hover:shadow-xl hover:shadow-black/5 lg:hover:-translate-y-1 relative overflow-hidden reveal-up">
                                         <div class="absolute top-0 left-0 w-full h-[3px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500"></div>
                                         <div>
                                             <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-stone-400 mb-4 block">Assistente ${num}</span>
@@ -1733,11 +1748,11 @@
                                 ScrollTrigger.refresh();
                             }
                         } else {
-                            vaultGrid.innerHTML = '<div class="col-span-full text-center text-stone-500 font-sans">O banco de dados do Google Planilhas está vazio.</div>';
+                            vaultGrid.innerHTML = '<div class="w-full text-center text-stone-500 font-sans">O banco de dados do Google Planilhas está vazio.</div>';
                         }
                     },
                     error: function (err) {
-                        vaultGrid.innerHTML = '<div class="col-span-full text-center text-stone-400 font-mono text-sm tracking-widest uppercase">Falha na conexão com a central.</div>';
+                        vaultGrid.innerHTML = '<div class="w-full text-center text-stone-400 font-mono text-sm tracking-widest uppercase">Falha na conexão com a central.</div>';
                         console.error('Erro de sincronia Vault:', err);
                     }
                 });
