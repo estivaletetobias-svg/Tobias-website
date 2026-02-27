@@ -253,15 +253,12 @@
         <main id="hero-section"
             class="relative z-10 w-full h-[100dvh] flex flex-col border-b border-stone-300 overflow-hidden bg-[#EAEAE5]">
 
-            <!-- Vídeo de Fundo Fullscreen -->
+            <!-- Vídeo de Fundo Fullscreen Nativo e Acelerado -->
             <div class="absolute inset-0 w-full h-full z-0 overflow-hidden" id="video-container">
-                <video id="product-video" src="assets/vid/tobias_hero.mp4" class="hidden w-full h-full object-cover"
-                    playsinline webkit-playsinline muted preload="auto"></video>
-
-                <!-- Canvas para desenho hiper fluido estilo Apple -->
-                <canvas id="video-canvas"
+                <video id="product-video" src="assets/vid/tobias_hero.mp4"
                     class="absolute inset-0 w-full h-full object-cover transform scale-105 z-0 will-change-transform"
-                    style="transform: scale(1.05) translateZ(0);"></canvas>
+                    style="transform: scale(1.05) translateZ(0);" playsinline webkit-playsinline muted
+                    preload="auto"></video>
 
                 <!-- Overlays Claro para Leitura Premium -->
                 <!-- Gradiente claro à esquerda para a leitura do texto -->
@@ -1326,83 +1323,35 @@
 
         });
 
-        // 5. Novo Stack de Vídeo: API Canvas 2D + RequestAnimationFrame Lerping (Real Apple-like)
+        // 5. Engine nativa e leve para o Vídeo de Fundo
         const video = document.getElementById('product-video');
-        const canvas = document.getElementById('video-canvas');
-        const ctx = canvas.getContext('2d');
 
-        let targetTime = 0;
-        let lastRenderedTime = -1;
-
-        function renderCanvas() {
-            if (video.readyState >= 2) { // HAVE_CURRENT_DATA
-                // Ajusta a resolução do canvas caso não corresponda
-                if (canvas.width !== video.videoWidth) {
-                    canvas.width = video.videoWidth;
-                    canvas.height = video.videoHeight;
-                }
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-            }
-        }
-
-        let hasRenderedFrame = false;
-
-        // Engine de renderização contínua atrelada puramente ao requestAnimationFrame da tela
-        function tick() {
-            // Em vez de comparar contra o "video.currentTime" (que o navegador arredonda e causa loop infinito),
-            // comparamos contra a última vez que nós MESMOS pedimos uma renderização.
-            // Isso garante que se o mouse estiver parado, o custo da GPU/CPU cai pra ZERO.
-
-            if (Math.abs(targetTime - lastRenderedTime) > 0.04 || !hasRenderedFrame) {
-                lastRenderedTime = targetTime;
-                video.currentTime = targetTime;
-
-                // Só desenha se tiver dados
-                if (video.readyState >= 2) {
-                    renderCanvas();
-                    hasRenderedFrame = true;
-                }
-            }
-
-            requestAnimationFrame(tick);
-        }
-
-        // Garante que desenha caso o vídeo pegue cache muito rápido
-        video.addEventListener('loadeddata', () => {
-            renderCanvas();
-            // Hack leve apenas para despertar a leitura no iOS sem loop contínuo
-            let playPromise = video.play();
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                    video.pause();
-                }).catch(error => {
-                    // Auto-play prevent (low power mode, etc)
-                });
-            }
-        });
-
-        if (video.readyState >= 2) {
-            renderCanvas();
-            hasRenderedFrame = true;
-        }
-
-        function initCanvasScrub() {
+        function initVideoScrub() {
             if (video.dataset.scrubInitialized === 'true') return;
             video.dataset.scrubInitialized = 'true';
 
-            // Inicia o looper
-            requestAnimationFrame(tick);
+            // Hack essencial para iOS Safari: "Desperta" a decodificação da GPU em vídeos pausados na largada
+            let playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => video.pause()).catch(error => { /* Auto-play evitado pelas politicas, ok */ });
+            }
 
-            // Usa ScrollTrigger apenas para alimentar a variável 'targetTime' baseada no scroll
+            // O Lenis gerencia a suavidade por trás. Nós apenas alimentamos o progresso matemático no vídeo nativo.
+            // O Chrome adora isso porque mantém o pipeline inteiro na GPU sem Canvas cópia de memória.
             ScrollTrigger.create({
                 trigger: "#hero-section",
                 start: "top top",
-                end: "+=120%", // ROLAGEM CUSTA MENOS ESFORÇO: o vídeo passa super rápido de forma ágil com pouco scroll
+                end: "+=120%",
                 pin: true,
                 anticipatePin: 1,
                 onUpdate: (self) => {
-                    // Mapeia o progresso (0 a 1) na duração total do vídeo
-                    targetTime = self.progress * (video.duration || 1);
+                    if (video.readyState >= 2) {
+                        // Limita saltos microscópicos absurdos para não fritar decodificadores velhos
+                        let newTime = self.progress * (video.duration || 1);
+                        if (Math.abs(video.currentTime - newTime) > 0.02) {
+                            video.currentTime = newTime;
+                        }
+                    }
                 }
             });
 
@@ -1411,9 +1360,9 @@
 
         // Preload robusto e start da engine
         if (video.readyState >= 1) {
-            initCanvasScrub();
+            initVideoScrub();
         } else {
-            video.addEventListener('loadedmetadata', initCanvasScrub);
+            video.addEventListener('loadeddata', initVideoScrub);
         }
 
         video.load();
