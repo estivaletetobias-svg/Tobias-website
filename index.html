@@ -1153,6 +1153,23 @@
             touchMultiplier: 2,
         });
 
+        // 2.1 Funções Nativas de Trava de Scroll (Para dominar o iOS e Safari)
+        let savedScrollY = 0;
+        function lockScroll() {
+            savedScrollY = window.scrollY;
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${savedScrollY}px`;
+            document.body.style.width = '100%';
+            if (typeof lenis !== 'undefined') lenis.stop();
+        }
+        function unlockScroll() {
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            if (typeof lenis !== 'undefined') lenis.start();
+            window.scrollTo(0, savedScrollY);
+        }
+
         lenis.on('scroll', ScrollTrigger.update);
 
         gsap.ticker.add((time) => {
@@ -1381,12 +1398,12 @@
                 mobileMenu.classList.remove('translate-y-[-100%]');
                 mobileMenu.classList.add('translate-y-0');
                 menuIcon.setAttribute('data-lucide', 'x');
-                document.body.style.overflow = 'hidden'; // Evitar scroll no fundo
+                lockScroll(); // Trava o site de fundo
             } else {
                 mobileMenu.classList.remove('translate-y-0');
                 mobileMenu.classList.add('translate-y-[-100%]');
                 menuIcon.setAttribute('data-lucide', 'menu');
-                document.body.style.overflow = '';
+                unlockScroll();
             }
             lucide.createIcons(); // Recarrega o ícone alterado
         }
@@ -1600,7 +1617,7 @@
             modalPanel.classList.remove('translate-x-full');
             modalPanel.classList.add('translate-x-0');
 
-            document.body.style.overflow = 'hidden'; // Trava o site de fundo
+            lockScroll(); // Trava o site de fundo Nativamente
 
             // Força o iOS a reconhecer a rolagem resetando o scroll
             const scrollContainer = document.getElementById('modal-scroll-container');
@@ -1616,7 +1633,7 @@
             modalVeil.classList.remove('opacity-100', 'pointer-events-auto');
             modalVeil.classList.add('opacity-0', 'pointer-events-none');
 
-            document.body.style.overflow = ''; // Destrava o fundo
+            unlockScroll(); // Destrava o fundo
         }
 
         // --- ENGENHARIA DE MODAis EMBED (Puxar Google Docs para tela cheia) ---
@@ -1636,7 +1653,7 @@
             panel.classList.remove('scale-95', 'opacity-0');
             panel.classList.add('scale-100', 'opacity-100');
 
-            document.body.style.overflow = 'hidden';
+            lockScroll();
 
             if (window.lucide) lucide.createIcons();
         }
@@ -1654,7 +1671,7 @@
             panel.classList.remove('scale-100', 'opacity-100');
             panel.classList.add('scale-95', 'opacity-0');
 
-            document.body.style.overflow = '';
+            unlockScroll();
 
             // Derruba a banda após transição (Evita som de youtubes continuar tocando)
             setTimeout(() => { iframe.src = ''; }, 600);
