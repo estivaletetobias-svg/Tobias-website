@@ -529,225 +529,16 @@
                     escale sua própria inteligência.
                 </p>
 
-                <!-- Open Ecosystem GPTs Grid -->
-                <div
-                    class="w-full max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left relative z-20">
+                <!-- Open Ecosystem GPTs Grid (Agora Dinâmico via Google Sheets) -->
+                <div id="vault-grid"
+                    class="w-full max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left relative z-20 min-h-[300px]">
 
-                    <!-- GPT 1 -->
-                    <a href="https://chatgpt.com/g/g-6993d037505c8191a4d2c8b7d257c551-flow-architect-video-workflow-studio"
-                        target="_blank" rel="noopener noreferrer"
-                        class="group bg-white border border-stone-200 p-8 flex flex-col justify-between min-h-[260px] transition-all duration-500 hover:border-stone-400 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 relative overflow-hidden">
-                        <div
-                            class="absolute top-0 left-0 w-full h-[3px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500">
-                        </div>
-                        <div>
-                            <span
-                                class="text-[10px] font-mono uppercase tracking-[0.2em] text-stone-400 mb-4 block">Assistente
-                                01</span>
-                            <h4
-                                class="font-serif text-2xl text-[#1c1917] mb-3 group-hover:text-black transition-colors">
-                                Flow Architect — Video Workflow</h4>
-                            <p class="font-sans text-[13px] text-stone-500 leading-relaxed font-light">Copiloto
-                                estratégico para criação de vídeos com IA. Organiza narrativa, estrutura imagens,
-                                transições proporcionais e controla direção de câmera.</p>
-                        </div>
-                        <div class="mt-8 flex items-center justify-between">
-                            <span
-                                class="text-[11px] font-sans font-medium uppercase tracking-widest text-[#1c1917]">Acessar
-                                GPT</span>
-                            <i data-lucide="external-link"
-                                class="w-4 h-4 text-stone-300 group-hover:text-[#1c1917] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"></i>
-                        </div>
-                    </a>
-
-                    <!-- GPT 2 -->
-                    <a href="https://chatgpt.com/g/g-698dbceb49948191be4a30f3e7b4adfa-fotopronta-ai" target="_blank"
-                        rel="noopener noreferrer"
-                        class="group bg-white border border-stone-200 p-8 flex flex-col justify-between min-h-[260px] transition-all duration-500 hover:border-stone-400 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 relative overflow-hidden">
-                        <div
-                            class="absolute top-0 left-0 w-full h-[3px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500">
-                        </div>
-                        <div>
-                            <span
-                                class="text-[10px] font-mono uppercase tracking-[0.2em] text-stone-400 mb-4 block">Assistente
-                                02</span>
-                            <h4
-                                class="font-serif text-2xl text-[#1c1917] mb-3 group-hover:text-black transition-colors">
-                                FotoPronta AI</h4>
-                            <p class="font-sans text-[13px] text-stone-500 leading-relaxed font-light">Identifica o que
-                                precisa ser ajustado (textos, perfis ou elementos visuais) e entrega a versão final
-                                pronta para uso com integração realista.</p>
-                        </div>
-                        <div class="mt-8 flex items-center justify-between">
-                            <span
-                                class="text-[11px] font-sans font-medium uppercase tracking-widest text-[#1c1917]">Acessar
-                                GPT</span>
-                            <i data-lucide="external-link"
-                                class="w-4 h-4 text-stone-300 group-hover:text-[#1c1917] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"></i>
-                        </div>
-                    </a>
-
-                    <!-- GPT 3 -->
-                    <a href="https://chatgpt.com/g/g-698504e503608191aefd17474c308a7f-forjador-de-slides-notebooklm"
-                        target="_blank" rel="noopener noreferrer"
-                        class="group bg-white border border-stone-200 p-8 flex flex-col justify-between min-h-[260px] transition-all duration-500 hover:border-stone-400 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 relative overflow-hidden">
-                        <div
-                            class="absolute top-0 left-0 w-full h-[3px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500">
-                        </div>
-                        <div>
-                            <span
-                                class="text-[10px] font-mono uppercase tracking-[0.2em] text-stone-400 mb-4 block">Assistente
-                                03</span>
-                            <h4
-                                class="font-serif text-2xl text-[#1c1917] mb-3 group-hover:text-black transition-colors">
-                                Forjador de Slides — NotebookLM</h4>
-                            <p class="font-sans text-[13px] text-stone-500 leading-relaxed font-light">Transforme
-                                qualquer material em um único prompt final pronto para gerar apresentações de alto
-                                impacto no NotebookLM.</p>
-                        </div>
-                        <div class="mt-8 flex items-center justify-between">
-                            <span
-                                class="text-[11px] font-sans font-medium uppercase tracking-widest text-[#1c1917]">Acessar
-                                GPT</span>
-                            <i data-lucide="external-link"
-                                class="w-4 h-4 text-stone-300 group-hover:text-[#1c1917] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"></i>
-                        </div>
-                    </a>
-
-                    <!-- GPT 4 -->
-                    <a href="https://chatgpt.com/g/g-698116fac4a08191a9d01dd0753716a4-infographic-notebook"
-                        target="_blank" rel="noopener noreferrer"
-                        class="group bg-white border border-stone-200 p-8 flex flex-col justify-between min-h-[260px] transition-all duration-500 hover:border-stone-400 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 relative overflow-hidden">
-                        <div
-                            class="absolute top-0 left-0 w-full h-[3px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500">
-                        </div>
-                        <div>
-                            <span
-                                class="text-[10px] font-mono uppercase tracking-[0.2em] text-stone-400 mb-4 block">Assistente
-                                04</span>
-                            <h4
-                                class="font-serif text-2xl text-[#1c1917] mb-3 group-hover:text-black transition-colors">
-                                Infographic Notebook</h4>
-                            <p class="font-sans text-[13px] text-stone-500 leading-relaxed font-light">Transform complex
-                                texts into well-designed infographics. Analyzes your material, chooses styles, and
-                                generates precise prompts.</p>
-                        </div>
-                        <div class="mt-8 flex items-center justify-between">
-                            <span
-                                class="text-[11px] font-sans font-medium uppercase tracking-widest text-[#1c1917]">Acessar
-                                GPT</span>
-                            <i data-lucide="external-link"
-                                class="w-4 h-4 text-stone-300 group-hover:text-[#1c1917] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"></i>
-                        </div>
-                    </a>
-
-                    <!-- GPT 5 -->
-                    <a href="https://chatgpt.com/g/g-6914fbea9fd48191b4081abcd834efd7-bodycheck-coach-interpretacao-de-av-fisicas"
-                        target="_blank" rel="noopener noreferrer"
-                        class="group bg-white border border-stone-200 p-8 flex flex-col justify-between min-h-[260px] transition-all duration-500 hover:border-stone-400 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 relative overflow-hidden">
-                        <div
-                            class="absolute top-0 left-0 w-full h-[3px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500">
-                        </div>
-                        <div>
-                            <span
-                                class="text-[10px] font-mono uppercase tracking-[0.2em] text-stone-400 mb-4 block">Assistente
-                                05</span>
-                            <h4
-                                class="font-serif text-2xl text-[#1c1917] mb-3 group-hover:text-black transition-colors">
-                                BodyCheck Coach</h4>
-                            <p class="font-sans text-[13px] text-stone-500 leading-relaxed font-light">Interpretação
-                                educacional de Avaliações Físicas. Organiza dados, explica o significado de cada
-                                marcador e observa tendências de evolução.</p>
-                        </div>
-                        <div class="mt-8 flex items-center justify-between">
-                            <span
-                                class="text-[11px] font-sans font-medium uppercase tracking-widest text-[#1c1917]">Acessar
-                                GPT</span>
-                            <i data-lucide="external-link"
-                                class="w-4 h-4 text-stone-300 group-hover:text-[#1c1917] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"></i>
-                        </div>
-                    </a>
-
-                    <!-- GPT 6 -->
-                    <a href="https://chatgpt.com/g/g-690f649552a8819193e78a3b986a9fb4-checkup-lab-coach-guia-educacional-de-exames"
-                        target="_blank" rel="noopener noreferrer"
-                        class="group bg-white border border-stone-200 p-8 flex flex-col justify-between min-h-[260px] transition-all duration-500 hover:border-stone-400 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 relative overflow-hidden">
-                        <div
-                            class="absolute top-0 left-0 w-full h-[3px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500">
-                        </div>
-                        <div>
-                            <span
-                                class="text-[10px] font-mono uppercase tracking-[0.2em] text-stone-400 mb-4 block">Assistente
-                                06</span>
-                            <h4
-                                class="font-serif text-2xl text-[#1c1917] mb-3 group-hover:text-black transition-colors">
-                                Checkup Lab Coach</h4>
-                            <p class="font-sans text-[13px] text-stone-500 leading-relaxed font-light">Aprenda o que
-                                significam os principais exames laboratoriais em linguagem simples. Guia educacional com
-                                fontes científicas para consulta.</p>
-                        </div>
-                        <div class="mt-8 flex items-center justify-between">
-                            <span
-                                class="text-[11px] font-sans font-medium uppercase tracking-widest text-[#1c1917]">Acessar
-                                GPT</span>
-                            <i data-lucide="external-link"
-                                class="w-4 h-4 text-stone-300 group-hover:text-[#1c1917] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"></i>
-                        </div>
-                    </a>
-
-                    <!-- GPT 7 -->
-                    <a href="https://chatgpt.com/g/g-690f554bbe30819188c2c94b05c6add3-formula-decodificada"
-                        target="_blank" rel="noopener noreferrer"
-                        class="group bg-white border border-stone-200 p-8 flex flex-col justify-between min-h-[260px] transition-all duration-500 hover:border-stone-400 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 relative overflow-hidden">
-                        <div
-                            class="absolute top-0 left-0 w-full h-[3px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500">
-                        </div>
-                        <div>
-                            <span
-                                class="text-[10px] font-mono uppercase tracking-[0.2em] text-stone-400 mb-4 block">Assistente
-                                07</span>
-                            <h4
-                                class="font-serif text-2xl text-[#1c1917] mb-3 group-hover:text-black transition-colors">
-                                Fórmula Decodificada</h4>
-                            <p class="font-sans text-[13px] text-stone-500 leading-relaxed font-light">Envie a fórmula
-                                de um manipulado e receba a função do conjunto, interações e cuidados gerais. Assistente
-                                100% educacional.</p>
-                        </div>
-                        <div class="mt-8 flex items-center justify-between">
-                            <span
-                                class="text-[11px] font-sans font-medium uppercase tracking-widest text-[#1c1917]">Acessar
-                                GPT</span>
-                            <i data-lucide="external-link"
-                                class="w-4 h-4 text-stone-300 group-hover:text-[#1c1917] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"></i>
-                        </div>
-                    </a>
-
-                    <!-- GPT 8 -->
-                    <a href="https://chatgpt.com/g/g-690275758248819185cfc1362cd008ec-alimentos-proibidos-para-humanos"
-                        target="_blank" rel="noopener noreferrer"
-                        class="group bg-white border border-stone-200 p-8 flex flex-col justify-between min-h-[260px] transition-all duration-500 hover:border-stone-400 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 relative overflow-hidden">
-                        <div
-                            class="absolute top-0 left-0 w-full h-[3px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500">
-                        </div>
-                        <div>
-                            <span
-                                class="text-[10px] font-mono uppercase tracking-[0.2em] text-stone-400 mb-4 block">Assistente
-                                08</span>
-                            <h4
-                                class="font-serif text-2xl text-[#1c1917] mb-3 group-hover:text-black transition-colors">
-                                Risk Check Alimentar</h4>
-                            <p class="font-sans text-[13px] text-stone-500 leading-relaxed font-light">Descubra em
-                                segundos se um determinado produto contém substâncias não recomendadas para consumo, com
-                                base na Lei SB 25 (Texas, EUA).</p>
-                        </div>
-                        <div class="mt-8 flex items-center justify-between">
-                            <span
-                                class="text-[11px] font-sans font-medium uppercase tracking-widest text-[#1c1917]">Acessar
-                                GPT</span>
-                            <i data-lucide="external-link"
-                                class="w-4 h-4 text-stone-300 group-hover:text-[#1c1917] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"></i>
-                        </div>
-                    </a>
+                    <!-- Estado de Carregamento Elevado (Loading) -->
+                    <div class="col-span-full flex flex-col items-center justify-center p-16 text-stone-400">
+                        <i data-lucide="loader-2" class="w-8 h-8 animate-spin mb-4 text-[#1c1917]"></i>
+                        <span class="font-mono text-[10px] uppercase tracking-widest">Sincronizando Vault via
+                            Inteligência Externa...</span>
+                    </div>
 
                 </div>
 
@@ -1774,7 +1565,76 @@
 
             document.body.style.overflow = ''; // Destrava o fundo
         }
+    </script>
 
+    <!-- Motor de Sincronia de Banco de Dados via Planilha do Google (PapaParse) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+    <script>
+        // MÁGICA: Vault Dinâmico atrelado ao celular do Tobias
+        document.addEventListener('DOMContentLoaded', () => {
+            const vaultGrid = document.getElementById('vault-grid');
+
+            // Link de ignição fornecido (Convertido automaticamente para Leitura CSV Cruda do Google)
+            const sheetId = '15qenJ8v-444LncgBOonfTkOoe-bNgxd6CUGXWGXZ3d0';
+            const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv`;
+
+            if (vaultGrid) {
+                Papa.parse(SHEET_CSV_URL, {
+                    download: true,
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: function (results) {
+                        const data = results.data;
+                        if (data && data.length > 0) {
+                            vaultGrid.innerHTML = ''; // Limpa o círculo de carregamento
+
+                            data.forEach(row => {
+                                // Mapeamento das Colunas A, B, C, D, E que o Tobias criou
+                                const num = row.numero ? String(row.numero).trim().padStart(2, '0') : '00';
+                                const titulo = row.titulo ? row.titulo : 'Sem título';
+                                const desc = row.descricao ? row.descricao : '';
+                                const link = row.link ? row.link : '#';
+                                const rotulo = row.rotulo ? row.rotulo : 'Acessar';
+
+                                // DNA Visual do Card criado do zero
+                                const cardHTML = `
+                                    <a href="${link}" target="_blank" rel="noopener noreferrer"
+                                        class="group bg-white border border-stone-200 p-8 flex flex-col justify-between min-h-[260px] transition-all duration-500 hover:border-stone-400 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 relative overflow-hidden reveal-up">
+                                        <div class="absolute top-0 left-0 w-full h-[3px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500"></div>
+                                        <div>
+                                            <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-stone-400 mb-4 block">Assistente ${num}</span>
+                                            <h4 class="font-serif text-2xl text-[#1c1917] mb-3 group-hover:text-black transition-colors">${titulo}</h4>
+                                            <p class="font-sans text-[13px] text-stone-500 leading-relaxed font-light">${desc}</p>
+                                        </div>
+                                        <div class="mt-8 flex items-center justify-between">
+                                            <span class="text-[11px] font-sans font-medium uppercase tracking-widest text-[#1c1917]">${rotulo}</span>
+                                            <i data-lucide="external-link" class="w-4 h-4 text-stone-300 group-hover:text-[#1c1917] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"></i>
+                                        </div>
+                                    </a>
+                                `;
+                                vaultGrid.insertAdjacentHTML('beforeend', cardHTML);
+                            });
+                            // Reassopra vida nos ícones Lucide dentro dos novos cards
+                            if (window.lucide) {
+                                lucide.createIcons();
+                            }
+
+                            // Reassopra vida nas animações GSAP dentro dos novos cards
+                            if (window.ScrollTrigger) {
+                                ScrollTrigger.refresh();
+                            }
+                        } else {
+                            vaultGrid.innerHTML = '<div class="col-span-full text-center text-stone-500 font-sans">O banco de dados do Google Planilhas está vazio.</div>';
+                        }
+                    },
+                    error: function (err) {
+                        vaultGrid.innerHTML = '<div class="col-span-full text-center text-stone-400 font-mono text-sm tracking-widest uppercase">Falha na conexão com a central.</div>';
+                        console.error('Erro de sincronia Vault:', err);
+                    }
+                });
+            }
+        });
     </script>
 </body>
 
