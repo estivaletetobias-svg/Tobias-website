@@ -76,8 +76,7 @@
         /* Grain / Noise Filter */
         .noise {
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
             opacity: 0.04;
@@ -85,8 +84,6 @@
             z-index: 9999;
             background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAAAAP///8AODg6qqqp2dnafMTGfMzOPL/yWAAAAAXRSTlMAQObVGgAAAJNJREFUOMuV1NEJwzAMBVDfD/n5Xy2ZIFvoP0wQoRCDrC/1yEHT95h2/B2hXN8+yvV7pPpdUh2tTqo+vupotXqq+viXo/XfTqve/7V43E6rz+149Xw+j1ePp1UfL6tVP1+OVofTqtezo9Xz+Txe9b9Vv19Hq4/DqvfrsOr37Wj1vB2vnq/Hq9evw6rPs8Oqz1x1uAH7FzK2p8d+4gAAAABJRU5ErkJggg==");
             background-repeat: repeat;
-            transform: translateZ(0);
-            will-change: transform;
         }
 
         /* Ocultar barra de rolagem mas manter funcionalidade */
@@ -1072,7 +1069,7 @@
         <!-- Modal Scrollable Content -->
         <div id="modal-scroll-container" data-lenis-prevent
             class="flex-1 overflow-y-auto overflow-x-hidden p-6 md:p-10 flex flex-col pb-32"
-            style="-webkit-overflow-scrolling: touch; overscroll-behavior: contain;">
+            style="-webkit-overflow-scrolling: touch; overscroll-behavior: contain; touch-action: pan-y;">
             <h3 id="modal-title"
                 class="text-3xl md:text-[2.75rem] font-serif leading-[1.1] tracking-tight mb-8 text-[#1c1917]">Título
             </h3>
