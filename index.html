@@ -1068,7 +1068,8 @@
         </div>
 
         <!-- Modal Scrollable Content -->
-        <div data-lenis-prevent class="flex-1 overflow-y-auto overflow-x-hidden p-6 md:p-10 flex flex-col pb-32">
+        <div data-lenis-prevent
+            class="flex-1 overflow-y-auto overflow-x-hidden overscroll-contain touch-pan-y p-6 md:p-10 flex flex-col pb-32">
             <h3 id="modal-title"
                 class="text-3xl md:text-[2.75rem] font-serif leading-[1.1] tracking-tight mb-8 text-[#1c1917]">Título
             </h3>
@@ -1098,7 +1099,7 @@
         onclick="closeIframeModal()">
 
         <div id="iframe-modal-panel" data-lenis-prevent
-            class="bg-[#F9F9F8] w-full max-w-5xl h-full rounded-2xl shadow-2xl flex flex-col scale-95 opacity-0 transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] relative overflow-hidden ring-1 ring-white/20"
+            class="bg-[#F9F9F8] w-full max-w-5xl h-full rounded-2xl shadow-2xl flex flex-col scale-95 opacity-0 transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] relative overflow-hidden ring-1 ring-white/20 overscroll-contain touch-pan-y"
             onclick="event.stopPropagation()">
 
             <!-- Header moderno -->
@@ -1377,13 +1378,11 @@
                 mobileMenu.classList.add('translate-y-0');
                 menuIcon.setAttribute('data-lucide', 'x');
                 document.body.style.overflow = 'hidden'; // Evitar scroll no fundo
-                if (typeof lenis !== 'undefined') lenis.stop(); // Pausa Scroll Principal
             } else {
                 mobileMenu.classList.remove('translate-y-0');
                 mobileMenu.classList.add('translate-y-[-100%]');
                 menuIcon.setAttribute('data-lucide', 'menu');
                 document.body.style.overflow = '';
-                if (typeof lenis !== 'undefined') lenis.start(); // Retoma Scroll Principal
             }
             lucide.createIcons(); // Recarrega o ícone alterado
         }
@@ -1598,7 +1597,6 @@
             modalPanel.classList.add('translate-x-0');
 
             document.body.style.overflow = 'hidden'; // Trava o site de fundo
-            if (typeof lenis !== 'undefined') lenis.stop(); // Desativa o Smooth Scroll no fundo liberando a modal
 
             lucide.createIcons();
         }
@@ -1611,7 +1609,6 @@
             modalVeil.classList.add('opacity-0', 'pointer-events-none');
 
             document.body.style.overflow = ''; // Destrava o fundo
-            if (typeof lenis !== 'undefined') lenis.start(); // Reativa o Smooth Scroll no fundo
         }
 
         // --- ENGENHARIA DE MODAis EMBED (Puxar Google Docs para tela cheia) ---
@@ -1632,7 +1629,6 @@
             panel.classList.add('scale-100', 'opacity-100');
 
             document.body.style.overflow = 'hidden';
-            if (typeof lenis !== 'undefined') lenis.stop(); // Desativa Smooth Scroll no fundo
 
             if (window.lucide) lucide.createIcons();
         }
@@ -1651,7 +1647,6 @@
             panel.classList.add('scale-95', 'opacity-0');
 
             document.body.style.overflow = '';
-            if (typeof lenis !== 'undefined') lenis.start(); // Reativa o Smooth Scroll no fundo
 
             // Derruba a banda após transição (Evita som de youtubes continuar tocando)
             setTimeout(() => { iframe.src = ''; }, 600);
