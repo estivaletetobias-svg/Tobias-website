@@ -1355,7 +1355,21 @@
         }
 
         // Simplesmente Inicia quando a página carregar
-        document.addEventListener('DOMContentLoaded', initParallaxHero);
+        document.addEventListener('DOMContentLoaded', () => {
+            initParallaxHero();
+
+            // Força o vídeo a tocar asincronamente se bater em restrições brutas de carregamento
+            const nativeVideo = document.getElementById('product-video');
+            if (nativeVideo) {
+                let playAttempt = nativeVideo.play();
+                if (playAttempt !== undefined) {
+                    playAttempt.catch(e => {
+                        // Autoplay was prevented.
+                        console.warn("Autoplay bloqueado pelo Navegador / Low Power Mode.");
+                    });
+                }
+            }
+        });
 
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         if (prefersReducedMotion.matches) {
