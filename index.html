@@ -204,7 +204,7 @@
 
     <!-- MOBILE MENU OVERLAY -->
     <div id="mobile-menu"
-        class="fixed inset-0 bg-[#EAEAE5]/95 backdrop-blur-xl z-40 flex flex-col justify-center items-center gap-10 translate-y-[-100%] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden">
+        class="fixed inset-0 bg-[#EAEAE5]/95 z-40 flex flex-col justify-center items-center gap-10 translate-y-[-100%] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden">
         <a href="#home"
             class="mobile-link text-4xl font-serif tracking-tight text-stone-900 transition-colors hover:text-stone-500">Home</a>
         <a href="#projetos"
@@ -398,7 +398,7 @@
                     class="group border-b border-stone-300 bg-[#EAEAE5] transition-colors duration-500 overflow-hidden block reveal-up relative opacity-90 cursor-wait">
                     <!-- Tooltip "Em Breve" -->
                     <div
-                        class="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/30 backdrop-blur-[2px]">
+                        class="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/70">
                         <span
                             class="bg-[#1c1917] text-[#EAEAE5] font-mono text-xs uppercase tracking-[0.2em] px-6 py-3 rounded-full shadow-2xl translate-y-4 group-hover:translate-y-0 transition-all duration-300 ease-out">Em
                             Breve</span>
@@ -438,7 +438,7 @@
                     class="group border-b border-stone-300 bg-[#EAEAE5] transition-colors duration-500 overflow-hidden block reveal-up relative opacity-90 cursor-wait">
                     <!-- Tooltip "Em Breve" -->
                     <div
-                        class="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/30 backdrop-blur-[2px]">
+                        class="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/70">
                         <span
                             class="bg-[#1c1917] text-[#EAEAE5] font-mono text-xs uppercase tracking-[0.2em] px-6 py-3 rounded-full shadow-2xl translate-y-4 group-hover:translate-y-0 transition-all duration-300 ease-out">Em
                             Lançamento</span>
@@ -614,13 +614,13 @@
                 <div
                     class="w-full md:w-1/2 min-h-[60vh] md:min-h-0 order-1 md:order-2 overflow-hidden border-b md:border-b-0 md:border-l border-stone-300/60 z-0 relative flex-grow">
                     <img id="sobre-imagem" src="assets/img/tobias_pb2.png" alt="Tobias Estivalete" loading="lazy"
-                        class="absolute inset-0 w-full h-full object-cover object-[center_top] brightness-95 contrast-125 grayscale-[20%] sepia-[10%] mix-blend-multiply origin-[center_35%]">
+                        class="absolute inset-0 w-full h-full object-cover object-[center_top] brightness-95 contrast-125 grayscale-[20%] sepia-[10%] origin-[center_35%]">
 
                     <!-- Sombra leve interior -->
                     <div class="absolute inset-0 shadow-[inset_0_0_100px_rgba(28,25,23,0.1)] pointer-events-none"></div>
 
                     <!-- Floating Tag Minimalista - Ajuste de Contraste para Dark Glass -->
-                    <div class="absolute bottom-6 right-6 md:bottom-10 md:right-10 px-5 py-2.5 border border-white/20 backdrop-blur-xl bg-[#1c1917]/50 shadow-[0_10px_30px_rgba(0,0,0,0.5)] reveal-up group"
+                    <div class="absolute bottom-6 right-6 md:bottom-10 md:right-10 px-5 py-2.5 border border-transparent bg-[#1c1917]/90 shadow-[0_10px_30px_rgba(0,0,0,0.3)] reveal-up group"
                         style="transition-delay: 600ms;">
                         <!-- Brilho que passa por cima do texto -->
                         <span
@@ -653,15 +653,11 @@
                         </div>
                     </div>
 
-                    <!-- Fundo decorativo evoluído (Aura Glass / Grain) -->
+                    <!-- Fundo decorativo simplificado -->
                     <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-                        <!-- Camada de luz sutil no centro -->
+                        <!-- Camada de luz sutil no centro sem Blurs gigantes -->
                         <div
-                            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-white/40 rounded-full blur-[100px] opacity-70">
-                        </div>
-                        <!-- Granulação mínima -->
-                        <div
-                            class="absolute inset-0 bg-[url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAAAAP///8AODg6qqqp2dnafMTGfMzOPL/yWAAAAAXRSTlMAQObVGgAAAJNJREFUOMuV1NEJwzAMBVDfD/n5Xy2ZIFvoP0wQoRCDrC/1yEHT95h2/B2hXN8+yvV7pPpdUh2tTqo+vupotXqq+viXo/XfTqve/7V43E6rz+149Xw+j1ePp1UfL6tVP1+OVofTqtezo9Xz+Txe9b9Vv19Hq4/DqvfrsOr37Wj1vB2vnq/Hq9evw6rPs8Oqz1x1uAH7FzK2p8d+4gAAAABJRU5ErkJggg==')] opacity-[0.04] bg-repeat translate-z-0">
+                            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-radial from-white/20 to-transparent rounded-full opacity-70">
                         </div>
                     </div>
 
@@ -855,7 +851,7 @@
                     </h3>
 
                     <button
-                        class="group inline-flex items-center gap-3 mt-10 font-sans uppercase font-semibold text-[11px] tracking-[0.2em] text-[#A8A29E] bg-white backdrop-blur-md px-6 py-3 rounded-full border border-stone-200 shadow-[0_5px_15px_rgba(0,0,0,0.02)] transition-all duration-500 hover:text-[#1c1917] hover:border-[#1c1917] hover:bg-[#F9F9F8] hover:shadow-[0_10px_25px_rgba(0,0,0,0.05)] hover:-translate-y-1">
+                        class="group inline-flex items-center gap-3 mt-10 font-sans uppercase font-semibold text-[11px] tracking-[0.2em] text-[#A8A29E] bg-white px-6 py-3 rounded-full border border-stone-200 shadow-[0_5px_15px_rgba(0,0,0,0.02)] transition-all duration-500 hover:text-[#1c1917] hover:border-[#1c1917] hover:bg-[#F9F9F8] hover:shadow-[0_10px_25px_rgba(0,0,0,0.05)] hover:-translate-y-1">
                         <span
                             class="w-1.5 h-1.5 rounded-full bg-stone-300 group-hover:bg-[#1c1917] group-hover:animate-ping transition-colors duration-500"></span>
                         Eu trabalho na interseção dos dois
@@ -870,7 +866,7 @@
             <!-- Fundo de Vídeo e Efeitos (Inspirado no Hero) -->
             <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
                 <video src="assets/vid/tobias_celular.mp4" autoplay loop muted playsinline
-                    class="w-full h-full object-cover transform scale-105 select-none blur-sm opacity-80"></video>
+                    class="w-full h-full object-cover transform scale-105 select-none opacity-40"></video>
 
                 <!-- Overlays Claros para Leitura Premium -->
                 <!-- Fundo geral um pouco mais fosco para garantir leitura perfeita do form centralizado -->
@@ -905,7 +901,7 @@
                             <label for="name"
                                 class="font-sans text-[10px] uppercase tracking-[0.15em] text-[#A8A29E] font-semibold ml-2">Nome</label>
                             <input type="text" id="name" name="name" required placeholder="Como devemos chamar você?"
-                                class="w-full bg-[#F9F9F8]/60 backdrop-blur-md border border-white/80 shadow-[inset_0_1px_3px_rgba(255,255,255,0.7),0_4px_10px_rgba(0,0,0,0.02)] rounded-[20px] px-6 py-[18px] font-sans text-[14px] text-[#1c1917] placeholder-[#A8A29E]/60 focus:outline-none focus:bg-white focus:shadow-[inset_0_1px_3px_rgba(255,255,255,1),0_8px_20px_rgba(0,0,0,0.04)] transition-all duration-500">
+                                class="w-full bg-[#F9F9F8] border border-white/80 shadow-[0_4px_10px_rgba(0,0,0,0.02)] rounded-[20px] px-6 py-[18px] font-sans text-[14px] text-[#1c1917] placeholder-[#A8A29E]/60 focus:outline-none focus:bg-white focus:shadow-[0_8px_20px_rgba(0,0,0,0.04)] transition-all duration-500">
                         </div>
 
                         <!-- Email -->
@@ -913,7 +909,7 @@
                             <label for="email"
                                 class="font-sans text-[10px] uppercase tracking-[0.15em] text-[#A8A29E] font-semibold ml-2">Email</label>
                             <input type="email" id="email" name="email" required placeholder="Onde respondemos?"
-                                class="w-full bg-[#F9F9F8]/60 backdrop-blur-md border border-white/80 shadow-[inset_0_1px_3px_rgba(255,255,255,0.7),0_4px_10px_rgba(0,0,0,0.02)] rounded-[20px] px-6 py-[18px] font-sans text-[14px] text-[#1c1917] placeholder-[#A8A29E]/60 focus:outline-none focus:bg-white focus:shadow-[inset_0_1px_3px_rgba(255,255,255,1),0_8px_20px_rgba(0,0,0,0.04)] transition-all duration-500">
+                                class="w-full bg-[#F9F9F8] border border-white/80 shadow-[0_4px_10px_rgba(0,0,0,0.02)] rounded-[20px] px-6 py-[18px] font-sans text-[14px] text-[#1c1917] placeholder-[#A8A29E]/60 focus:outline-none focus:bg-white focus:shadow-[0_8px_20px_rgba(0,0,0,0.04)] transition-all duration-500">
                         </div>
 
                         <!-- Tipo de demanda -->
@@ -923,7 +919,7 @@
                                 de demanda</label>
                             <input type="text" id="subject" name="subject" required
                                 placeholder="Ex: Arquitetura Sistêmica, Consultoria..."
-                                class="w-full bg-[#F9F9F8]/60 backdrop-blur-md border border-white/80 shadow-[inset_0_1px_3px_rgba(255,255,255,0.7),0_4px_10px_rgba(0,0,0,0.02)] rounded-[20px] px-6 py-[18px] font-sans text-[14px] text-[#1c1917] placeholder-[#A8A29E]/60 focus:outline-none focus:bg-white focus:shadow-[inset_0_1px_3px_rgba(255,255,255,1),0_8px_20px_rgba(0,0,0,0.04)] transition-all duration-500">
+                                class="w-full bg-[#F9F9F8] border border-white/80 shadow-[0_4px_10px_rgba(0,0,0,0.02)] rounded-[20px] px-6 py-[18px] font-sans text-[14px] text-[#1c1917] placeholder-[#A8A29E]/60 focus:outline-none focus:bg-white focus:shadow-[0_8px_20px_rgba(0,0,0,0.04)] transition-all duration-500">
                         </div>
 
                         <!-- Mensagem -->
@@ -932,7 +928,7 @@
                                 class="font-sans text-[10px] uppercase tracking-[0.15em] text-[#A8A29E] font-semibold ml-2">Mensagem</label>
                             <textarea id="message" name="message" required rows="4"
                                 placeholder="Detalhe a visão geral..."
-                                class="w-full bg-[#F9F9F8]/60 backdrop-blur-md border border-white/80 shadow-[inset_0_1px_3px_rgba(255,255,255,0.7),0_4px_10px_rgba(0,0,0,0.02)] rounded-[20px] px-6 py-[18px] font-sans text-[14px] text-[#1c1917] placeholder-[#A8A29E]/60 focus:outline-none focus:bg-white focus:shadow-[inset_0_1px_3px_rgba(255,255,255,1),0_8px_20px_rgba(0,0,0,0.04)] transition-all duration-500 resize-none"></textarea>
+                                class="w-full bg-[#F9F9F8] border border-white/80 shadow-[0_4px_10px_rgba(0,0,0,0.02)] rounded-[20px] px-6 py-[18px] font-sans text-[14px] text-[#1c1917] placeholder-[#A8A29E]/60 focus:outline-none focus:bg-white focus:shadow-[0_8px_20px_rgba(0,0,0,0.04)] transition-all duration-500 resize-none"></textarea>
                         </div>
 
                         <!-- Botão de Envio (Dark Solid) -->
@@ -1071,7 +1067,7 @@
 
     <!-- PROJECT MODALS (MINI LANDING PAGES "OFF-CANVAS") -->
     <div id="project-modal-veil"
-        class="fixed inset-0 bg-[#1c1917]/20 backdrop-blur-sm z-[90] opacity-0 pointer-events-none transition-opacity duration-500"
+        class="fixed inset-0 bg-[#1c1917]/80 z-[90] opacity-0 pointer-events-none transition-opacity duration-500"
         onclick="closeProjectModal()"></div>
 
     <aside id="project-modal-panel"
@@ -1114,7 +1110,7 @@
 
     <!-- CONTENT IFRAME MODAL (Para Artigos, Google Docs e Manuais no Site) -->
     <div id="iframe-modal-veil"
-        class="fixed inset-0 bg-[#1c1917]/70 backdrop-blur-md z-[110] opacity-0 pointer-events-none transition-opacity duration-500 flex items-center justify-center pt-24 pb-8 px-4 sm:px-8"
+        class="fixed inset-0 bg-[#1c1917]/80 z-[110] opacity-0 pointer-events-none transition-opacity duration-500 flex items-center justify-center pt-24 pb-8 px-4 sm:px-8"
         onclick="closeIframeModal()">
 
         <div id="iframe-modal-panel"
