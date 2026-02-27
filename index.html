@@ -1336,8 +1336,15 @@
                 playPromise.then(_ => video.pause()).catch(error => { /* Auto-play evitado pelas politicas, ok */ });
             }
 
-            // O Lenis gerencia a suavidade por trás. Nós apenas alimentamos o progresso matemático no vídeo nativo.
-            // O Chrome adora isso porque mantém o pipeline inteiro na GPU sem Canvas cópia de memória.
+            // O GSAP tem um motor especializado para interpolar propriedades numéricas.
+            // Passar o 'currentTime' pra ele com um fator de 'scrub: 1.5' cria um amortecimento
+            // que esconde os saltos de keyframes pesados de decodificação do MP4 no Chrome.
+            // Motor hibrido final: O GSAP apenas calcula o progresso da rolagem
+            // Mas QUEM atualiza o vídeo é o navegador diretamente no loop de renderização para poupar memória
+
+            let scrubCurrentTime = 0;
+            let scrubTargetTime = 0;
+
             ScrollTrigger.create({
                 trigger: "#hero-section",
                 start: "top top",
@@ -1345,15 +1352,30 @@
                 pin: true,
                 anticipatePin: 1,
                 onUpdate: (self) => {
-                    if (video.readyState >= 2) {
-                        // Limita saltos microscópicos absurdos para não fritar decodificadores velhos
-                        let newTime = self.progress * (video.duration || 1);
-                        if (Math.abs(video.currentTime - newTime) > 0.02) {
-                            video.currentTime = newTime;
-                        }
-                    }
+                    scrubTargetTime = self.progress * (video.duration || 1);
                 }
             });
+
+            // Motor Híbrido: Função pura de interpolação matemática suave (Amortecedor) fora do ScrollTrigger
+            function lerp(start, end, amount) {
+                return (1 - amount) * start + amount * end;
+            }
+
+            function updateVideo() {
+                if (video.readyState >= 2) {
+                    // Atrasa a posição atual suavemente até o alvo matemático que o mouse mandou
+                    scrubCurrentTime = lerp(scrubCurrentTime, scrubTargetTime, 0.08);
+
+                    // Só pede poder atômico pro computador (desenhar o video) caso tenha andado de verdade
+                    if (Math.abs(video.currentTime - scrubCurrentTime) > 0.05) {
+                        video.currentTime = scrubCurrentTime;
+                    }
+                }
+                requestAnimationFrame(updateVideo);
+            }
+
+            // Inicia o motor passivo e gelado
+            requestAnimationFrame(updateVideo);
 
             ScrollTrigger.refresh();
         }
