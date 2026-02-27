@@ -560,7 +560,7 @@
                 <!-- Carrossel Deslizante de Ponta a Ponta -->
                 <div id="vault-grid" data-lenis-prevent
                     class="w-full max-w-5xl mx-auto flex gap-6 text-left relative z-20 min-h-[300px] overflow-x-auto overflow-y-hidden snap-x snap-mandatory px-6 lg:px-8 pb-8 hide-scroll-mobile"
-                    style="touch-action: pan-x; scroll-behavior: smooth;">
+                    style="scroll-behavior: smooth;">
 
                     <!-- Estado de Carregamento Elevado (Loading) -->
                     <!-- Flex-shrink garante que cards no celular não fiquem esmagados -->
@@ -1236,23 +1236,25 @@
                 // Seleciona títulos, parágrafos, e caixas que devem surgir em sequência
                 const elements = container.querySelectorAll('div, h3, .reveal-up-box');
 
-                // Set initial state for all children directly here without waiting
-                gsap.set(elements, { autoAlpha: 0, y: 40 });
+                if (elements.length > 0) {
+                    // Set initial state for all children directly here without waiting
+                    gsap.set(elements, { autoAlpha: 0, y: 40 });
 
-                ScrollTrigger.create({
-                    trigger: container,
-                    start: "top 85%", // Dispara quando o topo do container atingir 85% da tela
-                    onEnter: () => {
-                        gsap.to(elements, {
-                            autoAlpha: 1,
-                            y: 0,
-                            duration: 1,
-                            stagger: 0.15,
-                            ease: "power3.out"
-                        });
-                    },
-                    once: true // Anima apenas 1 vez para performance da página
-                });
+                    ScrollTrigger.create({
+                        trigger: container,
+                        start: "top 85%", // Dispara quando o topo do container atingir 85% da tela
+                        onEnter: () => {
+                            gsap.to(elements, {
+                                autoAlpha: 1,
+                                y: 0,
+                                duration: 1,
+                                stagger: 0.15,
+                                ease: "power3.out"
+                            });
+                        },
+                        once: true // Anima apenas 1 vez para performance da página
+                    });
+                }
             });
 
             // --- NOVA ANIMAÇÃO: Deslize Horizontal no Rodapé (Nome) ---
@@ -1365,6 +1367,10 @@
 
         // Garante que desenha caso o vídeo pegue cache muito rápido
         video.addEventListener('loadeddata', renderCanvas);
+        if (video.readyState >= 2) {
+            renderCanvas();
+            hasRenderedFrame = true;
+        }
 
         function initCanvasScrub() {
             if (video.dataset.scrubInitialized === 'true') return;
