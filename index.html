@@ -237,14 +237,9 @@
             <div class="hidden md:block md:col-span-1 border-r border-stone-300 h-full"></div>
         </div>
 
-        <!-- EFEITOS DE LUZ RADIAL NO BACKGROUND -->
+        <!-- EFEITOS DE LUZ RADIAL LIMPADOS PARA PREVENIR LAG NO CHROME -->
         <div class="absolute top-0 right-0 w-full h-[100dvh] overflow-hidden pointer-events-none z-0">
-            <div
-                class="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-gradient-to-br from-stone-200 to-transparent rounded-full blur-3xl opacity-50">
-            </div>
-            <div
-                class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-gradient-to-tr from-white to-stone-300/50 rounded-full blur-3xl">
-            </div>
+            <!-- Esferas gigantes de CSS Blur destruíam a aba de composição do navegador em Scroll -->
         </div>
 
         <!-- HERO SECTION (Pin Container) -->
@@ -252,8 +247,9 @@
         <main id="hero-section"
             class="relative z-10 w-full h-[100dvh] flex flex-col border-b border-stone-300 overflow-hidden bg-[#EAEAE5]">
 
-            <!-- Vídeo de Fundo Fullscreen Liso e Independente -->
-            <div class="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[#EAEAE5]" id="video-container">
+            <!-- Vídeo de Fundo Fullscreen Liso e Isolado num Vector GPU -->
+            <div class="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[#EAEAE5] will-change-transform"
+                style="transform: translateZ(0); will-change: transform, opacity;" id="video-container">
                 <video id="product-video" src="assets/vid/tobias_hero.mp4" class="w-full h-full object-cover"
                     playsinline webkit-playsinline muted autoplay loop preload="auto"></video>
 
@@ -1177,15 +1173,14 @@
         });
         window.lenis = lenis;
 
-        // Lenis puro: não atrelado ao GSAP Ticker, quebrava o Chrome
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-
-        // Somente notifica o scroll trigger de rolagens, não domina o ciclo.
+        // Lenis Engine Sincronizado Estritamente com o GSAP (Performance Sync)
         lenis.on('scroll', ScrollTrigger.update);
+
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+
+        gsap.ticker.lagSmoothing(0);
 
         // 3. Registrar GSAP
         gsap.registerPlugin(ScrollTrigger);
@@ -1341,10 +1336,11 @@
             });
 
             // Motor de Mergulho 3D: Aumenta o fundo em 15% (trazendo pra tela) e afasta para Fade Out.
-            // Essa escala é processada na GPU web nativa (zero lags de decodificação)
+            // force3D garante atômico layer promotion no Chrome.
             parallaxTl.to(videoContainer, {
                 scale: 1.15,
                 opacity: 0,
+                force3D: true,
                 ease: "power2.inOut"
             });
 
