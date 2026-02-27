@@ -1315,31 +1315,12 @@
         const videoContainer = document.getElementById('video-container');
 
         function initParallaxHero() {
-            if (videoContainer.dataset.parallaxInitialized === 'true') return;
-            videoContainer.dataset.parallaxInitialized = 'true';
-
-            // Criamos a linha do tempo atrelada ao scroll para criar a ilusão de profundidade "Apple"
-            let parallaxTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: "#hero-section",
-                    start: "top top",
-                    end: "+=120%",
-                    pin: true,
-                    anticipatePin: 1,
-                    scrub: 1 // Suavização garantida atrelada à subida da página
-                }
-            });
-
-            // Motor de Mergulho 3D: Aumenta o fundo em 15% (trazendo pra tela) e afasta para Fade Out.
-            // force3D garante atômico layer promotion no Chrome.
-            parallaxTl.to(videoContainer, {
-                scale: 1.15,
-                opacity: 0,
-                force3D: true,
-                ease: "power2.inOut"
-            });
-
-            ScrollTrigger.refresh();
+            // DESABILITADO: O Google Chrome sofre engine throttling severo (lag/perda de responsividade)
+            // ao mesclar ScrollTrigger com 'pin: true' e manipulação de matriz 'scale' do GSAP 
+            // sobre uma tag dinâmica pesada como <video>.
+            //
+            // Agora, o hero tem um fluxo de scroll nativo em CSS livre (120fps garantidos na GPU pura).
+            // O UX e velocidade de uso do site tornam-se primordiais.
         }
 
         // Simplesmente Inicia quando a página carregar
