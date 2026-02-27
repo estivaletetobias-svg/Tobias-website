@@ -1343,6 +1343,8 @@
             }
         }
 
+        let hasRenderedFrame = false;
+
         // Engine de renderização contínua atrelada puramente ao requestAnimationFrame da tela
         function tick() {
             // Em vez de suavizar a transição com matemática manual pesada (double-lerp), 
@@ -1350,14 +1352,19 @@
             // evitando desconexão entre o mouse e o vídeo (responsividade instantânea).
             currentTime = targetTime;
 
-            // Verifica se o tempo real mudou o suficiente para gastar decodificação do vídeo
-            if (Math.abs(video.currentTime - currentTime) > 0.04) {
+            // Verifica se o tempo real mudou o suficiente para gastar decodificação do vídeo,
+            // ou se é o primeiro frame vazio a ser desenhado na montagem do site.
+            if (Math.abs(video.currentTime - currentTime) > 0.04 || !hasRenderedFrame) {
                 video.currentTime = currentTime;
                 renderCanvas();
+                if (video.readyState >= 2) hasRenderedFrame = true;
             }
 
             requestAnimationFrame(tick);
         }
+
+        // Garante que desenha caso o vídeo pegue cache muito rápido
+        video.addEventListener('loadeddata', renderCanvas);
 
         function initCanvasScrub() {
             if (video.dataset.scrubInitialized === 'true') return;
