@@ -253,11 +253,11 @@
         <main id="hero-section"
             class="relative z-10 w-full h-[100dvh] flex flex-col border-b border-stone-300 overflow-hidden bg-[#EAEAE5]">
 
-            <!-- Vídeo de Fundo Fullscreen Nativo e Acelerado -->
-            <div class="absolute inset-0 w-full h-full z-0 overflow-hidden" id="video-container">
+            <!-- Vídeo de Fundo Fullscreen Liso e Independente -->
+            <div class="absolute inset-0 w-full h-full z-0 overflow-hidden bg-stone-200" id="video-container">
                 <video id="product-video" src="assets/vid/tobias_hero.mp4"
                     class="absolute inset-0 w-full h-full object-cover transform scale-105 z-0 will-change-transform"
-                    style="transform: scale(1.05) translateZ(0);" playsinline webkit-playsinline muted
+                    style="transform: scale(1.05) translateZ(0);" playsinline webkit-playsinline muted autoplay loop
                     preload="auto"></video>
 
                 <!-- Overlays Claro para Leitura Premium -->
@@ -1323,61 +1323,44 @@
 
         });
 
-        // 5. Engine nativa e leve para o Vídeo de Fundo
-        const video = document.getElementById('product-video');
+        // 5. Novo Motor Cinematic Parallax (100% Fluido no Chrome sem Scrubbing de Vídeo)
+        // Libera o MP4 para tocar natural na placa de vídeo, e usa Transform/3D pro efeito de mergulho no Scroll.
+        const videoContainer = document.getElementById('video-container');
 
-        function initVideoScrub() {
-            if (video.dataset.scrubInitialized === 'true') return;
-            video.dataset.scrubInitialized = 'true';
+        function initParallaxHero() {
+            if (videoContainer.dataset.parallaxInitialized === 'true') return;
+            videoContainer.dataset.parallaxInitialized = 'true';
 
-            // Hack essencial para iOS Safari: "Desperta" a decodificação da GPU em vídeos pausados na largada
-            let playPromise = video.play();
-            if (playPromise !== undefined) {
-                playPromise.then(_ => video.pause()).catch(error => { /* Auto-play evitado pelas politicas, ok */ });
-            }
-
-            // O GSAP tem um motor especializado para interpolar propriedades numéricas.
-            // Passar o 'currentTime' pra ele com um fator de 'scrub: 1.5' cria um amortecimento
-            // que esconde os saltos de keyframes pesados de decodificação do MP4 no Chrome.
-            // Motor hibrido final: O GSAP apenas calcula o progresso da rolagem
-            // Mas QUEM atualiza o vídeo é o navegador diretamente no loop de renderização para poupar memória
-
-            // O uso de 'scrub: 1' ou '0.5' terceiriza completamente pro GSAP 
-            // amaciar as chamadas para o Chrome e o Safari de forma igual.
-            let scrubTl = gsap.timeline({
+            // Criamos a linha do tempo atrelada ao scroll para criar a ilusão de profundidade "Apple"
+            let parallaxTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: "#hero-section",
                     start: "top top",
                     end: "+=120%",
                     pin: true,
                     anticipatePin: 1,
-                    scrub: 1 // Suavização pura de 1 segundo atrelada estritamente à física do scroll local (Lenis repassa)
+                    scrub: 1 // Suavização garantida atrelada à subida da página
                 }
             });
 
-            // Motor Atômico: Anima DIRETAMENTE a propriedade currentTime do elemento nativo HTML5.
-            scrubTl.to(video, {
-                currentTime: video.duration || 1,
-                ease: "none"
+            // Motor de Mergulho 3D: Aumenta o fundo em 15% (trazendo pra tela) e afasta para Fade Out.
+            // Essa escala é processada na GPU web nativa (zero lags de decodificação)
+            parallaxTl.to(videoContainer, {
+                scale: 1.15,
+                opacity: 0,
+                ease: "power2.inOut"
             });
 
             ScrollTrigger.refresh();
         }
 
-        // Preload robusto e start da engine
-        if (video.readyState >= 1) {
-            initVideoScrub();
-        } else {
-            video.addEventListener('loadeddata', initVideoScrub);
-        }
-
-        video.load();
+        // Simplesmente Inicia quando a página carregar
+        document.addEventListener('DOMContentLoaded', initParallaxHero);
 
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         if (prefersReducedMotion.matches) {
             gsap.globalTimeline.timeScale(100); // acelera todas as animações infinitamente
             ScrollTrigger.disable(); // pode desativar o scrub se motion causar desconforto
-            // se desativado, o section pin e scrub não ocorrem. O layout flui normalmente.
         }
 
         // 7. Configuração do Menu Mobile Dinâmico
