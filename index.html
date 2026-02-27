@@ -1342,40 +1342,24 @@
             // Motor hibrido final: O GSAP apenas calcula o progresso da rolagem
             // Mas QUEM atualiza o vídeo é o navegador diretamente no loop de renderização para poupar memória
 
-            let scrubCurrentTime = 0;
-            let scrubTargetTime = 0;
-
-            ScrollTrigger.create({
-                trigger: "#hero-section",
-                start: "top top",
-                end: "+=120%",
-                pin: true,
-                anticipatePin: 1,
-                onUpdate: (self) => {
-                    scrubTargetTime = self.progress * (video.duration || 1);
+            // O uso de 'scrub: 1' ou '0.5' terceiriza completamente pro GSAP 
+            // amaciar as chamadas para o Chrome e o Safari de forma igual.
+            let scrubTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#hero-section",
+                    start: "top top",
+                    end: "+=120%",
+                    pin: true,
+                    anticipatePin: 1,
+                    scrub: 1 // Suavização pura de 1 segundo atrelada estritamente à física do scroll local (Lenis repassa)
                 }
             });
 
-            // Motor Híbrido: Função pura de interpolação matemática suave (Amortecedor) fora do ScrollTrigger
-            function lerp(start, end, amount) {
-                return (1 - amount) * start + amount * end;
-            }
-
-            function updateVideo() {
-                if (video.readyState >= 2) {
-                    // Atrasa a posição atual suavemente até o alvo matemático que o mouse mandou
-                    scrubCurrentTime = lerp(scrubCurrentTime, scrubTargetTime, 0.08);
-
-                    // Só pede poder atômico pro computador (desenhar o video) caso tenha andado de verdade
-                    if (Math.abs(video.currentTime - scrubCurrentTime) > 0.05) {
-                        video.currentTime = scrubCurrentTime;
-                    }
-                }
-                requestAnimationFrame(updateVideo);
-            }
-
-            // Inicia o motor passivo e gelado
-            requestAnimationFrame(updateVideo);
+            // Motor Atômico: Anima DIRETAMENTE a propriedade currentTime do elemento nativo HTML5.
+            scrubTl.to(video, {
+                currentTime: video.duration || 1,
+                ease: "none"
+            });
 
             ScrollTrigger.refresh();
         }
