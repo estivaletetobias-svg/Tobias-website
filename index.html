@@ -83,7 +83,10 @@
             opacity: 0.04;
             pointer-events: none;
             z-index: 9999;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAAAAP///8AODg6qqqp2dnafMTGfMzOPL/yWAAAAAXRSTlMAQObVGgAAAJNJREFUOMuV1NEJwzAMBVDfD/n5Xy2ZIFvoP0wQoRCDrC/1yEHT95h2/B2hXN8+yvV7pPpdUh2tTqo+vupotXqq+viXo/XfTqve/7V43E6rz+149Xw+j1ePp1UfL6tVP1+OVofTqtezo9Xz+Txe9b9Vv19Hq4/DqvfrsOr37Wj1vB2vnq/Hq9evw6rPs8Oqz1x1uAH7FzK2p8d+4gAAAABJRU5ErkJggg==");
+            background-repeat: repeat;
+            transform: translateZ(0);
+            will-change: transform;
         }
 
         /* Ocultar barra de rolagem mas manter funcionalidade */
@@ -156,7 +159,7 @@
         .reveal-text {
             opacity: 0;
             visibility: hidden;
-            will-change: transform, opacity, filter;
+            will-change: transform, opacity;
         }
     </style>
 </head>
@@ -249,7 +252,8 @@
 
                 <!-- Canvas para desenho hiper fluido estilo Apple -->
                 <canvas id="video-canvas"
-                    class="absolute inset-0 w-full h-full object-cover transform scale-105 z-0"></canvas>
+                    class="absolute inset-0 w-full h-full object-cover transform scale-105 z-0 will-change-transform"
+                    style="transform: scale(1.05) translateZ(0);"></canvas>
 
                 <!-- Overlays Claro para Leitura Premium -->
                 <!-- Gradiente claro à esquerda para a leitura do texto -->
@@ -640,11 +644,9 @@
                             class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-white/40 rounded-full blur-[100px] opacity-70">
                         </div>
                         <!-- Granulação mínima -->
-                        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg viewBox=\" 0 0 200 200\"
-                            xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence
-                            type=\"fractalNoise\" baseFrequency=\"0.8\" numOctaves=\"3\"
-                            stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\"
-                            filter=\"url(%23noiseFilter)\" opacity=\"0.04\"/%3E%3C/svg%3E')]"></div>
+                        <div
+                            class="absolute inset-0 bg-[url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAAAAP///8AODg6qqqp2dnafMTGfMzOPL/yWAAAAAXRSTlMAQObVGgAAAJNJREFUOMuV1NEJwzAMBVDfD/n5Xy2ZIFvoP0wQoRCDrC/1yEHT95h2/B2hXN8+yvV7pPpdUh2tTqo+vupotXqq+viXo/XfTqve/7V43E6rz+149Xw+j1ePp1UfL6tVP1+OVofTqtezo9Xz+Txe9b9Vv19Hq4/DqvfrsOr37Wj1vB2vnq/Hq9evw6rPs8Oqz1x1uAH7FzK2p8d+4gAAAABJRU5ErkJggg==')] opacity-[0.04] bg-repeat translate-z-0">
+                        </div>
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0 relative z-10">
@@ -670,7 +672,7 @@
                             <div class="flex flex-col gap-5 w-full">
                                 <!-- Card 1 -->
                                 <div
-                                    class="reveal-up-box group relative bg-[#F9F9F8]/80 backdrop-blur-sm border-[0.5px] border-white/80 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] rounded-[20px] p-6 lg:p-7 transition-all duration-[600ms] cursor-default overflow-hidden hover:scale-[1.02] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-stone-200">
+                                    class="reveal-up-box group relative bg-[#F9F9F8]/95 border-[0.5px] border-white/80 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] rounded-[20px] p-6 lg:p-7 transition-all duration-[600ms] cursor-default overflow-hidden hover:scale-[1.02] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-stone-200">
                                     <div
                                         class="absolute left-0 top-0 bottom-0 w-[4px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500 rounded-l-[20px]">
                                     </div>
@@ -688,7 +690,7 @@
                                     </div>
                                 </div>
                                 <!-- Card 2 -->
-                                <div class="reveal-up-box group relative bg-[#F9F9F8]/80 backdrop-blur-sm border-[0.5px] border-white/80 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] rounded-[20px] p-6 lg:p-7 transition-all duration-[600ms] cursor-default overflow-hidden hover:scale-[1.02] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-stone-200"
+                                <div class="reveal-up-box group relative bg-[#F9F9F8]/95 border-[0.5px] border-white/80 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] rounded-[20px] p-6 lg:p-7 transition-all duration-[600ms] cursor-default overflow-hidden hover:scale-[1.02] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-stone-200"
                                     style="transition-delay: 100ms;">
                                     <div
                                         class="absolute left-0 top-0 bottom-0 w-[4px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500 rounded-l-[20px]">
@@ -707,7 +709,7 @@
                                     </div>
                                 </div>
                                 <!-- Card 3 -->
-                                <div class="reveal-up-box group relative bg-[#F9F9F8]/80 backdrop-blur-sm border-[0.5px] border-white/80 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] rounded-[20px] p-6 lg:p-7 transition-all duration-[600ms] cursor-default overflow-hidden hover:scale-[1.02] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-stone-200"
+                                <div class="reveal-up-box group relative bg-[#F9F9F8]/95 border-[0.5px] border-white/80 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] rounded-[20px] p-6 lg:p-7 transition-all duration-[600ms] cursor-default overflow-hidden hover:scale-[1.02] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-stone-200"
                                     style="transition-delay: 200ms;">
                                     <div
                                         class="absolute left-0 top-0 bottom-0 w-[4px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500 rounded-l-[20px]">
@@ -726,7 +728,7 @@
                                     </div>
                                 </div>
                                 <!-- Card 4 -->
-                                <div class="reveal-up-box group relative bg-[#F9F9F8]/80 backdrop-blur-sm border-[0.5px] border-white/80 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] rounded-[20px] p-6 lg:p-7 transition-all duration-[600ms] cursor-default overflow-hidden hover:scale-[1.02] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-stone-200"
+                                <div class="reveal-up-box group relative bg-[#F9F9F8]/95 border-[0.5px] border-white/80 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] rounded-[20px] p-6 lg:p-7 transition-all duration-[600ms] cursor-default overflow-hidden hover:scale-[1.02] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-stone-200"
                                     style="transition-delay: 300ms;">
                                     <div
                                         class="absolute left-0 top-0 bottom-0 w-[4px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500 rounded-l-[20px]">
@@ -764,7 +766,7 @@
 
                             <!-- Large Feature Card / Board com interações inteligentes -->
                             <div
-                                class="reveal-up-box group w-full bg-[#fdfdfd]/70 backdrop-blur-xl border border-white shadow-[0_20px_50px_-12px_rgba(0,0,0,0.06)] rounded-[32px] p-8 md:p-12 transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)] flex flex-col justify-center h-full min-h-[460px] relative overflow-hidden">
+                                class="reveal-up-box group w-full bg-[#fdfdfd]/95 border border-white shadow-[0_20px_50px_-12px_rgba(0,0,0,0.06)] rounded-[32px] p-8 md:p-12 transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)] flex flex-col justify-center h-full min-h-[460px] relative overflow-hidden">
 
                                 <!-- Decorative Glowing -->
                                 <div
@@ -852,11 +854,11 @@
             <!-- Fundo de Vídeo e Efeitos (Inspirado no Hero) -->
             <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
                 <video src="assets/vid/tobias_celular.mp4" autoplay loop muted playsinline
-                    class="w-full h-full object-cover transform scale-105 select-none"></video>
+                    class="w-full h-full object-cover transform scale-105 select-none blur-sm opacity-80"></video>
 
                 <!-- Overlays Claros para Leitura Premium -->
                 <!-- Fundo geral um pouco mais fosco para garantir leitura perfeita do form centralizado -->
-                <div class="absolute inset-0 bg-[#EAEAE5]/80 backdrop-blur-[4px]"></div>
+                <div class="absolute inset-0 bg-[#EAEAE5]/80"></div>
                 <!-- Gradientes copiados do hero para manter a coerência de luz -->
                 <div class="absolute inset-0 bg-gradient-to-r from-[#EAEAE5]/50 via-transparent to-[#EAEAE5]/50"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-[#EAEAE5] via-transparent to-[#EAEAE5]/80"></div>
@@ -1171,21 +1173,21 @@
             // A física do design_system.html usa "cubic-bezier(0.16, 1, 0.3, 1)", 
             // que em GSAP mapeia de forma mais elegante para "expo.out" ou "power4.out".
 
-            // Setup inicial: translateY e blur, usando autoAlpha (que mapeia visibilidade tbm)
-            gsap.set(["#hero-badge", "#hero-desc", "#hero-buttons", "#scroll-indicator"], { filter: "blur(10px)", y: 32 });
-            gsap.set("#video-container", { scale: 0.95, filter: "blur(15px)" });
+            // Setup inicial: translateY, usando autoAlpha (que mapeia visibilidade tbm)
+            gsap.set(["#hero-badge", "#hero-desc", "#hero-buttons", "#scroll-indicator"], { y: 32 });
+            gsap.set("#video-container", { scale: 0.95 });
 
             const introTl = gsap.timeline({ delay: 0.1 });
 
-            // Timeline de Entrada (Fade + Blur IN Premium) usando autoAlpha
-            introTl.to("#video-container", { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 2, ease: "power4.out" })
-                .to("#hero-badge", { autoAlpha: 1, filter: "blur(0px)", y: 0, duration: 1.2, ease: "power4.out" }, "-=1.5")
-                .to(".reveal-text", { y: "0%", autoAlpha: 1, filter: "blur(0px)", stagger: 0.15, duration: 1.2, ease: "power4.out" }, "-=1.0")
-                .to("#hero-desc", { autoAlpha: 1, filter: "blur(0px)", y: 0, duration: 1.2, ease: "power4.out" }, "-=1.0")
-                .to("#hero-buttons", { autoAlpha: 1, filter: "blur(0px)", y: 0, duration: 1.2, ease: "power4.out" }, "-=1.0")
-                .to("#scroll-indicator", { autoAlpha: 1, filter: "blur(0px)", y: 0, duration: 1.2, ease: "power4.out" }, "-=0.8");
+            // Timeline de Entrada (Fade IN Premium) usando autoAlpha
+            introTl.to("#video-container", { autoAlpha: 1, scale: 1, duration: 2, ease: "power4.out" })
+                .to("#hero-badge", { autoAlpha: 1, y: 0, duration: 1.2, ease: "power4.out" }, "-=1.5")
+                .to(".reveal-text", { y: "0%", autoAlpha: 1, stagger: 0.15, duration: 1.2, ease: "power4.out" }, "-=1.0")
+                .to("#hero-desc", { autoAlpha: 1, y: 0, duration: 1.2, ease: "power4.out" }, "-=1.0")
+                .to("#hero-buttons", { autoAlpha: 1, y: 0, duration: 1.2, ease: "power4.out" }, "-=1.0")
+                .to("#scroll-indicator", { autoAlpha: 1, y: 0, duration: 1.2, ease: "power4.out" }, "-=0.8");
 
-            // Timeline de Saída baseada no Scroll (Fade + Blur OUT com a Mesma Física)
+            // Timeline de Saída baseada no Scroll (Fade OUT com a Mesma Física)
             gsap.to(["#hero-badge", "#hero-title", "#hero-desc", "#hero-buttons", "#scroll-indicator"], {
                 scrollTrigger: {
                     trigger: "#hero-section",
@@ -1194,7 +1196,6 @@
                     scrub: 1          // "esmaece quando scrola pra baixo, reaparece quando sobe"
                 },
                 opacity: 0,
-                filter: "blur(12px)",
                 y: -32, // sobe 2rem refletindo a entrada de baixo pra cima
                 stagger: 0.05,
                 ease: "power2.inOut"
@@ -1208,7 +1209,7 @@
                 const elements = container.querySelectorAll('div, h3, .reveal-up-box');
 
                 // Set initial state for all children directly here without waiting
-                gsap.set(elements, { autoAlpha: 0, y: 40, filter: "blur(5px)" });
+                gsap.set(elements, { autoAlpha: 0, y: 40 });
 
                 ScrollTrigger.create({
                     trigger: container,
@@ -1217,7 +1218,6 @@
                         gsap.to(elements, {
                             autoAlpha: 1,
                             y: 0,
-                            filter: "blur(0px)",
                             duration: 1,
                             stagger: 0.15,
                             ease: "power3.out"
@@ -1323,7 +1323,7 @@
             currentTime = targetTime;
 
             // Verifica se o tempo real mudou o suficiente para gastar decodificação do vídeo
-            if (Math.abs(video.currentTime - currentTime) > 0.01) {
+            if (Math.abs(video.currentTime - currentTime) > 0.04) {
                 video.currentTime = currentTime;
                 renderCanvas();
             }
