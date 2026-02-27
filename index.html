@@ -256,7 +256,7 @@
             <!-- Vídeo de Fundo Fullscreen -->
             <div class="absolute inset-0 w-full h-full z-0 overflow-hidden" id="video-container">
                 <video id="product-video" src="assets/vid/tobias_hero.mp4" class="hidden w-full h-full object-cover"
-                    playsinline webkit-playsinline muted autoplay loop preload="auto"></video>
+                    playsinline webkit-playsinline muted preload="auto"></video>
 
                 <!-- Canvas para desenho hiper fluido estilo Apple -->
                 <canvas id="video-canvas"
@@ -1332,7 +1332,7 @@
         const ctx = canvas.getContext('2d');
 
         let targetTime = 0;
-        let currentTime = 0;
+        let lastRenderedTime = -1;
 
         function renderCanvas() {
             if (video.readyState >= 2) { // HAVE_CURRENT_DATA
@@ -1349,17 +1349,19 @@
 
         // Engine de renderização contínua atrelada puramente ao requestAnimationFrame da tela
         function tick() {
-            // Em vez de suavizar a transição com matemática manual pesada (double-lerp), 
-            // confiamos no Lenis para mandar a posição de scroll suave, 
-            // evitando desconexão entre o mouse e o vídeo (responsividade instantânea).
-            currentTime = targetTime;
+            // Em vez de comparar contra o "video.currentTime" (que o navegador arredonda e causa loop infinito),
+            // comparamos contra a última vez que nós MESMOS pedimos uma renderização.
+            // Isso garante que se o mouse estiver parado, o custo da GPU/CPU cai pra ZERO.
 
-            // Verifica se o tempo real mudou o suficiente para gastar decodificação do vídeo,
-            // ou se é o primeiro frame vazio a ser desenhado na montagem do site.
-            if (Math.abs(video.currentTime - currentTime) > 0.04 || !hasRenderedFrame) {
-                video.currentTime = currentTime;
-                renderCanvas();
-                if (video.readyState >= 2) hasRenderedFrame = true;
+            if (Math.abs(targetTime - lastRenderedTime) > 0.04 || !hasRenderedFrame) {
+                lastRenderedTime = targetTime;
+                video.currentTime = targetTime;
+
+                // Só desenha se tiver dados
+                if (video.readyState >= 2) {
+                    renderCanvas();
+                    hasRenderedFrame = true;
+                }
             }
 
             requestAnimationFrame(tick);
@@ -1368,13 +1370,13 @@
         // Garante que desenha caso o vídeo pegue cache muito rápido
         video.addEventListener('loadeddata', () => {
             renderCanvas();
-            // Hack obrigatório para Safari: "Desperta" a decodificação da GPU antes de pausar e entregar para o scroll
+            // Hack leve apenas para despertar a leitura no iOS sem loop contínuo
             let playPromise = video.play();
             if (playPromise !== undefined) {
                 playPromise.then(_ => {
                     video.pause();
                 }).catch(error => {
-                    // Auto-play prevent (low power mode, etc) - falha aceitável
+                    // Auto-play prevent (low power mode, etc)
                 });
             }
         });
