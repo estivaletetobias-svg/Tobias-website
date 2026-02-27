@@ -758,46 +758,24 @@
         <section id="sobre" class="relative z-10 w-full bg-[#EAEAE5] border-t border-[#d4d4d0]/50 overflow-hidden">
 
             <!-- 1. TOP HERO: Manifesto Integrado (Imagem + Texto) Tela Cheia -->
+            <!-- 1. TOP HERO: Manifesto com Imagem Fixa (Sticky Side-by-Side) -->
             <div
-                class="relative w-full overflow-hidden rounded-none isolate min-h-[100vh] flex flex-col items-center justify-end p-8 md:p-12 lg:p-20 reveal-up shadow-none m-0">
+                class="relative w-full overflow-hidden rounded-none isolate min-h-[100dvh] bg-[#EAEAE5] flex flex-col md:flex-row items-stretch">
 
-                <!-- Título "Sobre" estilo Vault - Topo da seção -->
-                <div class="absolute top-16 md:top-24 w-full flex justify-center z-20 reveal-up">
-                    <h1 class="font-serif text-white/50 text-5xl md:text-7xl lg:text-[6rem] font-normal tracking-tight relative flex flex-col items-center uppercase"
-                        style="transition-delay: 50ms;">
-                        Sobre
-                        <!-- Linha divisória minimalista -->
-                        <span class="absolute -bottom-8 w-12 h-[1px] bg-white/30"></span>
-                    </h1>
-                </div>
-                <!-- Imagem de Fundo -->
-                <div class="absolute inset-0 -z-20">
-                    <img src="tobias_pb2.png" alt="Tobias Estivalete" loading="lazy"
-                        class="w-full h-full object-cover object-[center_20%] opacity-60 md:opacity-75 transform scale-105 transition-transform duration-[10s] ease-out hover:scale-100">
-                </div>
-
-                <!-- Overlays de Elegância para leitura (menos agressivos) -->
-                <div class="absolute inset-0 bg-[#1c1917]/50 backdrop-blur-[2px] -z-10 mix-blend-multiply"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-[#1c1917]/80 via-transparent to-transparent -z-10">
-                </div>
-                <div class="absolute inset-0 bg-gradient-to-b from-[#1c1917]/40 to-transparent -z-10"></div>
-
-                <!-- Efeito de Granulação (Noise) -->
-                <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg viewBox=\" 0 0 200 200\"
-                    xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence
-                    type=\"fractalNoise\" baseFrequency=\"0.8\" numOctaves=\"3\"
-                    stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\"
-                    filter=\"url(%23noiseFilter)\" opacity=\"0.04\"/%3E%3C/svg%3E')] -z-10 pointer-events-none">
-                </div>
-
-                <!-- Conteúdo do Manifesto no Espaço Vertical -->
+                <!-- Coluna de Leitura -->
                 <div
-                    class="relative z-10 w-full max-w-5xl text-center flex flex-col items-center justify-end h-full pt-[45vh] pb-24 md:pb-32">
-                    <!-- Citação com mesma fonte, elegante e espaçada de forma fluida -->
+                    class="w-full md:w-1/2 p-8 md:p-12 lg:p-20 flex flex-col justify-center order-2 md:order-1 z-10 py-20 md:py-32 self-center">
+
+                    <h1
+                        class="font-serif text-[#1c1917] text-4xl md:text-5xl lg:text-7xl font-normal tracking-tight mb-12 md:mb-16 reveal-up">
+                        Sobre.
+                        <span class="block w-12 h-[2px] bg-stone-300 mt-6"></span>
+                    </h1>
+
                     <div
-                        class="font-serif text-white text-[1.15rem] md:text-[1.35rem] lg:text-[1.75rem] leading-[1.6] font-normal tracking-tight flex flex-col gap-10 md:gap-14 max-w-4xl text-balance">
+                        class="font-sans text-[#1c1917] text-[1rem] md:text-[1.15rem] leading-[1.8] font-light flex flex-col gap-8 md:gap-12 max-w-xl mx-auto md:mx-0 w-full text-balance">
                         <p class="reveal-up" style="transition-delay: 100ms;">
-                            "Dedico duas décadas à performance humana.<br>
+                            "Dedico duas décadas à <strong class="font-medium">performance humana</strong>.<br>
                             Nesse percurso, aprendi que evolução não é impulso — é construção.
                         </p>
                         <p class="reveal-up" style="transition-delay: 200ms;">
@@ -806,33 +784,47 @@
                         </p>
                         <p class="reveal-up" style="transition-delay: 300ms;">
                             Do treino presencial aos sistemas inteligentes, mantenho o mesmo princípio:<br>
-                            disciplina estruturada gera resultado consistente.
+                            <span class="font-serif italic text-stone-600 block mt-2 text-2xl">disciplina estruturada
+                                gera resultado consistente.</span>
                         </p>
                         <p class="reveal-up" style="transition-delay: 400ms;">
                             Acredito em lifelong learning como compromisso profissional.<br>
                             Aprender continuamente não é diferencial — é responsabilidade.
                         </p>
                         <p class="reveal-up" style="transition-delay: 500ms;">
-                            Hoje, estruturo performance humana e construo sistemas inteligentes<br>
-                            para escalar disciplina e autoridade."
+                            Hoje, estruturo performance humana e construo sistemas inteligentes para escalar disciplina
+                            e autoridade."
                         </p>
+                    </div>
+
+                </div>
+
+                <!-- Coluna de Imagem -->
+                <div
+                    class="w-full md:w-1/2 min-h-[60vh] md:min-h-0 order-1 md:order-2 overflow-hidden border-b md:border-b-0 md:border-l border-stone-300/60 z-0 relative flex-grow">
+                    <img id="sobre-imagem" src="tobias_pb2.png" alt="Tobias Estivalete" loading="lazy"
+                        class="absolute inset-0 w-full h-full object-cover object-[center_top] brightness-95 contrast-125 grayscale-[20%] sepia-[10%] mix-blend-multiply origin-[center_35%]">
+
+                    <!-- Sombra leve interior -->
+                    <div class="absolute inset-0 shadow-[inset_0_0_100px_rgba(28,25,23,0.1)] pointer-events-none"></div>
+
+                    <!-- Floating Tag Minimalista - Ajuste de Contraste para Dark Glass -->
+                    <div class="absolute bottom-6 right-6 md:bottom-10 md:right-10 px-5 py-2.5 border border-white/20 backdrop-blur-xl bg-[#1c1917]/50 shadow-[0_10px_30px_rgba(0,0,0,0.5)] reveal-up group"
+                        style="transition-delay: 600ms;">
+                        <!-- Brilho que passa por cima do texto -->
+                        <span
+                            class="text-[11px] font-mono uppercase tracking-[0.25em] text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] font-medium">Tobias
+                            Estivalete</span>
                     </div>
                 </div>
 
-                <!-- Floating Tag inside the image -->
-                <div class="absolute bottom-6 right-6 md:bottom-10 md:right-10 bg-[#1c1917]/80 backdrop-blur-md px-6 py-3 border border-stone-500/30 reveal-up"
-                    style="transition-delay: 600ms;">
-                    <span
-                        class="text-[11px] font-mono uppercase tracking-[0.2em] bg-gradient-to-r from-stone-400 via-stone-200 to-white bg-clip-text text-transparent font-semibold">Tobias
-                        Estivalete</span>
-                </div>
             </div>
 
-            <div
-                class="max-w-7xl mx-auto pt-16 md:pt-24 px-6 md:px-12 lg:px-24 flex flex-col gap-16 md:gap-24 pb-16 md:pb-24 w-full">
+            <!-- Continuation... -->
+            <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 flex flex-col gap-16 md:gap-24 pb-16 md:pb-24 w-full">
 
                 <!-- 2. MIDDLE GRID: Inteligência & Princípios em Cards Modulares -->
-                <div class="relative w-full border-t border-stone-300/40 pt-16 md:pt-20 mt-4">
+                <div class="relative w-full pt-12 md:pt-16 mt-0">
 
                     <!-- Seta Direcionadora Centralizada Flutuante -->
                     <div class="absolute -top-6 left-1/2 -translate-x-1/2 flex flex-col items-center">
@@ -1398,27 +1390,69 @@
             // --- NOVA ANIMAÇÃO: Deslize Horizontal no Rodapé (Nome) ---
             gsap.from("#footer-name-tobias", {
                 scrollTrigger: {
-                    trigger: "#contato",
-                    start: "top 80%", // Dispara quando a seção Contato entra 20% na tela
-                    end: "bottom bottom",
-                    scrub: 1.5 // Atrito premium na animação
+                    trigger: "#footer-name-tobias",
+                    start: "top 85%", // Dispara apenas quando o texto já tiver subido bem na visão (15% da base)
+                    toggleActions: "play none none reverse"
                 },
-                x: "-10vw", // Nasce mais à esquerda e desliza pro eixo 0
+                x: "-30vw",
                 opacity: 0,
-                ease: "power2.out"
+                duration: 1.5,
+                delay: 0.1, // Atraso minúsculo para garantir a chegada dos olhos do usuário
+                ease: "power3.out"
             });
 
             gsap.from("#footer-name-estivalete", {
                 scrollTrigger: {
-                    trigger: "#contato",
-                    start: "top 80%",
-                    end: "bottom bottom",
-                    scrub: 1.5
+                    trigger: "#footer-name-estivalete",
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
                 },
-                x: "10vw", // Nasce mais à direita e desliza pro eixo 0
+                x: "30vw",
                 opacity: 0,
-                ease: "power2.out"
+                duration: 1.5,
+                delay: 0.1,
+                ease: "power3.out"
             });
+
+            // --- NOVA ANIMAÇÃO: Zoom Dinâmico c/ Movimento do Cursor (Imagem "SOBRE") ---
+            const sobreImagem = document.getElementById("sobre-imagem");
+            if (sobreImagem) {
+                const imgContainer = sobreImagem.parentElement;
+
+                imgContainer.addEventListener("mouseenter", () => {
+                    // Quando o mouse entra, ela sai do distante para o próximo (scale 1 para 1.1)
+                    gsap.to(sobreImagem, {
+                        scale: 1.1,
+                        duration: 1.5,
+                        ease: "power3.out"
+                    });
+                });
+
+                imgContainer.addEventListener("mousemove", (e) => {
+                    // Mapeamento milimétrico do cursor pra distorcer no estilo Parallax 3D
+                    const rect = imgContainer.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+                    gsap.to(sobreImagem, {
+                        x: x * -30, // Desliza pra direção oposta da seta
+                        y: y * -30,
+                        duration: 0.8,
+                        ease: "power2.out"
+                    });
+                });
+
+                imgContainer.addEventListener("mouseleave", () => {
+                    // Reseta pra estado distante calmamente
+                    gsap.to(sobreImagem, {
+                        scale: 1,
+                        x: 0,
+                        y: 0,
+                        duration: 2,
+                        ease: "power3.out"
+                    });
+                });
+            }
 
         });
 
