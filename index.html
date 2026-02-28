@@ -168,6 +168,23 @@
             scrollbar-width: none;
             /* Firefox */
         }
+
+        .mask-fade {
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        @keyframes scrollAnim {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+
+            /* Halfway point for seamless loop if duplicated */
+        }
     </style>
 
     <!-- Microsoft Clarity (Analytics & Heatmaps) -->
@@ -574,17 +591,106 @@
                     <div class="relative z-10 w-full">
                         <i data-lucide="lock" class="w-6 h-6 mx-auto mb-6 text-stone-400"></i>
                         <h3 class="font-serif text-2xl text-[#1c1917] mb-3">Acesso Restrito</h3>
-                        <p class="font-sans text-[14px] text-stone-500 mb-8 max-w-md mx-auto leading-relaxed">Vault em
-                            atualização quinzenal. O repositório base das minhas estruturas e sistemas pagos. Em breve
-                            destravado via aplicação.</p>
+                        <p class="font-sans text-[14px] text-stone-500 mb-8 max-w-md mx-auto leading-relaxed">Acesse
+                            imediatamente o material gratuito: <strong class="text-stone-800">prompts estruturados,
+                                fluxos de uso e templates de projetos</strong>. Adicione seu e-mail para destrancar o
+                            Vault de conhecimento.</p>
 
-                        <form action="#"
-                            class="w-full relative flex items-center relative z-20 pointer-events-auto shadow-sm">
-                            <input type="email" placeholder="O seu melhor e-mail" required
+                        <!-- Formulário de Captação -->
+                        <form id="vault-form" action="https://formspree.io/f/mkovyled" method="POST"
+                            class="w-full relative flex items-center z-20 pointer-events-auto shadow-sm transition-all duration-500">
+                            <input type="hidden" name="subject" value="Nova Aplicação - Acesso ao Vault Oculto">
+                            <input type="email" name="email" id="vault-email" placeholder="O seu melhor e-mail" required
                                 class="w-full bg-[#EAEAE5] border border-stone-300/50 rounded-full pl-6 pr-32 py-4 font-sans text-[14px] text-[#1c1917] focus:outline-none focus:bg-white focus:shadow-md transition-all duration-300 placeholder:text-stone-400">
-                            <button type="submit"
-                                class="absolute right-2 top-1/2 -translate-y-1/2 bg-[#1c1917] text-[#EAEAE5] text-[10px] uppercase tracking-widest font-bold px-6 py-2.5 rounded-full hover:bg-stone-700 transition-colors">Aplicar</button>
+                            <button type="submit" id="vault-submit"
+                                class="absolute right-2 top-1/2 -translate-y-1/2 bg-[#1c1917] text-[#EAEAE5] text-[10px] uppercase tracking-widest font-bold px-6 py-2.5 rounded-full hover:bg-stone-700 transition-colors flex items-center justify-center min-w-[90px]">
+                                <span id="vault-btn-text">Receber</span>
+                                <i data-lucide="loader-2" id="vault-btn-spinner"
+                                    class="w-4 h-4 animate-spin hidden"></i>
+                            </button>
                         </form>
+
+                        <!-- Mensagem de Sucesso (Oculta por Padrão) -->
+                        <div id="vault-success"
+                            class="hidden w-full flex-col items-center justify-center z-20 translate-y-2 opacity-0 transition-all duration-500 h-[60px]">
+                            <div class="flex items-center justify-center gap-4">
+                                <div
+                                    class="w-10 h-10 bg-[#1c1917] rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="mail-check" class="w-5 h-5 text-stone-100"></i>
+                                </div>
+                                <div class="text-left">
+                                    <h4 class="font-serif text-xl leading-none text-[#1c1917] mb-1">Verifique seu
+                                        e-mail!</h4>
+                                    <p class="font-sans text-[13px] leading-tight text-stone-500">
+                                        Te enviei o link com acesso ao que preparei para você.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aperitivo Visual (Atrás do Bloqueio) -->
+                <div class="w-full relative mx-auto mt-4 overflow-hidden mask-fade">
+                    <div
+                        class="flex items-center gap-6 opacity-40 blur-[2px] pointer-events-none select-none animate-[scrollAnim_30s_linear_infinite]">
+
+                        <!-- Ghost Card 1 -->
+                        <div
+                            class="flex-shrink-0 w-[280px] h-[320px] bg-white border border-stone-300 rounded-[20px] p-6 flex flex-col justify-between">
+                            <div class="w-10 h-10 bg-stone-100 rounded-lg flex items-center justify-center mb-4">
+                                <div class="w-5 h-5 bg-stone-300 rounded-sm"></div>
+                            </div>
+                            <div>
+                                <div class="h-4 bg-stone-200 rounded w-3/4 mb-3"></div>
+                                <div class="h-3 bg-stone-100 rounded w-full mb-1"></div>
+                                <div class="h-3 bg-stone-100 rounded w-5/6"></div>
+                            </div>
+                            <div class="w-full h-[1px] bg-stone-200 mt-4"></div>
+                        </div>
+
+                        <!-- Ghost Card 2 -->
+                        <div
+                            class="flex-shrink-0 w-[280px] h-[320px] bg-white border border-stone-300 rounded-[20px] p-6 flex flex-col justify-between">
+                            <div class="w-10 h-10 bg-stone-100 rounded-lg flex items-center justify-center mb-4">
+                                <div class="w-5 h-5 bg-stone-300 rounded-sm"></div>
+                            </div>
+                            <div>
+                                <div class="h-4 bg-stone-200 rounded w-2/3 mb-3"></div>
+                                <div class="h-3 bg-stone-100 rounded w-full mb-1"></div>
+                                <div class="h-3 bg-stone-100 rounded w-4/5"></div>
+                            </div>
+                            <div class="w-full h-[1px] bg-stone-200 mt-4"></div>
+                        </div>
+
+                        <!-- Ghost Card 3 -->
+                        <div
+                            class="flex-shrink-0 w-[280px] h-[320px] bg-white border border-stone-300 rounded-[20px] p-6 flex flex-col justify-between">
+                            <div class="w-10 h-10 bg-stone-100 rounded-lg flex items-center justify-center mb-4">
+                                <div class="w-5 h-5 bg-stone-300 rounded-sm"></div>
+                            </div>
+                            <div>
+                                <div class="h-4 bg-stone-200 rounded w-4/5 mb-3"></div>
+                                <div class="h-3 bg-stone-100 rounded w-full mb-1"></div>
+                                <div class="h-3 bg-stone-100 rounded w-full"></div>
+                            </div>
+                            <div class="w-full h-[1px] bg-stone-200 mt-4"></div>
+                        </div>
+
+                        <!-- Ghost Card 4 -->
+                        <div
+                            class="flex-shrink-0 w-[280px] h-[320px] bg-white border border-stone-300 rounded-[20px] p-6 flex flex-col justify-between">
+                            <div class="w-10 h-10 bg-stone-100 rounded-lg flex items-center justify-center mb-4">
+                                <div class="w-5 h-5 bg-stone-300 rounded-sm"></div>
+                            </div>
+                            <div>
+                                <div class="h-4 bg-stone-200 rounded w-3/4 mb-3"></div>
+                                <div class="h-3 bg-stone-100 rounded w-full mb-1"></div>
+                                <div class="h-3 bg-stone-100 rounded w-5/6"></div>
+                            </div>
+                            <div class="w-full h-[1px] bg-stone-200 mt-4"></div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -1779,6 +1885,61 @@
 
             }
         });
+
+        // Script para Captação Assíncrona do Vault
+        const vaultForm = document.getElementById('vault-form');
+        const vaultSuccess = document.getElementById('vault-success');
+        const vaultBtnText = document.getElementById('vault-btn-text');
+        const vaultBtnSpinner = document.getElementById('vault-btn-spinner');
+
+        if (vaultForm) {
+            vaultForm.addEventListener('submit', function (e) {
+                e.preventDefault(); // Impede o redirecionamento padrão
+
+                // Estado de Loading
+                vaultForm.classList.add('opacity-70', 'pointer-events-none');
+                vaultBtnText.classList.add('hidden');
+                vaultBtnSpinner.classList.remove('hidden');
+
+                const data = new FormData(vaultForm);
+
+                fetch(vaultForm.action, {
+                    method: 'POST',
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        // Sucesso: Esconder formulário e mostrar mensagem
+                        vaultForm.classList.add('opacity-0', 'scale-95');
+                        setTimeout(() => {
+                            vaultForm.classList.add('hidden');
+                            vaultSuccess.classList.remove('hidden');
+                            // setTimeout para aplicar a animação de entrada
+                            setTimeout(() => {
+                                vaultSuccess.classList.remove('translate-y-2', 'opacity-0');
+                            }, 50);
+
+                            if (window.lucide) {
+                                lucide.createIcons();
+                            }
+                        }, 500);
+                    } else {
+                        // Reseta form em caso de erro da API
+                        alert('Houve um problema com a rede. Tente novamente.');
+                        vaultForm.classList.remove('opacity-70', 'pointer-events-none');
+                        vaultBtnText.classList.remove('hidden');
+                        vaultBtnSpinner.classList.add('hidden');
+                    }
+                }).catch(error => {
+                    alert('Erro de conexão. Verifique se há internet e tente novamente.');
+                    vaultForm.classList.remove('opacity-70', 'pointer-events-none');
+                    vaultBtnText.classList.remove('hidden');
+                    vaultBtnSpinner.classList.add('hidden');
+                });
+            });
+        }
     </script>
 </body>
 
