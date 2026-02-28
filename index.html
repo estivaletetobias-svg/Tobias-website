@@ -433,11 +433,13 @@
                 <button type="button" onclick="openProjectModal('athena-protocol')"
                     class="group border-b border-stone-300 bg-[#EAEAE5] hover:bg-white transition-colors duration-500 cursor-pointer overflow-hidden block reveal-up text-left w-full">
                     <div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-12 min-h-[320px]">
-                        <div class="col-span-1 md:col-span-5 p-8 md:p-12 lg:p-16 border-r border-stone-300/0 md:border-stone-300 flex flex-col justify-center">
+                        <div
+                            class="col-span-1 md:col-span-5 p-8 md:p-12 lg:p-16 border-r border-stone-300/0 md:border-stone-300 flex flex-col justify-center">
                             <div class="flex items-center gap-3 mb-6">
                                 <span class="text-xs font-mono text-stone-500">03</span>
                                 <div class="h-px w-8 bg-stone-300"></div>
-                                <span class="text-[10px] font-bold uppercase tracking-widest text-[#1c1917]">Evolução Biológica</span><span
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-[#1c1917]">Evolução
+                                    Biológica</span><span
                                     class="ml-3 mt-[-2px] px-2 py-0.5 bg-[#1c1917] text-[#EAEAE5] text-[8px] rounded uppercase tracking-widest inline-block">Ativo</span>
                             </div>
                             <h4
@@ -588,11 +590,17 @@
                                 o
                                 Vault de conhecimento.</p>
 
-                            <!-- Formulário de Captação -->
-                            <form id="vault-form" action="https://formspree.io/f/mkovyled" method="POST"
+                            <!-- Formulário de Captação (Brevo) -->
+                            <form id="vault-form"
+                                action="https://49e4255f.sibforms.com/serve/MUIFAFo9m72ByoeKO6MMuOwyG6QWlwJIeBAyscW5HzhU-JPt3Pe-Zhtc6pxkIk3kQLItnGgTAajb1SP7VXyYRIsr6dzJmUOdhcpty0fbc9B1QJSDCfNvEj2xp_vL1-o8JONNoO96lD0pvakINERDfz0Ch9usVCIFNHoOWvOKhzQ4wlIV2r2HUdWPcbSVL_g-K-_MWLOtjVxO-3MTXw=="
+                                method="POST"
                                 class="w-full relative flex items-center z-20 pointer-events-auto shadow-sm transition-all duration-500">
-                                <input type="hidden" name="subject" value="Nova Aplicação - Acesso ao Vault Oculto">
-                                <input type="email" name="email" id="vault-email" placeholder="O seu melhor e-mail"
+                                <!-- Honeypot e Locale Nativo do Brevo -->
+                                <input type="text" name="email_address_check" value="" class="hidden"
+                                    style="display:none;">
+                                <input type="hidden" name="locale" value="pt">
+
+                                <input type="email" name="EMAIL" id="vault-email" placeholder="O seu melhor e-mail"
                                     required
                                     class="w-full bg-[#EAEAE5] border border-stone-300/50 rounded-full pl-6 pr-32 py-4 font-sans text-[14px] text-[#1c1917] focus:outline-none focus:bg-white focus:shadow-md transition-all duration-300 placeholder:text-stone-400">
                                 <button type="submit" id="vault-submit"
@@ -2006,32 +2014,22 @@
                 fetch(vaultForm.action, {
                     method: 'POST',
                     body: data,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                }).then(response => {
-                    if (response.ok) {
-                        // Sucesso: Esconder formulário e mostrar mensagem
-                        vaultForm.classList.add('opacity-0', 'scale-95');
-                        setTimeout(() => {
-                            vaultForm.classList.add('hidden');
-                            vaultSuccess.classList.remove('hidden');
-                            // setTimeout para aplicar a animação de entrada
-                            setTimeout(() => {
-                                vaultSuccess.classList.remove('translate-y-2', 'opacity-0');
-                            }, 50);
+                    mode: 'no-cors' // Essencial para evitar bloqueio de redirecionamento nativo do Brevo
+                }).then(() => {
+                    // Como não bloqueamos redirect, mas injetamos form nativo via fetch no-cors, assumimos opacidade na resposta (Sucesso)
+                    vaultForm.classList.add('opacity-0', 'scale-95');
+                    setTimeout(() => {
+                        vaultForm.classList.add('hidden');
+                        vaultSuccess.classList.remove('hidden');
 
-                            if (window.lucide) {
-                                lucide.createIcons();
-                            }
-                        }, 500);
-                    } else {
-                        // Reseta form em caso de erro da API
-                        alert('Houve um problema com a rede. Tente novamente.');
-                        vaultForm.classList.remove('opacity-70', 'pointer-events-none');
-                        vaultBtnText.classList.remove('hidden');
-                        vaultBtnSpinner.classList.add('hidden');
-                    }
+                        setTimeout(() => {
+                            vaultSuccess.classList.remove('translate-y-2', 'opacity-0');
+                        }, 50);
+
+                        if (window.lucide) {
+                            lucide.createIcons();
+                        }
+                    }, 500);
                 }).catch(error => {
                     alert('Erro de conexão. Verifique se há internet e tente novamente.');
                     vaultForm.classList.remove('opacity-70', 'pointer-events-none');
