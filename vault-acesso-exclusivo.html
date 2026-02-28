@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tobias Estivalete | Estruturo performance humana</title>
+    <title>Vault | Acesso Restrito - Tobias Estivalete</title>
+    <meta name="robots" content="noindex, nofollow">
 
     <!-- Google Fonts conforme Design System -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -208,759 +209,127 @@
             Tobias <span class="text-stone-400 ml-1">Estivalete</span>
         </div>
 
-        <div
-            class="hidden md:flex items-center gap-6 text-[10px] lg:text-xs font-mono uppercase tracking-widest text-stone-600">
-            <a href="#home" class="hover:text-stone-900 transition-colors">Home</a>
-            <span class="text-stone-300">|</span>
-            <a href="#projetos" class="hover:text-stone-900 transition-colors">Projetos</a>
-            <span class="text-stone-300">|</span>
-            <a href="#vault" class="hover:text-stone-900 transition-colors">Vault</a>
-            <span class="text-stone-300">|</span>
-            <a href="#sobre" class="hover:text-stone-900 transition-colors">Sobre</a>
-            <span class="text-stone-300">|</span>
-            <a href="#contato" class="hover:text-stone-900 transition-colors">Contato</a>
-        </div>
+        
 
-        <button id="mobile-menu-btn"
-            class="relative flex items-center justify-center p-2 rounded-full hover:bg-stone-200/50 transition-colors text-stone-900 md:hidden group z-50"
-            aria-label="Menu Mobile">
-            <i id="menu-icon" data-lucide="menu" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
-        </button>
+        
     </nav>
 
+    <!-- WRAPPER GERAL -->
+    <div class="max-w-[1440px] mx-auto border-x border-stone-300 relative bg-[#EAEAE5] shadow-2xl shadow-stone-200">
+
+<!-- SEÇÃO VAULT DESTRANCADA -->
+        <section id="vault" class="relative z-10 w-full min-h-[90vh] bg-[#F9F9F8] py-32 px-6 md:px-12 flex flex-col items-center text-center">
+
+            <!-- Fundo dinâmico da área VIP -->
+            <div class="absolute inset-0 bg-gradient-to-b from-stone-100 to-[#F9F9F8] z-0 pointer-events-none opacity-50"></div>
+
+            <div class="max-w-6xl mx-auto flex flex-col items-center w-full mt-10 md:mt-24 relative z-10">
+
+                <!-- Cabeçalho de Sucesso/Acesso -->
+                <div class="mb-6 flex items-center justify-center gap-2 text-[10px] md:text-xs uppercase font-mono tracking-widest text-emerald-700/80 bg-emerald-50 px-4 py-2 border border-emerald-100 rounded-full shadow-sm">
+                    <i data-lucide="unlock" class="w-3.5 h-3.5"></i>
+                    Acesso Autenticado
+                </div>
+
+                <h1 class="font-serif text-[#1c1917] text-4xl md:text-6xl lg:text-[4.5rem] leading-[1.1] font-normal tracking-tight mb-8">
+                    Vault Destrancado.
+                </h1>
+
+                <p class="font-sans text-[#78716C] text-[15px] md:text-[17px] max-w-2xl leading-[1.6] font-light mb-16">
+                    Abaixo estão os ativos gratuitos iniciais para estruturar a sua visão e escalar sua execução. Materiais premium e novos acessos serão notificados na sua caixa de entrada.
+                </p>
+
+                <!-- Grid de Materiais -->
+                <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left relative z-20">
+                    
+                    <!-- Material 1: Notion -->
+                    <a href="#" target="_blank" class="group bg-white border border-stone-200 p-8 flex flex-col justify-between min-h-[280px] w-full transition-all duration-500 hover:border-stone-400 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-[3px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500"></div>
+                        <div>
+                            <div class="w-12 h-12 bg-[#F9F9F8] rounded-xl flex items-center justify-center mb-6">
+                                <i data-lucide="layout-template" class="w-5 h-5 text-[#1c1917]"></i>
+                            </div>
+                            <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-stone-400 mb-2 block">Notion Template</span>
+                            <h4 class="font-serif text-2xl text-[#1c1917] mb-3 group-hover:text-black transition-colors">Sistema Pessoal Base</h4>
+                            <p class="font-sans text-[13px] text-stone-500 leading-relaxed font-light">Estrutura inicial de organização de tarefas inspirado no Agente de Produção.</p>
+                        </div>
+                        <div class="mt-8 flex items-center justify-between">
+                            <span class="text-[11px] font-sans font-medium uppercase tracking-widest text-[#1c1917]">Duplicar</span>
+                            <i data-lucide="external-link" class="w-4 h-4 text-stone-300 group-hover:text-[#1c1917] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"></i>
+                        </div>
+                    </a>
+
+                    <!-- Material 2: Ebook/PDF -->
+                    <a href="#" target="_blank" class="group bg-white border border-stone-200 p-8 flex flex-col justify-between min-h-[280px] w-full transition-all duration-500 hover:border-stone-400 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 relative overflow-hidden" style="transition-delay: 100ms;">
+                        <div class="absolute top-0 left-0 w-full h-[3px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500"></div>
+                        <div>
+                            <div class="w-12 h-12 bg-[#F9F9F8] rounded-xl flex items-center justify-center mb-6">
+                                <i data-lucide="book-open" class="w-5 h-5 text-[#1c1917]"></i>
+                            </div>
+                            <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-stone-400 mb-2 block">Protocolo em PDF</span>
+                            <h4 class="font-serif text-2xl text-[#1c1917] mb-3 group-hover:text-black transition-colors">A Lógica da Alta Performance</h4>
+                            <p class="font-sans text-[13px] text-stone-500 leading-relaxed font-light">Os 4 pilares físicos e mentais para performar em alto nível sem queimar o motor.</p>
+                        </div>
+                        <div class="mt-8 flex items-center justify-between">
+                            <span class="text-[11px] font-sans font-medium uppercase tracking-widest text-[#1c1917]">Baixar</span>
+                            <i data-lucide="download" class="w-4 h-4 text-stone-300 group-hover:text-[#1c1917] group-hover:translate-y-[2px] transition-all"></i>
+                        </div>
+                    </a>
+
+                    <!-- Material 3: GPT -->
+                    <a href="#" target="_blank" class="group bg-white border border-stone-200 p-8 flex flex-col justify-between min-h-[280px] w-full transition-all duration-500 hover:border-stone-400 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 relative overflow-hidden" style="transition-delay: 200ms;">
+                        <div class="absolute top-0 left-0 w-full h-[3px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500"></div>
+                        <div>
+                            <div class="w-12 h-12 bg-[#F9F9F8] rounded-xl flex items-center justify-center mb-6">
+                                <i data-lucide="bot" class="w-5 h-5 text-[#1c1917]"></i>
+                            </div>
+                            <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-stone-400 mb-2 block">GPT Customizado</span>
+                            <h4 class="font-serif text-2xl text-[#1c1917] mb-3 group-hover:text-black transition-colors">Conselheiro Sintético</h4>
+                            <p class="font-sans text-[13px] text-stone-500 leading-relaxed font-light">Prompt estruturado para auxiliar na tomada de decisões complexas de negócios.</p>
+                        </div>
+                        <div class="mt-8 flex items-center justify-between">
+                            <span class="text-[11px] font-sans font-medium uppercase tracking-widest text-[#1c1917]">Conversar</span>
+                            <i data-lucide="message-square" class="w-4 h-4 text-stone-300 group-hover:text-[#1c1917] transition-all"></i>
+                        </div>
+                    </a>
+
+                </div>
+                
+                <div class="mt-20 flex justify-center pb-10">
+                    <a href="index.html" class="inline-flex items-center text-[10px] font-mono uppercase tracking-[0.2em] text-[#1c1917]/50 hover:text-[#1c1917] transition-colors relative z-20">
+                        <i data-lucide="arrow-left" class="w-3 h-3 mr-2"></i> Voltar ao site principal
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Footer Simplificado -->
+        <section class="relative z-10 w-full bg-[#EAEAE5] border-t border-[#d4d4d0]/50 pt-10 pb-12 overflow-hidden flex flex-col items-center">
+            
+            <a href="mailto:estivaletetobias@gmail.com" class="text-[10px] font-mono uppercase tracking-[0.2em] text-stone-500 hover:text-stone-800 transition-colors mb-20 relative z-20">
+                Qualquer dúvida responda por email
+            </a>
+
+            <!-- Tipografia Gigante em 2 Linhas -->
+            <div class="opacity-[0.08] pointer-events-none select-none overflow-hidden w-full z-0 px-4 md:px-12 max-w-screen-2xl mx-auto flex flex-col items-center">
+                <span class="text-[20vw] md:text-[14vw] lg:text-[11.5vw] font-bold font-serif leading-[0.7] tracking-tighter uppercase block w-full text-[#1c1917] text-left">
+                    Tobias
+                </span>
+                <span class="text-[17vw] md:text-[14vw] lg:text-[11.5vw] font-bold font-serif leading-[0.7] tracking-tighter uppercase block w-full text-[#1c1917] text-right mt-1 md:mt-0">
+                    Estivalete
+                </span>
+            </div>
+        </section>
+
+    </div> <!-- FIM DO WRAPPER GERAL -->
     
-    </section>
-
-    <!-- PROJECT MODALS (MINI LANDING PAGES "OFF-CANVAS") -->
-    <div id="project-modal-veil"
-        class="fixed inset-0 bg-[#1c1917]/80 z-[90] opacity-0 pointer-events-none transition-opacity duration-500"
-        onclick="closeProjectModal()"></div>
-
-    <aside id="project-modal-panel"
-        class="fixed top-0 right-0 w-full md:w-[600px] lg:w-[700px] h-[100dvh] bg-[#EAEAE5] shadow-2xl z-[100] translate-x-full transition-transform duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col border-l border-stone-300/50">
-        <!-- Modal Header -->
-        <div class="flex items-center justify-between p-6 md:p-10 border-b border-stone-300">
-            <div class="font-mono text-xs uppercase tracking-[0.2em] text-stone-500" id="modal-tag">Loading...</div>
-            <button type="button" onclick="closeProjectModal()"
-                class="p-3 bg-stone-200/50 hover:bg-stone-300/50 hover:rotate-90 transition-all rounded-full group cursor-pointer">
-                <i data-lucide="x" class="w-5 h-5 text-stone-900 group-hover:scale-110 transition-transform"></i>
-            </button>
-        </div>
-
-        <!-- Modal Scrollable Content -->
-        <div id="modal-scroll-container" data-lenis-prevent
-            class="flex-1 overflow-y-auto overflow-x-hidden p-6 md:p-10 flex flex-col pb-32"
-            style="-webkit-overflow-scrolling: touch; overscroll-behavior: contain; touch-action: pan-y;">
-            <h3 id="modal-title"
-                class="text-3xl md:text-[2.75rem] font-serif leading-[1.1] tracking-tight mb-8 text-[#1c1917]">Título
-            </h3>
-
-            <img id="modal-image" src="assets/img/4.png" alt="Imagem Projeto"
-                class="w-full h-[300px] md:h-[400px] object-cover mb-10 grayscale opacity-90" />
-
-            <p id="modal-desc" class="text-stone-600 font-sans text-lg md:text-xl font-light leading-relaxed mb-6">
-                Descrição longa</p>
-            <div id="modal-bullets" class="flex flex-col gap-4 text-[#1c1917] mb-12">
-                <!-- Injetado via JS -->
-            </div>
-
-            <div class="mt-auto">
-                <a id="modal-checkout-btn" href="#" target="_blank" rel="noopener noreferrer"
-                    class="group inline-flex items-center gap-3 bg-[#1c1917] text-[#EAEAE5] px-8 py-5 text-sm uppercase tracking-[0.15em] font-medium w-full justify-center transition-transform hover:scale-[1.02] active:scale-95 shadow-lg shadow-black/10">
-                    <span>Acessar o Projeto</span>
-                    <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
-                </a>
-            </div>
-        </div>
-    </aside>
-
-    <!-- CONTENT IFRAME MODAL (Para Artigos, Google Docs e Manuais no Site) -->
-    <div id="iframe-modal-veil"
-        class="fixed inset-0 bg-[#1c1917]/80 z-[110] opacity-0 pointer-events-none transition-opacity duration-500 flex items-center justify-center pt-24 pb-8 px-4 sm:px-8"
-        onclick="closeIframeModal()">
-
-        <div id="iframe-modal-panel"
-            class="bg-[#F9F9F8] w-full max-w-5xl h-full rounded-2xl shadow-2xl flex flex-col scale-95 opacity-0 transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] relative overflow-hidden ring-1 ring-white/20"
-            onclick="event.stopPropagation()">
-
-            <!-- Header moderno -->
-            <div class="flex items-center justify-between p-4 px-6 border-b border-stone-300/50 shrink-0 bg-[#EAEAE5]">
-                <div class="flex items-center gap-3 w-3/4">
-                    <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                    <div class="font-serif text-xl tracking-tight text-[#1c1917] truncate" id="iframe-modal-title">
-                        Lendo...</div>
-                </div>
-                <div class="flex items-center gap-4 shrink-0">
-                    <a id="iframe-modal-external" href="#" target="_blank"
-                        class="text-[10px] font-mono uppercase tracking-[0.15em] text-stone-500 hover:text-[#1c1917] transition-colors hidden sm:block">Abrir
-                        num Mestre</a>
-                    <button type="button" onclick="closeIframeModal()"
-                        class="p-2 bg-stone-200 hover:bg-stone-300 hover:rotate-90 transition-all rounded-full group cursor-pointer inline-flex items-center justify-center">
-                        <i data-lucide="x"
-                            class="w-4 h-4 text-stone-900 group-hover:scale-110 transition-transform"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Corpo Iframe -->
-            <div class="flex-1 w-full bg-white relative">
-                <!-- Fallback Loading visual enquanto a porta serial responde -->
-                <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-0">
-                    <i data-lucide="loader-2" class="w-8 h-8 animate-spin text-stone-300 mb-3"></i>
-                    <span class="text-[10px] uppercase tracking-widest text-stone-400 font-mono">Buscando na
-                        rede...</span>
-                </div>
-                <!-- O Iframe encobre a layer de trás assim que o GDocs renderiza -->
-                <iframe id="iframe-modal-content" src=""
-                    class="absolute inset-0 w-full h-full border-none z-10 bg-transparent rounded-b-2xl"></iframe>
-            </div>
-        </div>
-    </div>
-
-    </div>
-
-    <!-- SCRIPTS -->
+    <!-- SCRIPTS CORE (Somente Lucide para a area restrita) -->
     <script>
-        // 1. Inicializar Ícones
-        lucide.createIcons();
-
-        // 2. Inicializar Lenis (Tratamento para Smooth Scroll)
-        const lenis = new Lenis({
-            lerp: 0.1, // Suavidade padrão estável
-            smoothWheel: true,
-            wheelMultiplier: 1, // Retornado ao default para evitar saltos quebrados no Chrome
-            smoothTouch: false,
-            touchMultiplier: 2,
-        });
-        window.lenis = lenis;
-
-        // Lenis Engine Sincronizado Estritamente com o GSAP (Performance Sync)
-        lenis.on('scroll', ScrollTrigger.update);
-
-        gsap.ticker.add((time) => {
-            lenis.raf(time * 1000);
-        });
-
-        gsap.ticker.lagSmoothing(0);
-
-        // 3. Registrar GSAP
-        gsap.registerPlugin(ScrollTrigger);
-
-        // 4. Animação de Entrada e Saída (Hero Reveal + Fade no Scroll Exato do Design System)
-        document.addEventListener('DOMContentLoaded', () => {
-            // A física do design_system.html usa "cubic-bezier(0.16, 1, 0.3, 1)", 
-            // que em GSAP mapeia de forma mais elegante para "expo.out" ou "power4.out".
-
-            // Setup inicial: translateY, usando autoAlpha (que mapeia visibilidade tbm)
-            gsap.set(["#hero-badge", "#hero-desc", "#hero-buttons", "#scroll-indicator"], { y: 32 });
-            gsap.set("#video-container", { scale: 0.95 });
-
-            const introTl = gsap.timeline({ delay: 0.1 });
-
-            // Timeline de Entrada (Fade IN Premium) usando autoAlpha
-            introTl.to("#video-container", { autoAlpha: 1, scale: 1, duration: 2, ease: "power4.out" })
-                .to("#hero-badge", { autoAlpha: 1, y: 0, duration: 1.2, ease: "power4.out" }, "-=1.5")
-                .to(".reveal-text", { y: "0%", autoAlpha: 1, stagger: 0.15, duration: 1.2, ease: "power4.out" }, "-=1.0")
-                .to("#hero-desc", { autoAlpha: 1, y: 0, duration: 1.2, ease: "power4.out" }, "-=1.0")
-                .to("#hero-buttons", { autoAlpha: 1, y: 0, duration: 1.2, ease: "power4.out" }, "-=1.0")
-                .to("#scroll-indicator", { autoAlpha: 1, y: 0, duration: 1.2, ease: "power4.out" }, "-=0.8");
-
-            // Timeline de Saída baseada no Scroll (Fade OUT com a Mesma Física)
-            gsap.to(["#hero-badge", "#hero-title", "#hero-desc", "#hero-buttons", "#scroll-indicator"], {
-                scrollTrigger: {
-                    trigger: "#hero-section",
-                    start: "top top", // Começa quando rola
-                    end: "top -60%",  // Espaçamento para desaparecer
-                    scrub: 1          // "esmaece quando scrola pra baixo, reaparece quando sobe"
-                },
-                opacity: 0,
-                y: -32, // sobe 2rem refletindo a entrada de baixo pra cima
-                stagger: 0.05,
-                ease: "power2.inOut"
-            });
-
-            // --- NOVAS ANIMAÇÕES: Seção Sobre (Fade In + Slide Up Smoothly) ---
-            const revealContainers = document.querySelectorAll('.reveal-up');
-
-            revealContainers.forEach((container) => {
-                // Seleciona títulos, parágrafos, e caixas que devem surgir em sequência
-                const elements = container.querySelectorAll('div, h3, .reveal-up-box');
-
-                if (elements.length > 0) {
-                    // Set initial state for all children directly here without waiting
-                    gsap.set(elements, { autoAlpha: 0, y: 40 });
-
-                    ScrollTrigger.create({
-                        trigger: container,
-                        start: "top 85%", // Dispara quando o topo do container atingir 85% da tela
-                        onEnter: () => {
-                            gsap.to(elements, {
-                                autoAlpha: 1,
-                                y: 0,
-                                duration: 1,
-                                stagger: 0.15,
-                                ease: "power3.out"
-                            });
-                        },
-                        once: true // Anima apenas 1 vez para performance da página
-                    });
-                }
-            });
-
-            // --- NOVA ANIMAÇÃO: Deslize Horizontal no Rodapé (Nome) ---
-            gsap.from("#footer-name-tobias", {
-                scrollTrigger: {
-                    trigger: "#footer-name-tobias",
-                    start: "top 85%", // Dispara apenas quando o texto já tiver subido bem na visão (15% da base)
-                    toggleActions: "play none none reverse"
-                },
-                x: "-30vw",
-                opacity: 0,
-                duration: 1.5,
-                delay: 0.1, // Atraso minúsculo para garantir a chegada dos olhos do usuário
-                ease: "power3.out"
-            });
-
-            gsap.from("#footer-name-estivalete", {
-                scrollTrigger: {
-                    trigger: "#footer-name-estivalete",
-                    start: "top 85%",
-                    toggleActions: "play none none reverse"
-                },
-                x: "30vw",
-                opacity: 0,
-                duration: 1.5,
-                delay: 0.1,
-                ease: "power3.out"
-            });
-
-            // --- NOVA ANIMAÇÃO: Zoom Dinâmico c/ Movimento do Cursor (Imagem "SOBRE") ---
-            const sobreImagem = document.getElementById("sobre-imagem");
-            if (sobreImagem) {
-                const imgContainer = sobreImagem.parentElement;
-
-                imgContainer.addEventListener("mouseenter", () => {
-                    // Quando o mouse entra, ela sai do distante para o próximo (scale 1 para 1.1)
-                    gsap.to(sobreImagem, {
-                        scale: 1.1,
-                        duration: 1.5,
-                        ease: "power3.out"
-                    });
-                });
-
-                imgContainer.addEventListener("mousemove", (e) => {
-                    // Mapeamento milimétrico do cursor pra distorcer no estilo Parallax 3D
-                    const rect = imgContainer.getBoundingClientRect();
-                    const x = (e.clientX - rect.left) / rect.width - 0.5;
-                    const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-                    gsap.to(sobreImagem, {
-                        x: x * -30, // Desliza pra direção oposta da seta
-                        y: y * -30,
-                        duration: 0.8,
-                        ease: "power2.out"
-                    });
-                });
-
-                imgContainer.addEventListener("mouseleave", () => {
-                    // Reseta pra estado distante calmamente
-                    gsap.to(sobreImagem, {
-                        scale: 1,
-                        x: 0,
-                        y: 0,
-                        duration: 2,
-                        ease: "power3.out"
-                    });
-                });
-            }
-
-        });
-
-        // 5. Novo Motor Cinematic Parallax (100% Fluido no Chrome sem Scrubbing de Vídeo)
-        // Libera o MP4 para tocar natural na placa de vídeo, e usa Transform/3D pro efeito de mergulho no Scroll.
-        const videoContainer = document.getElementById('video-container');
-
-        function initParallaxHero() {
-            // DESABILITADO: O Google Chrome sofre engine throttling severo (lag/perda de responsividade)
-            // ao mesclar ScrollTrigger com 'pin: true' e manipulação de matriz 'scale' do GSAP 
-            // sobre uma tag dinâmica pesada como <video>.
-            //
-            // Agora, o hero tem um fluxo de scroll nativo em CSS livre (120fps garantidos na GPU pura).
-            // O UX e velocidade de uso do site tornam-se primordiais.
-        }
-
-        // Simplesmente Inicia quando a página carregar
-        document.addEventListener('DOMContentLoaded', () => {
-            initParallaxHero();
-
-            // Força o vídeo a tocar asincronamente se bater em restrições brutas de carregamento
-            const nativeVideo = document.getElementById('product-video');
-            if (nativeVideo) {
-                let playAttempt = nativeVideo.play();
-                if (playAttempt !== undefined) {
-                    playAttempt.catch(e => {
-                        // Autoplay was prevented.
-                        console.warn("Autoplay bloqueado pelo Navegador / Low Power Mode.");
-                    });
-                }
-            }
-        });
-
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-        if (prefersReducedMotion.matches) {
-            gsap.globalTimeline.timeScale(100); // acelera todas as animações infinitamente
-            ScrollTrigger.disable(); // pode desativar o scrub se motion causar desconforto
-        }
-
-        // 7. Configuração do Menu Mobile Dinâmico
-        const mobileBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-        let isMobileMenuOpen = false;
-
-        function toggleMenu() {
-            isMobileMenuOpen = !isMobileMenuOpen;
-            if (isMobileMenuOpen) {
-                mobileMenu.classList.remove('translate-y-[-100%]');
-                mobileMenu.classList.add('translate-y-0');
-                menuIcon.setAttribute('data-lucide', 'x');
-                document.body.style.overflow = 'hidden';
-                if (window.lenis) window.lenis.stop();
-            } else {
-                mobileMenu.classList.remove('translate-y-0');
-                mobileMenu.classList.add('translate-y-[-100%]');
-                menuIcon.setAttribute('data-lucide', 'menu');
-                document.body.style.overflow = '';
-                if (window.lenis) window.lenis.start();
-            }
-            lucide.createIcons(); // Recarrega o ícone alterado
-        }
-
-        mobileBtn.addEventListener('click', toggleMenu);
-
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (isMobileMenuOpen) toggleMenu();
-            });
-        });
-
-        // 8. Lógica Mini Landings (Drawer Modals)
-        const projectData = {
-            'ia-personal-coach': {
-                tag: '01 / Inteligência',
-                title: 'IA Personal Coach',
-                img: 'assets/img/4.png',
-                desc: `
-                <div class="flex flex-col gap-6 text-[#1c1917] font-sans pb-4">
-                    <p class="text-xl md:text-2xl font-serif leading-snug tracking-tight">Estruture sua evolução. Tenha direção todos os dias.</p>
-                    
-                    <p class="text-stone-600 font-light leading-relaxed">Você não precisa de mais motivação.<br>Você precisa de um sistema.</p>
-                    
-                    <p class="text-stone-600 font-light leading-relaxed">O <strong>IA Personal Coach</strong> é um assistente inteligente personalizado que acompanha sua rotina de treino de forma contínua, estratégica e adaptável.</p>
-                    
-                    <p class="text-stone-600 font-light leading-relaxed">Sem improviso.<br>Sem dependência de planilhas genéricas.<br>Sem ficar esperando a próxima consulta.</p>
-
-                    <h5 class="text-2xl font-serif text-[#1c1917] tracking-tight mt-6">O que você recebe</h5>
-                    <ul class="flex flex-col gap-3">
-                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-stone-900 shrink-0 mt-[2px]"></i><span>Treinos ajustados ao seu nível</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-stone-900 shrink-0 mt-[2px]"></i><span>Organização semanal estruturada</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-stone-900 shrink-0 mt-[2px]"></i><span>Adaptação imediata quando sua rotina muda</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-stone-900 shrink-0 mt-[2px]"></i><span>Orientação clara e objetiva</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-stone-900 shrink-0 mt-[2px]"></i><span>Acompanhamento 24/7</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-stone-900 shrink-0 mt-[2px]"></i><span>Supervisão humana por trás do sistema</span></li>
-                    </ul>
-
-                    <p class="text-lg font-medium tracking-tight mt-4">Você treina com direção.</p>
-
-                    <h5 class="text-2xl font-serif text-[#1c1917] tracking-tight mt-6">Como funciona</h5>
-                    <ul class="flex flex-col gap-2 text-stone-600 font-light">
-                        <li>— Você responde um formulário estratégico.</li>
-                        <li>— Seu assistente é configurado individualmente.</li>
-                        <li>— Ele passa a acompanhar sua rotina diariamente.</li>
-                        <li>— Sempre que algo muda, ele ajusta.</li>
-                        <li>— Você evolui com constância.</li>
-                    </ul>
-
-                    <p class="text-lg font-medium tracking-tight text-[#1c1917] mt-4">Simples. Inteligente. Eficiente.</p>
-
-                    <h5 class="text-2xl font-serif text-[#1c1917] tracking-tight mt-6">Para quem é</h5>
-                    <p class="text-stone-600 font-light leading-relaxed mb-1">Para quem quer:</p>
-                    <ul class="flex flex-col gap-2 font-light text-stone-600 ml-4 list-disc mb-2">
-                        <li>Evoluir com método</li>
-                        <li>Ter clareza sobre o que fazer</li>
-                        <li>Construir disciplina estruturada</li>
-                        <li>Parar de depender apenas de força de vontade</li>
-                    </ul>
-
-                    <p class="text-stone-600 font-light leading-relaxed">Não é para quem busca atalhos.<br><strong>É para quem quer progressão sustentada.</strong></p>
-
-                    <h5 class="text-2xl font-serif text-[#1c1917] tracking-tight mt-6">Diferencial</h5>
-                    <p class="text-stone-600 font-light leading-relaxed">O IA Personal Coach não substitui o treinador.<br>Ele amplia a presença.</p>
-                    <p class="text-stone-600 font-light leading-relaxed">É tecnologia aplicada à performance humana, baseada em duas décadas de experiência prática.</p>
-
-                    <p class="text-lg font-medium tracking-tight text-[#1c1917] mt-4">Sistema inteligente.<br>Supervisão responsável.<br>Evolução real.</p>
-
-                    <h5 class="text-2xl font-serif text-[#1c1917] tracking-tight mt-6">Decisão</h5>
-                    <p class="text-stone-600 font-light leading-relaxed">Se você quer continuar treinando no improviso, tudo bem.</p>
-                    <p class="text-xl md:text-2xl font-serif text-[#1c1917] leading-snug mt-2">Mas se quer um sistema que organiza sua evolução diariamente, o próximo passo está aqui.</p>
-                </div>`,
-                bullets: [],
-                checkoutLink: 'https://chk.eduzz.com/1W3ZVP8DW2'
-            },
-            'clone-pronto': {
-                tag: '02 / Autoridade Assíncrona',
-                title: 'Clone Pronto™',
-                img: 'assets/img/3.png',
-                desc: `
-                <div class="flex flex-col gap-6 text-[#1c1917] font-sans pb-4">
-                    <p class="text-xl md:text-2xl font-serif leading-snug tracking-tight">Presença digital sem o peso do operacional.</p>
-                    
-                    <p class="text-stone-600 font-light leading-relaxed">Você já tem autoridade.<br>O que falta é constância estratégica.</p>
-                    
-                    <p class="text-stone-600 font-light leading-relaxed">O <strong>Clone Pronto™</strong> é um sistema que transforma sua mente, sua comunicação e sua imagem em uma presença digital escalável — sem que você precise gravar, editar ou operar conteúdo diariamente.</p>
-                    
-                    <p class="text-stone-600 font-light leading-relaxed">Você define a mensagem.<br>O Clone executa com fidelidade estética e estratégica.</p>
-
-                    <h5 class="text-2xl font-serif text-[#1c1917] tracking-tight mt-6">O que entregamos</h5>
-                    <ul class="flex flex-col gap-3">
-                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-stone-900 shrink-0 mt-[2px]"></i><span>Clone profissional com imagem e voz alinhadas ao seu posicionamento</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-stone-900 shrink-0 mt-[2px]"></i><span>Definição de looks e cenários estratégicos</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-stone-900 shrink-0 mt-[2px]"></i><span>Produção contínua de vídeos prontos para postagem</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-stone-900 shrink-0 mt-[2px]"></i><span>Até 30 unidades de conteúdo por mês</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-stone-900 shrink-0 mt-[2px]"></i><span>Padronização visual e narrativa</span></li>
-                    </ul>
-
-                    <p class="text-lg font-medium tracking-tight mt-4">Você mantém o controle da mensagem.<br>Nós estruturamos a execução.</p>
-
-                    <h5 class="text-2xl font-serif text-[#1c1917] tracking-tight mt-6">Para quem é</h5>
-                    <p class="text-stone-600 font-light leading-relaxed mb-1">Profissionais que:</p>
-                    <ul class="flex flex-col gap-2 font-light text-stone-600 ml-4 list-disc mb-2">
-                        <li>Já possuem autoridade real</li>
-                        <li>Querem escalar presença sem virar reféns da agenda</li>
-                        <li>Entendem que constância constrói percepção</li>
-                        <li>Não querem entrar no operacional do conteúdo</li>
-                    </ul>
-
-                    <p class="text-stone-600 font-light leading-relaxed">Não é sobre virar influenciador.<br><strong>É sobre estruturar posicionamento.</strong></p>
-
-                    <h5 class="text-2xl font-serif text-[#1c1917] tracking-tight mt-6">Fase atual</h5>
-                    <p class="text-stone-600 font-light leading-relaxed">O Clone Pronto™ está em fase de validação com um grupo restrito de Fundadores.</p>
-                    <p class="text-stone-600 font-light leading-relaxed">Estamos ajustando modelo, processos e ritmo de produção com profissionais consolidados que decidiram estruturar sua presença digital com método.</p>
-
-                    <p class="text-xl md:text-2xl font-serif text-[#1c1917] leading-snug mt-6">As vagas são limitadas porque a implementação é personalizada.</p>
-                </div>`,
-                bullets: [],
-                checkoutLink: '#contato'
-            },
-            'personal-trainer': {
-                tag: '05 / Performance Real',
-                title: 'Personal Trainer Presencial',
-                img: 'assets/img/5.png',
-                desc: `
-                <div class="flex flex-col gap-6 text-[#1c1917] font-sans pb-4">
-                    <p class="text-xl md:text-2xl font-serif leading-snug tracking-tight">Performance com Método. Resultado com Estrutura.</p>
-                    
-                    <p class="text-stone-600 font-light leading-relaxed">Se você procura apenas alguém para acompanhar o treino, existem muitas opções.<br>Mas se você quer direção, progressão inteligente e resultado consistente, <strong>precisa de método</strong>.</p>
-                    
-                    <p class="text-stone-600 font-light leading-relaxed">Eu sou Tobias Estivalete.<br>Há mais de duas décadas dedicado à performance humana.</p>
-                    
-                    <ul class="flex flex-col gap-2 font-light text-stone-600 border-l border-stone-300 pl-4 py-2 my-2">
-                        <li>Não aplico treinos aleatórios.</li>
-                        <li>Não entrego planilhas genéricas.</li>
-                        <li>Não improviso resultados.</li>
-                    </ul>
-
-                    <p class="text-lg font-medium tracking-tight mt-2 pb-2">Eu estruturo processos.</p>
-
-                    <h5 class="text-2xl font-serif text-[#1c1917] tracking-tight mt-6">Autoridade construída na prática</h5>
-                    <ul class="flex flex-col gap-3">
-                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-stone-900 shrink-0 mt-[2px]"></i><span>Mais de 20 anos de experiência</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-stone-900 shrink-0 mt-[2px]"></i><span>Atuação com diferentes perfis — do iniciante ao alto desempenho</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-stone-900 shrink-0 mt-[2px]"></i><span>Formação contínua e estudo permanente (lifelong learning como princípio)</span></li>
-                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-stone-900 shrink-0 mt-[2px]"></i><span>Integração entre ciência do treinamento, estratégia e execução</span></li>
-                    </ul>
-
-                    <p class="text-stone-600 font-light leading-relaxed mt-4">Meu trabalho se sustenta em três fundamentos:</p>
-                    <p class="text-lg font-medium tracking-tight text-[#1c1917]">Precisão técnica.<br>Progressão estruturada.<br>Cuidado individual.</p>
-
-                    <h5 class="text-2xl font-serif text-[#1c1917] tracking-tight mt-6">O que significa treinar comigo</h5>
-                    <p class="text-stone-600 font-light leading-relaxed">Você não recebe apenas um treino.<br><strong>Você recebe direção.</strong></p>
-
-                    <p class="text-stone-600 font-light leading-relaxed">Cada sessão tem intenção.<br>Cada ajuste tem lógica.<br>Cada evolução tem base.</p>
-
-                    <p class="text-stone-600 font-light leading-relaxed">Eu acompanho de perto, corrijo detalhes, organizo a progressão e construo constância.<br><strong>Porque resultado não é sobre intensidade momentânea. É sobre estrutura sustentada.</strong></p>
-
-                    <h5 class="text-2xl font-serif text-[#1c1917] tracking-tight mt-6">Florianópolis não precisa de mais um personal. Precisa de método.</h5>
-                    <p class="text-stone-600 font-light leading-relaxed">Se você vive em Florianópolis e decidiu levar sua performance a sério — estética, saúde ou alto rendimento — eu posso conduzir esse processo com estratégia, responsabilidade e visão de longo prazo.</p>
-
-                    <p class="text-stone-600 font-light leading-relaxed mt-4">Treinar é simples.</p>
-                    <p class="text-lg font-medium tracking-tight text-[#1c1917]">Evoluir exige direção.</p>
-
-                    <div class="bg-[#EAEAE5] border border-stone-300/60 p-6 mt-6 relative overflow-hidden group">
-                        <div class="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <p class="text-stone-600 font-light leading-relaxed relative z-10">Duas décadas dedicadas à performance humana.<br>Do treino presencial aos sistemas inteligentes, mantenho o mesmo princípio:</p>
-                        <p class="text-lg font-serif tracking-tight text-[#1c1917] mt-3 relative z-10">Estrutura, disciplina e progressão sustentada.</p>
-                    </div>
-
-                    <p class="text-xl md:text-2xl font-serif text-[#1c1917] leading-snug mt-6">Se fizer sentido para você… Vamos bater um papo?</p>
-                    <p class="text-stone-600 font-light leading-relaxed text-sm">📍 Atendimento presencial em Florianópolis<br>📲 Me chama e conversamos sobre seus próximos passos.</p>
-                </div>`,
-                bullets: [],
-                checkoutLink: 'https://wa.me/5548999165612?text=Ol%C3%A1%20Tobias,%20tenho%20interesse%20em%20saber%20sobre%20a%20consultoria%20presencial'
-            }
-        };
-
-        const modalPanel = document.getElementById('project-modal-panel');
-        const modalVeil = document.getElementById('project-modal-veil');
-
-        function openProjectModal(projectId) {
-            const data = projectData[projectId];
-            if (!data) return;
-
-            // Alimenta os dados na UI (Mini LP)
-            document.getElementById('modal-tag').textContent = data.tag;
-            document.getElementById('modal-title').innerHTML = data.title;
-            document.getElementById('modal-image').src = data.img;
-            document.getElementById('modal-desc').innerHTML = data.desc;
-
-            // Renderiza listinha topada
-            document.getElementById('modal-bullets').innerHTML = data.bullets.map(b => `<div class="flex items-start gap-4 p-4 bg-white/50 border border-stone-200"><span class="font-sans text-[15px] leading-relaxed">${b}</span></div>`).join('');
-
-            // Link Checkout Inteligente (Se for âncora, rola pra baixo e fecha)
-            const checkoutBtn = document.getElementById('modal-checkout-btn');
-            checkoutBtn.href = data.checkoutLink;
-
-            if (data.checkoutLink.startsWith('#')) {
-                checkoutBtn.removeAttribute('target');
-                checkoutBtn.onclick = () => closeProjectModal();
-            } else {
-                checkoutBtn.setAttribute('target', '_blank');
-                checkoutBtn.onclick = null;
-            }
-
-            // Abre as coisas (Gaveta + Véu negro no fundo)
-            modalVeil.classList.remove('opacity-0', 'pointer-events-none');
-            modalVeil.classList.add('opacity-100', 'pointer-events-auto');
-
-            modalPanel.classList.remove('translate-x-full');
-            modalPanel.classList.add('translate-x-0');
-
-            document.body.style.overflow = 'hidden';
-            if (window.lenis) window.lenis.stop();
-
-            // Força o iOS a reconhecer a rolagem resetando o scroll
-            const scrollContainer = document.getElementById('modal-scroll-container');
-            if (scrollContainer) scrollContainer.scrollTop = 0;
-
+        document.addEventListener("DOMContentLoaded", function() {
             lucide.createIcons();
-        }
-
-        function closeProjectModal() {
-            modalPanel.classList.remove('translate-x-0');
-            modalPanel.classList.add('translate-x-full');
-
-            modalVeil.classList.remove('opacity-100', 'pointer-events-auto');
-            modalVeil.classList.add('opacity-0', 'pointer-events-none');
-
-            document.body.style.overflow = '';
-            if (window.lenis) window.lenis.start();
-        }
-
-        // --- ENGENHARIA DE MODAis EMBED (Puxar Google Docs para tela cheia) ---
-        window.openIframeModal = function (url, title) {
-            const veil = document.getElementById('iframe-modal-veil');
-            const panel = document.getElementById('iframe-modal-panel');
-
-            document.getElementById('iframe-modal-title').textContent = title || "Documento";
-            document.getElementById('iframe-modal-external').href = url;
-            document.getElementById('iframe-modal-content').src = url;
-
-            // Fade background in
-            veil.classList.remove('opacity-0', 'pointer-events-none');
-            veil.classList.add('opacity-100', 'pointer-events-auto');
-
-            // Float modal in
-            panel.classList.remove('scale-95', 'opacity-0');
-            panel.classList.add('scale-100', 'opacity-100');
-
-            document.body.style.overflow = 'hidden';
-            if (window.lenis) window.lenis.stop();
-
-            if (window.lucide) lucide.createIcons();
-        }
-
-        window.closeIframeModal = function () {
-            const veil = document.getElementById('iframe-modal-veil');
-            const panel = document.getElementById('iframe-modal-panel');
-            const iframe = document.getElementById('iframe-modal-content');
-
-            // Fade out
-            veil.classList.remove('opacity-100', 'pointer-events-auto');
-            veil.classList.add('opacity-0', 'pointer-events-none');
-
-            // Un-float
-            panel.classList.remove('scale-100', 'opacity-100');
-            panel.classList.add('scale-95', 'opacity-0');
-
-            document.body.style.overflow = '';
-            if (window.lenis) window.lenis.start();
-
-            // Derruba a banda após transição (Evita som de youtubes continuar tocando)
-            setTimeout(() => { iframe.src = ''; }, 600);
-        }
-    </script>
-
-    <!-- Motor de Sincronia de Banco de Dados via Planilha do Google (PapaParse) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-
-    <script>
-        // MÁGICA: Vault Dinâmico atrelado ao celular do Tobias
-        document.addEventListener('DOMContentLoaded', () => {
-            const vaultGrid = document.getElementById('vault-grid');
-
-            // Link de ignição fornecido (Convertido automaticamente para Leitura CSV Cruda do Google)
-            const sheetId = '15qenJ8v-444LncgBOonfTkOoe-bNgxd6CUGXWGXZ3d0';
-            const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv`;
-
-            if (vaultGrid) {
-                Papa.parse(SHEET_CSV_URL, {
-                    download: true,
-                    header: true,
-                    skipEmptyLines: true,
-                    complete: function (results) {
-                        const data = results.data;
-                        if (data && data.length > 0) {
-                            vaultGrid.innerHTML = ''; // Limpa o círculo de carregamento
-
-                            data.forEach(row => {
-                                // Mapeamento das Colunas A, B, C, D, E que o Tobias criou
-                                const num = row.numero ? String(row.numero).trim().padStart(2, '0') : '00';
-                                const titulo = row.titulo ? row.titulo : 'Sem título';
-                                const desc = row.descricao ? row.descricao : '';
-                                const link = row.link ? row.link : '#';
-                                const rotulo = row.rotulo ? row.rotulo : 'Acessar';
-
-                                // Inteligência Autônoma para Rota de Iframe vs Pop-out:
-                                // OpenAI bloqueia iframes. Google Docs/Sheets libera via "Published". 
-                                // O código julga o destino pela URL, permitindo embutir na interface o q for compatível.
-                                const isEmbeddable = link.includes('docs.google.com') || link.includes('youtube.com/embed') || link.includes('drive.google.com') || link.includes('notion.site');
-                                const clickBehavior = isEmbeddable
-                                    ? `onclick="event.preventDefault(); window.openIframeModal('${link}', '${titulo.replace(/'/g, "\\'")}');"`
-                                    : `target="_blank" rel="noopener noreferrer"`;
-
-                                // DNA Visual do Card criado do zero
-                                // No mobile, cada card assume 85% da tela pra induzir o slide.
-                                const cardHTML = `
-                                    <a href="${link}" ${clickBehavior}
-                                        class="group bg-white border border-stone-200 p-8 flex flex-col justify-between min-h-[260px] w-[82vw] md:w-[340px] flex-shrink-0 snap-center transition-all duration-500 hover:border-stone-400 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 relative overflow-hidden reveal-up">
-                                        <div class="absolute top-0 left-0 w-full h-[3px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500"></div>
-                                        <div>
-                                            <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-stone-400 mb-4 block">Assistente ${num}</span>
-                                            <h4 class="font-serif text-2xl text-[#1c1917] mb-3 group-hover:text-black transition-colors">${titulo}</h4>
-                                            <p class="font-sans text-[13px] text-stone-500 leading-relaxed font-light">${desc}</p>
-                                        </div>
-                                        <div class="mt-8 flex items-center justify-between">
-                                            <span class="text-[11px] font-sans font-medium uppercase tracking-widest text-[#1c1917]">${rotulo}</span>
-                                            <i data-lucide="${isEmbeddable ? 'maximize-2' : 'external-link'}" class="w-4 h-4 text-stone-300 group-hover:text-[#1c1917] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"></i>
-                                        </div>
-                                    </a>
-                                `;
-                                vaultGrid.insertAdjacentHTML('beforeend', cardHTML);
-                            });
-                            // Reassopra vida nos ícones Lucide dentro dos novos cards
-                            if (window.lucide) {
-                                lucide.createIcons();
-                            }
-
-                            // Reassopra vida nas animações GSAP dentro dos novos cards
-                            if (window.ScrollTrigger) {
-                                ScrollTrigger.refresh();
-                            }
-                        } else {
-                            vaultGrid.innerHTML = '<div class="w-full text-center text-stone-500 font-sans">O banco de dados do Google Planilhas está vazio.</div>';
-                        }
-                    },
-                    error: function (err) {
-                        vaultGrid.innerHTML = '<div class="w-full text-center text-stone-400 font-mono text-sm tracking-widest uppercase">Falha na conexão com a central.</div>';
-                        console.error('Erro de sincronia Vault:', err);
-                    }
-                });
-
-                // Ativar os Botões Interativos do Carrossel (Esquerda / Direita)
-                const leftBtn = document.getElementById('scroll-left-btn');
-                const rightBtn = document.getElementById('scroll-right-btn');
-
-                if (leftBtn && rightBtn && vaultGrid) {
-                    leftBtn.addEventListener('click', () => {
-                        // Recuar tamanho equivalente a um card + gap
-                        vaultGrid.scrollBy({ left: -360, behavior: 'smooth' });
-                    });
-
-                    rightBtn.addEventListener('click', () => {
-                        // Avançar tamanho equivalente a um card + gap
-                        vaultGrid.scrollBy({ left: 360, behavior: 'smooth' });
-                    });
-                }
-
-            }
         });
-
-        // Script para Captação Assíncrona do Vault
-        const vaultForm = document.getElementById('vault-form');
-        const vaultSuccess = document.getElementById('vault-success');
-        const vaultBtnText = document.getElementById('vault-btn-text');
-        const vaultBtnSpinner = document.getElementById('vault-btn-spinner');
-
-        if (vaultForm) {
-            vaultForm.addEventListener('submit', function (e) {
-                e.preventDefault(); // Impede o redirecionamento padrão
-
-                // Estado de Loading
-                vaultForm.classList.add('opacity-70', 'pointer-events-none');
-                vaultBtnText.classList.add('hidden');
-                vaultBtnSpinner.classList.remove('hidden');
-
-                const data = new FormData(vaultForm);
-
-                fetch(vaultForm.action, {
-                    method: 'POST',
-                    body: data,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                }).then(response => {
-                    if (response.ok) {
-                        // Sucesso: Esconder formulário e mostrar mensagem
-                        vaultForm.classList.add('opacity-0', 'scale-95');
-                        setTimeout(() => {
-                            vaultForm.classList.add('hidden');
-                            vaultSuccess.classList.remove('hidden');
-                            // setTimeout para aplicar a animação de entrada
-                            setTimeout(() => {
-                                vaultSuccess.classList.remove('translate-y-2', 'opacity-0');
-                            }, 50);
-
-                            if (window.lucide) {
-                                lucide.createIcons();
-                            }
-                        }, 500);
-                    } else {
-                        // Reseta form em caso de erro da API
-                        alert('Houve um problema com a rede. Tente novamente.');
-                        vaultForm.classList.remove('opacity-70', 'pointer-events-none');
-                        vaultBtnText.classList.remove('hidden');
-                        vaultBtnSpinner.classList.add('hidden');
-                    }
-                }).catch(error => {
-                    alert('Erro de conexão. Verifique se há internet e tente novamente.');
-                    vaultForm.classList.remove('opacity-70', 'pointer-events-none');
-                    vaultBtnText.classList.remove('hidden');
-                    vaultBtnSpinner.classList.add('hidden');
-                });
-            });
-        }
     </script>
 </body>
-
 </html>
