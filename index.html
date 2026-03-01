@@ -1124,6 +1124,9 @@
                                     class="w-full bg-[#F9F9F8] border border-white/80 shadow-[0_4px_10px_rgba(0,0,0,0.02)] rounded-[20px] px-6 py-[18px] font-sans text-[14px] text-[#1c1917] placeholder-[#A8A29E]/60 focus:outline-none focus:bg-white focus:shadow-[0_8px_20px_rgba(0,0,0,0.04)] transition-all duration-500 appearance-none cursor-pointer">
                                     <option value="" disabled selected class="text-stone-400">Selecione o motivo da
                                         conversa...</option>
+                                    <option value="Aplicação: Lista Fundadoras Athena">Aplicação: Lista Fundadoras
+                                        Athena
+                                    </option>
                                     <option value="Quero evoluir minha performance">Quero evoluir minha performance
                                     </option>
                                     <option value="Preciso de sistemas e inteligência para meu negócio">Preciso de
@@ -1633,7 +1636,8 @@
                     'Arquitetura de rotina com blindagem de cortisol e preservação de capacidade cognitiva.',
                     'Estratégias de recuperação ativa com foco em proteção cardiovascular e sustentabilidade de longo prazo.'
                 ],
-                checkoutLink: '#contato'
+                checkoutLink: '#contato',
+                btnText: 'Entrar no Círculo Athena — Março 2026'
             },
             'ia-personal-coach': {
                 tag: '01 / Inteligência',
@@ -1817,7 +1821,12 @@
 
             // Link Checkout Inteligente (Se for âncora, rola pra baixo e fecha)
             const checkoutBtn = document.getElementById('modal-checkout-btn');
+            const checkoutBtnText = checkoutBtn.querySelector('span');
+
             checkoutBtn.href = data.checkoutLink;
+            if (checkoutBtnText) {
+                checkoutBtnText.textContent = data.btnText || "Acessar o Projeto";
+            }
 
             if (data.checkoutLink.startsWith('#')) {
                 checkoutBtn.removeAttribute('target');
