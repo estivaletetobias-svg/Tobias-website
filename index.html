@@ -622,7 +622,7 @@
                                     </div>
                                     <a href="vault-acesso-exclusivo.html"
                                         class="bg-[#1c1917] text-white text-[10px] uppercase tracking-[0.2em] font-bold px-10 py-4 rounded-full hover:bg-stone-800 transition-all shadow-xl">
-                                        Entrar no Vault Agora
+                                        Destrancar o Cofre de Conhecimento
                                     </a>
                                 </div>
                             </div>
@@ -1671,6 +1671,7 @@
                     <div class="bg-[#F9F9F8] border border-stone-200 p-6 rounded-[24px] shadow-sm relative overflow-hidden group">
                         <div class="absolute inset-0 bg-stone-100/50 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         <form id="memory-modal-form" method="POST" action="https://49e4255f.sibforms.com/serve/MUIFAA7qLYaFZS7Z_asOXxJOY6Qgt-HUlQsaDxv98roI_lX8TbNPkkZYGt6gSuauI4tH03ujAbi8ldPS3jD26wfg9Mdxz0g6fyjnFJ3fF7fXduUJ6FukzyuAUFZ0VNgTp3cnWq0wldCUS1fBS2FBewwnnfmOaTkMmBCbA5mCUNk6H61-9qq2-DdrgCHmEXIto07CGQP2Qj7ZYkA1w==" class="relative z-10 flex flex-col gap-4">
+                            <input type="text" name="email_address_check" value="" class="hidden" style="display:none;">
                             <input type="hidden" name="locale" value="pt">
                             <input type="hidden" name="ORIGEM_LEAD" value="Modal Engenharia Memória">
                             <input type="email" name="EMAIL" placeholder="Seu melhor e-mail para acesso" required 
@@ -1689,7 +1690,7 @@
                             <h4 class="font-serif text-xl mb-1 text-[#1c1917]">Acesso Liberado!</h4>
                             <p class="text-[14px] text-stone-500 font-light mb-6">Enviamos os detalhes para seu e-mail, mas você pode começar agora:</p>
                             <a href="engenharia-memoria.html" class="bg-[#1c1917] text-white text-[10px] uppercase tracking-[0.2em] font-bold px-8 py-4 rounded-full hover:bg-stone-800 transition-all shadow-xl">
-                                Entrar no Sistema Agora
+                                Ir para o Terminal de Comando
                             </a>
                         </div>
                     </div>
@@ -2082,11 +2083,14 @@
                 vaultBtnText.classList.add('hidden');
                 vaultBtnSpinner.classList.remove('hidden');
 
-                const data = new FormData(vaultForm);
+                const data = new URLSearchParams(new FormData(vaultForm));
 
                 fetch(vaultForm.action, {
                     method: 'POST',
-                    body: data,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: data.toString(),
                     mode: 'no-cors' // Essencial para evitar bloqueio de redirecionamento nativo do Brevo
                 }).then(() => {
                     // Como não bloqueamos redirect, mas injetamos form nativo via fetch no-cors, assumimos opacidade na resposta (Sucesso)
@@ -2128,10 +2132,13 @@
                 if (btnArrow) btnArrow.classList.add('hidden');
                 if (btnSpinner) btnSpinner.classList.remove('hidden');
 
-                const data = new FormData(form);
+                const data = new URLSearchParams(new FormData(form));
                 fetch(form.action, {
                     method: 'POST',
-                    body: data,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: data.toString(),
                     mode: 'no-cors'
                 }).then(() => {
                     form.classList.add('hidden');
