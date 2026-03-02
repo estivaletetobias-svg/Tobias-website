@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engenharia da Memória | Sistema de Revisão Programada</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #EAEAE5;
+            color: #1c1917;
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .input-field {
+            background: #F9F9F8;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            background: white;
+            border-color: #1c1917;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center p-6 md:p-12">
+
+    <div class="max-w-4xl w-full">
+        <!-- Header -->
+        <header class="mb-12 text-center md:text-left">
+            <div class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#78716C] mb-4">
+                <span class="w-1.5 h-1.5 bg-[#1c1917] rounded-sm"></span>
+                Protocolo de Retenção
+            </div>
+            <h1 class="text-4xl md:text-5xl font-serif mb-4">Engenharia da Memória</h1>
+            <p class="text-stone-500 font-light max-w-xl">Interface de comando para programar ciclos de repetição
+                espaçada e recuperação ativa baseada em densidade cognitiva.</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <!-- Coluna de Painel de Comando -->
+            <div class="lg:col-span-12">
+                <div class="glass-card rounded-[32px] p-8 md:p-10 shadow-2xl shadow-black/5">
+                    <h3 class="text-xl font-serif mb-8 flex items-center gap-3">
+                        <i data-lucide="zap" class="w-5 h-5"></i> Programar Novo Ciclo
+                    </h3>
+
+                    <form id="memory-form" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="flex flex-col gap-2">
+                            <label
+                                class="text-[10px] uppercase tracking-wider font-semibold text-stone-400 ml-2">Assunto /
+                                Matéria</label>
+                            <input type="text" id="subject" placeholder="Ex: Anatomia, Gestão..." required
+                                class="input-field px-6 py-4 text-sm focus:outline-none">
+                        </div>
+
+                        <div class="flex flex-col gap-2">
+                            <label
+                                class="text-[10px] uppercase tracking-wider font-semibold text-stone-400 ml-2">Densidade
+                                Cognitiva (0-10)</label>
+                            <input type="number" id="difficulty" min="0" max="10" placeholder="Grau de dificuldade"
+                                required class="input-field px-6 py-4 text-sm focus:outline-none">
+                        </div>
+
+                        <div class="flex items-end">
+                            <button type="submit"
+                                class="w-full bg-[#1c1917] text-white py-4 rounded-xl font-mono text-[11px] uppercase tracking-[0.2em] hover:bg-stone-800 transition-all shadow-lg hover:-translate-y-1 active:scale-95">
+                                Gerar Arquitetura
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Coluna de Resultados (Oculta até gerar) -->
+            <div id="results-panel" class="lg:col-span-12 hidden opacity-0 transition-all duration-700">
+                <div class="glass-card rounded-[32px] p-8 md:p-10">
+                    <div class="flex justify-between items-center mb-10 pb-6 border-b border-stone-200">
+                        <h3 class="text-2xl font-serif" id="result-title">Estratégia: [Assunto]</h3>
+                        <span id="category-badge"
+                            class="px-3 py-1 bg-stone-100 text-[10px] uppercase font-bold tracking-widest rounded">Nível
+                            Moderado</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4" id="cycles-grid">
+                        <!-- Ciclos gerados via JS -->
+                    </div>
+
+                    <div class="mt-12 p-6 bg-white/30 rounded-2xl border border-white/50">
+                        <h4 class="text-sm font-semibold mb-4 flex items-center gap-2">
+                            <i data-lucide="info" class="w-4 h-4"></i> Comando Operacional (P.S.)
+                        </h4>
+                        <p class="text-sm text-stone-600 leading-relaxed font-light" id="command-text">
+                            Sincronize esses alarmes no seu calendário. No dia de cada revisão, solicite ao seu
+                            <strong>NotebookLM</strong> que gere o instrumento pedagógico sugerido acima para garantir a
+                            consolidação da rede neural.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer / Voltar -->
+        <footer class="mt-20 pt-10 border-t border-stone-300/30 flex justify-between items-center">
+            <a href="index.html"
+                class="flex items-center gap-2 text-stone-400 hover:text-stone-900 transition-colors text-xs font-mono uppercase tracking-widest">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Voltar ao Terminal
+            </a>
+            <p class="text-[10px] text-stone-400 uppercase tracking-widest">Engenharia da Memória v1.0</p>
+        </footer>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const form = document.getElementById('memory-form');
+        const resultsPanel = document.getElementById('results-panel');
+        const cyclesGrid = document.getElementById('cycles-grid');
+
+        // Configuração conforme Engenharia_da_Memória.pdf
+        const config = {
+            critical: { name: 'Crítico', color: 'bg-red-50 text-red-600 border-red-100', days: [1, 3, 7, 15, 30] },
+            medium: { name: 'Médio', color: 'bg-stone-50 text-stone-600 border-stone-100', days: [2, 5, 12, 25, 50] },
+            light: { name: 'Leve', color: 'bg-blue-50 text-blue-600 border-blue-200', days: [4, 10, 20, 40, 80] }
+        };
+
+        const instruments = [
+            { name: 'Cloze Deletion', icon: 'scissors', task: 'Omissão de palavras-chave no NotebookLM' },
+            { name: 'Pergunta Aberta', icon: 'help-circle', task: 'Recuperação ativa simples' },
+            { name: 'Aplicação Prática', icon: 'code', task: 'Estudo de caso ou mini-cenário' },
+            { name: 'Explicação Voz Alta', icon: 'mic', task: 'Técnica de Feynman para explicar o todo' },
+            { name: 'Conexão Superior', icon: 'share-2', task: 'Integração interdisciplinar de conceitos' }
+        ];
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const subject = document.getElementById('subject').value;
+            const diff = parseInt(document.getElementById('difficulty').value);
+
+            let type = 'medium';
+            if (diff >= 8) type = 'critical';
+            else if (diff <= 3) type = 'light';
+
+            const sel = config[type];
+
+            document.getElementById('result-title').textContent = `Estratégia: ${subject}`;
+            const badge = document.getElementById('category-badge');
+            badge.textContent = `Prioridade: ${sel.name}`;
+            badge.className = `px-3 py-1 ${sel.color} text-[10px] uppercase font-bold tracking-widest rounded border`;
+
+            // Gerar Cards
+            cyclesGrid.innerHTML = '';
+            sel.days.forEach((day, index) => {
+                const inst = instruments[index] || instruments[4];
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-2xl shadow-sm border border-stone-100 flex flex-col gap-4 hover:shadow-xl transition-all duration-500';
+                card.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <span class="text-[10px] font-mono text-stone-400">D+${day}</span>
+                        <div class="w-8 h-8 rounded-full bg-stone-50 flex items-center justify-center">
+                            <i data-lucide="${inst.icon}" class="w-4 h-4 text-stone-800"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold mb-1">${inst.name}</h4>
+                        <p class="text-[11px] text-stone-500 leading-tight">${inst.task}</p>
+                    </div>
+                `;
+                cyclesGrid.appendChild(card);
+            });
+
+            // Apresentar Painel
+            resultsPanel.classList.remove('hidden');
+            setTimeout(() => {
+                resultsPanel.classList.remove('opacity-0');
+                resultsPanel.classList.add('opacity-100');
+                lucide.createIcons();
+                // Smooth scroll para resultados
+                resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        });
+    </script>
+</body>
+
+</html>
