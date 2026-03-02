@@ -104,14 +104,32 @@
                         <!-- Ciclos gerados via JS -->
                     </div>
 
-                    <div class="mt-12 p-6 bg-white/30 rounded-2xl border border-white/50">
-                        <h4 class="text-sm font-semibold mb-4 flex items-center gap-2">
-                            <i data-lucide="info" class="w-4 h-4"></i> Comando Operacional (P.S.)
+                    <!-- Botões de Ação de Automação -->
+                    <div class="mt-10 flex flex-col md:flex-row gap-4 border-t border-stone-100 pt-10">
+                        <button id="export-calendar"
+                            class="group flex-1 bg-[#1c1917] text-white py-5 rounded-2xl font-mono text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-black transition-all shadow-xl hover:-translate-y-1 flex items-center justify-center gap-3">
+                            <i data-lucide="calendar-days" class="w-4 h-4 text-stone-400 group-hover:text-white"></i>
+                            Agendar Ciclo no Calendário
+                        </button>
+                        <button id="whatsapp-automation"
+                            class="group flex-1 border-2 border-[#1c1917] text-[#1c1917] py-5 rounded-2xl font-mono text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-[#1c1917] hover:text-white transition-all hover:-translate-y-1 flex items-center justify-center gap-3">
+                            <i data-lucide="message-square" class="w-4 h-4 text-[#1c1917] group-hover:text-white"></i>
+                            Lembrete via WhatsApp
+                        </button>
+                    </div>
+
+                    <div class="mt-12 p-8 bg-[#F9F9F8] rounded-3xl border border-stone-200 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-10">
+                            <i data-lucide="cpu" class="w-12 h-12"></i>
+                        </div>
+                        <h4
+                            class="text-sm font-bold mb-4 flex items-center gap-2 uppercase tracking-widest text-stone-400">
+                            <i data-lucide="terminal" class="w-4 h-4"></i> Comando Operacional
                         </h4>
                         <p class="text-sm text-stone-600 leading-relaxed font-light" id="command-text">
-                            Sincronize esses alarmes no seu calendário. No dia de cada revisão, solicite ao seu
-                            <strong>NotebookLM</strong> que gere o instrumento pedagógico sugerido acima para garantir a
-                            consolidação da rede neural.
+                            O sistema calculou os momentos exatos de instabilidade da rede neural. Ao exportar para o
+                            seu calendário, o dispositivo assumirá o papel de <strong>sentinela de performance</strong>.
+                            Cada alerta contém o link de instrução para o seu assistente de IA.
                         </p>
                     </div>
                 </div>
@@ -134,6 +152,11 @@
         const form = document.getElementById('memory-form');
         const resultsPanel = document.getElementById('results-panel');
         const cyclesGrid = document.getElementById('cycles-grid');
+        const exportBtn = document.getElementById('export-calendar');
+        const waBtn = document.getElementById('whatsapp-automation');
+
+        let currentSubject = '';
+        let currentCycles = [];
 
         // Configuração conforme Engenharia_da_Memória.pdf
         const config = {
@@ -160,6 +183,11 @@
             else if (diff <= 3) type = 'light';
 
             const sel = config[type];
+            currentSubject = subject;
+            currentCycles = sel.days.map((day, index) => ({
+                day,
+                instrument: instruments[index] || instruments[4]
+            }));
 
             document.getElementById('result-title').textContent = `Estratégia: ${subject}`;
             const badge = document.getElementById('category-badge');
@@ -168,20 +196,19 @@
 
             // Gerar Cards
             cyclesGrid.innerHTML = '';
-            sel.days.forEach((day, index) => {
-                const inst = instruments[index] || instruments[4];
+            currentCycles.forEach((item) => {
                 const card = document.createElement('div');
                 card.className = 'bg-white p-6 rounded-2xl shadow-sm border border-stone-100 flex flex-col gap-4 hover:shadow-xl transition-all duration-500';
                 card.innerHTML = `
                     <div class="flex justify-between items-start">
-                        <span class="text-[10px] font-mono text-stone-400">D+${day}</span>
+                        <span class="text-[10px] font-mono text-stone-400">D+${item.day}</span>
                         <div class="w-8 h-8 rounded-full bg-stone-50 flex items-center justify-center">
-                            <i data-lucide="${inst.icon}" class="w-4 h-4 text-stone-800"></i>
+                            <i data-lucide="${item.instrument.icon}" class="w-4 h-4 text-stone-800"></i>
                         </div>
                     </div>
                     <div>
-                        <h4 class="text-sm font-semibold mb-1">${inst.name}</h4>
-                        <p class="text-[11px] text-stone-500 leading-tight">${inst.task}</p>
+                        <h4 class="text-sm font-semibold mb-1">${item.instrument.name}</h4>
+                        <p class="text-[11px] text-stone-500 leading-tight">${item.instrument.task}</p>
                     </div>
                 `;
                 cyclesGrid.appendChild(card);
@@ -194,8 +221,60 @@
                 resultsPanel.classList.add('opacity-100');
                 lucide.createIcons();
                 // Smooth scroll para resultados
-                resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 100);
+        });
+
+        // --- AUTOMAÇÃO DE EXPORTAÇÃO ---
+
+        exportBtn.addEventListener('click', () => {
+            if (!currentSubject) return;
+
+            let icsContent = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Engenharia da Memoria//Tobias Estivalete//PT\n";
+            const now = new Date();
+
+            currentCycles.forEach(item => {
+                const eventDate = new Date();
+                eventDate.setDate(now.getDate() + item.day);
+
+                // Formatação ICS: YYYYMMDD
+                const dateStr = eventDate.toISOString().split('T')[0].replace(/-/g, '');
+
+                const waMessage = encodeURIComponent(`🚨 REVISÃO AGENDADA: ${currentSubject}\n\nTécnica: ${item.instrument.name}\nTarefa: ${item.instrument.task}\n\n[Sistema Engenharia da Memória]`);
+                const waLink = `https://wa.me/?text=${waMessage}`;
+
+                icsContent += "BEGIN:VEVENT\n";
+                icsContent += `DTSTART;VALUE=DATE:${dateStr}\n`;
+                icsContent += `DTEND;VALUE=DATE:${dateStr}\n`;
+                icsContent += `SUMMARY:Revisão: ${currentSubject} (${item.instrument.name})\n`;
+                icsContent += `DESCRIPTION:Hoje é dia de revisar ${currentSubject}.\\n\\nTécnica: ${item.instrument.name}\\nTarefa: ${item.instrument.task}\\n\\n🔗 Relatar Conclusão no WhatsApp: ${waLink}\\n\\n[Protocolo Tobias Estivalete]\n`;
+                // Alarme para as 08:00 AM do dia
+                icsContent += "BEGIN:VALARM\nTRIGGER:PT8H\nACTION:DISPLAY\nDESCRIPTION:Lembrete de Revisão\nEND:VALARM\n";
+                icsContent += "END:VEVENT\n";
+            });
+
+            icsContent += "END:VCALENDAR";
+
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = `ciclo-revisao-${currentSubject.toLowerCase().replace(/\s+/g, '-')}.ics`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        waBtn.addEventListener('click', () => {
+            if (!currentSubject) return;
+
+            let summary = `🧠 *PROGRAMAÇÃO DE CICLO: ${currentSubject.toUpperCase()}*\n\n`;
+            currentCycles.forEach(item => {
+                summary += `📅 *D+${item.day}:* ${item.instrument.name}\n`;
+            });
+            summary += `\n_Agendado via Sistema Engenharia da Memória_`;
+
+            const waLink = `https://wa.me/?text=${encodeURIComponent(summary)}`;
+            window.open(waLink, '_blank');
         });
     </script>
 </body>
