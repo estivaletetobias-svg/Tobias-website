@@ -1859,7 +1859,27 @@
 
             if (data.checkoutLink.startsWith('#')) {
                 checkoutBtn.removeAttribute('target');
-                checkoutBtn.onclick = () => closeProjectModal();
+                checkoutBtn.onclick = () => {
+                    closeProjectModal();
+
+                    // Lógica especial para o Vault / Engenharia da Memória
+                    if (data.checkoutLink === '#vault') {
+                        const vaultTitle = document.querySelector('#vault h3');
+                        const vaultDesc = document.querySelector('#vault p.max-w-md');
+                        const originInput = document.getElementById('origin-lead');
+
+                        if (projectId === 'engenharia-memoria') {
+                            if (vaultTitle) vaultTitle.textContent = "Destrancar Engenharia da Memória";
+                            if (vaultDesc) vaultDesc.innerHTML = "Adicione seu e-mail abaixo para receber o <strong>acesso imediato ao link do sistema</strong> e o guia de implementação.";
+                            if (originInput) originInput.value = "Engenharia da Memória";
+                        } else {
+                            // Reset para o padrão do Vault
+                            if (vaultTitle) vaultTitle.textContent = "The Vault";
+                            if (vaultDesc) vaultDesc.innerHTML = "Acesse imediatamente o material gratuito: <strong class=\"text-stone-800\">prompts estruturados, fluxos de uso e templates de projetos</strong>. Adicione seu e-mail para destrancar o Vault de conhecimento.";
+                            if (originInput) originInput.value = "Home Vault";
+                        }
+                    }
+                };
             } else {
                 checkoutBtn.setAttribute('target', '_blank');
                 checkoutBtn.onclick = null;
