@@ -605,19 +605,25 @@
 
                             <!-- Mensagem de Sucesso (Oculta por Padrão) -->
                             <div id="vault-success"
-                                class="hidden w-full flex-col items-center justify-center z-20 translate-y-2 opacity-0 transition-all duration-500 h-[60px]">
-                                <div class="flex items-center justify-center gap-4">
-                                    <div
-                                        class="w-10 h-10 bg-[#1c1917] rounded-full flex items-center justify-center flex-shrink-0">
-                                        <i data-lucide="mail-check" class="w-5 h-5 text-stone-100"></i>
+                                class="hidden w-full flex-col items-center justify-center z-20 translate-y-2 opacity-0 transition-all duration-500 min-h-[140px]">
+                                <div class="flex flex-col items-center justify-center gap-6">
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-10 h-10 bg-[#1c1917] rounded-full flex items-center justify-center flex-shrink-0">
+                                            <i data-lucide="mail-check" class="w-5 h-5 text-stone-100"></i>
+                                        </div>
+                                        <div class="text-left">
+                                            <h4 class="font-serif text-xl leading-none text-[#1c1917] mb-1">Acesso
+                                                Liberado!</h4>
+                                            <p class="font-sans text-[13px] leading-tight text-stone-500">
+                                                O link também foi enviado para seu e-mail.
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="text-left">
-                                        <h4 class="font-serif text-xl leading-none text-[#1c1917] mb-1">Verifique seu
-                                            e-mail!</h4>
-                                        <p class="font-sans text-[13px] leading-tight text-stone-500">
-                                            Te enviei o link com acesso ao que preparei para você.
-                                        </p>
-                                    </div>
+                                    <a href="vault-acesso-exclusivo.html"
+                                        class="bg-[#1c1917] text-white text-[10px] uppercase tracking-[0.2em] font-bold px-10 py-4 rounded-full hover:bg-stone-800 transition-all shadow-xl">
+                                        Entrar no Vault Agora
+                                    </a>
                                 </div>
                             </div>
                         </div>
