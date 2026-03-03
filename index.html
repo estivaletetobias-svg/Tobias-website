@@ -21,7 +21,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 
     <!-- GSAP e ScrollTrigger (CDN) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -1385,8 +1385,7 @@
 
     <!-- SCRIPTS -->
     <script>
-        // 1. Inicializar Ícones
-        lucide.createIcons();
+        // 1. Ícones inicializados após DOMContentLoaded (ver abaixo)
 
         // 2. Inicializar Lenis — configuração otimizada para Chromium/Firefox
         const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
@@ -1414,20 +1413,10 @@
         // 3. Registrar GSAP
         gsap.registerPlugin(ScrollTrigger);
 
-        // configura ScrollTrigger para usar o scroll do lenis
-        ScrollTrigger.scrollerProxy(document.body, {
-            scrollTop(value) {
-                return arguments.length
-                    ? lenis.scrollTo(value, { immediate: true })
-                    : lenis.scroll;
-            },
-            getBoundingClientRect() {
-                return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-            },
-        });
-
         // 4. Hero Reveal + Fade no Scroll
         document.addEventListener('DOMContentLoaded', () => {
+            // Inicializa ícones após DOM pronto
+            lucide.createIcons();
 
             // Setup inicial de estado
             gsap.set(["#hero-badge", "#hero-desc", "#hero-buttons", "#scroll-indicator"], { y: 32 });
