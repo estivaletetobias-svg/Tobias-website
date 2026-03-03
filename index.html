@@ -1387,31 +1387,48 @@
     <script>
         // 1. Ícones inicializados após DOMContentLoaded (ver abaixo)
 
-        // 2. Inicializar Lenis — configuração otimizada para Chromium/Firefox
+        // 2. Scroll Engine: Lenis apenas em Safari/Firefox
+        // Chrome tem compositor de scroll nativo superior — Lenis cria jank ao sobrepor
         const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-        const lenis = new Lenis({
-            lerp: isChrome ? 0.12 : 0.1,
-            smoothWheel: true,
-            wheelMultiplier: isChrome ? 0.85 : 1,
-            smoothTouch: false,
-            touchMultiplier: 1.5,
-            infinite: false,
-        });
-        window.lenis = lenis;
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-        // Sync Lenis com RAF nativo (mais leve que gsap.ticker para efeito visual)
-        function lenisRaf(time) {
-            lenis.raf(time);
+        let lenis = null;
+
+        if (!isChrome) {
+            // Safari e Firefox: Lenis dá o smooth premium que o motor nativo não entrega
+            lenis = new Lenis({
+                lerp: 0.09,
+                smoothWheel: true,
+                wheelMultiplier: 1.0,
+                smoothTouch: false,
+                touchMultiplier: 1.5,
+            });
+            window.lenis = lenis;
+
+            function lenisRaf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(lenisRaf);
+            }
             requestAnimationFrame(lenisRaf);
+            lenis.on('scroll', ScrollTrigger.update);
+        } else {
+            // Chrome: scroll nativo puro — zero overhead de JS no thread principal
+            window.lenis = {
+                stop: () => { document.body.style.overflow = 'hidden'; },
+                start: () => { document.body.style.overflow = ''; },
+                scroll: window.scrollY,
+            };
         }
-        requestAnimationFrame(lenisRaf);
 
-        // Notifica ScrollTrigger em cada frame do Lenis
-        lenis.on('scroll', ScrollTrigger.update);
         gsap.ticker.lagSmoothing(0);
 
         // 3. Registrar GSAP
         gsap.registerPlugin(ScrollTrigger);
+
+        // ScrollTrigger usa scroll nativo no Chrome
+        if (isChrome) {
+            ScrollTrigger.defaults({ scroller: window });
+        }
 
         // 4. Hero Reveal + Fade no Scroll
         document.addEventListener('DOMContentLoaded', () => {
@@ -1432,19 +1449,36 @@
                 .to("#hero-buttons", { autoAlpha: 1, y: 0, duration: 1.0, ease: "power3.out" }, "-=0.9")
                 .to("#scroll-indicator", { autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.7");
 
-            // Fade-out hero no scroll (sem scrub pesado)
-            gsap.to(["#hero-badge", "#hero-title", "#hero-desc", "#hero-buttons", "#scroll-indicator"], {
-                scrollTrigger: {
-                    trigger: "#hero-section",
-                    start: "top top",
-                    end: "top -50%",
-                    scrub: 0.5,  // scrub mais suave (menos custo de recalculo)
-                },
-                opacity: 0,
-                y: -24,
-                stagger: 0.03,
-                ease: "none",
-            });
+            // Fade-out hero no scroll
+            // No Chrome: IntersectionObserver (zero custo de scroll-linked)
+            // No Safari/Firefox: GSAP scrub leve para o efeito premium
+            if (isChrome) {
+                const heroObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        const ratio = 1 - entry.intersectionRatio;
+                        gsap.to(["#hero-badge", "#hero-title", "#hero-desc", "#hero-buttons", "#scroll-indicator"], {
+                            opacity: entry.isIntersecting ? 1 : 0,
+                            duration: 0.3,
+                            ease: "none",
+                            overwrite: true,
+                        });
+                    });
+                }, { threshold: [0, 0.3, 1] });
+                heroObserver.observe(document.getElementById('hero-section'));
+            } else {
+                gsap.to(["#hero-badge", "#hero-title", "#hero-desc", "#hero-buttons", "#scroll-indicator"], {
+                    scrollTrigger: {
+                        trigger: "#hero-section",
+                        start: "top top",
+                        end: "top -50%",
+                        scrub: 0.5,
+                    },
+                    opacity: 0,
+                    y: -24,
+                    stagger: 0.03,
+                    ease: "none",
+                });
+            }
 
             // --- Animações Reveal: usando ScrollTrigger.batch (muito mais eficiente) ---
             // Batch anima todos elementos .reveal-up de uma vez por frame de scroll
@@ -1497,37 +1531,31 @@
                 const imgContainer = sobreImagem.parentElement;
 
                 imgContainer.addEventListener("mouseenter", () => {
-                    // Quando o mouse entra, ela sai do distante para o próximo (scale 1 para 1.1)
-                    gsap.to(sobreImagem, {
-                        scale: 1.1,
-                        duration: 1.5,
-                        ease: "power3.out"
-                    });
+                    gsap.to(sobreImagem, { scale: 1.08, duration: 1.2, ease: "power3.out" });
                 });
 
+                // Throttle do mousemove: no máximo 1 update por frame (evita GSAP spam)
+                let mouseMoveRaf = null;
                 imgContainer.addEventListener("mousemove", (e) => {
-                    // Mapeamento milimétrico do cursor pra distorcer no estilo Parallax 3D
-                    const rect = imgContainer.getBoundingClientRect();
-                    const x = (e.clientX - rect.left) / rect.width - 0.5;
-                    const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-                    gsap.to(sobreImagem, {
-                        x: x * -30, // Desliza pra direção oposta da seta
-                        y: y * -30,
-                        duration: 0.8,
-                        ease: "power2.out"
+                    if (mouseMoveRaf) return;
+                    mouseMoveRaf = requestAnimationFrame(() => {
+                        const rect = imgContainer.getBoundingClientRect();
+                        const x = (e.clientX - rect.left) / rect.width - 0.5;
+                        const y = (e.clientY - rect.top) / rect.height - 0.5;
+                        gsap.to(sobreImagem, {
+                            x: x * -20,
+                            y: y * -20,
+                            duration: 0.6,
+                            ease: "power2.out",
+                            overwrite: "auto",
+                        });
+                        mouseMoveRaf = null;
                     });
                 });
 
                 imgContainer.addEventListener("mouseleave", () => {
-                    // Reseta pra estado distante calmamente
-                    gsap.to(sobreImagem, {
-                        scale: 1,
-                        x: 0,
-                        y: 0,
-                        duration: 2,
-                        ease: "power3.out"
-                    });
+                    if (mouseMoveRaf) { cancelAnimationFrame(mouseMoveRaf); mouseMoveRaf = null; }
+                    gsap.to(sobreImagem, { scale: 1, x: 0, y: 0, duration: 1.5, ease: "power3.out" });
                 });
             }
 
