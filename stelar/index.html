@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+    <link rel="shortcut icon" href="./favicon.png" type="image/png">
+    <title>Vault | Acesso Restrito - Tobias Estivalete</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Google Fonts conforme Design System -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- GSAP e ScrollTrigger (CDN) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Lenis para Smooth Scroll (Opcional premium) -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+    <!-- Tailwind Configuration (Design System Tokens) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        serif: ['Libre Baskerville', 'serif'],
+                    },
+                    colors: {
+                        stone: {
+                            50: '#fafaf9',
+                            100: '#f5f5f4',
+                            200: '#e7e5e4',
+                            300: '#d6d3d1',
+                            400: '#a8a29e',
+                            500: '#78716c',
+                            600: '#57534e',
+                            700: '#44403c',
+                            800: '#292524',
+                            900: '#1c1917',
+                        },
+                        'surface-light': '#EAEAE5',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #EAEAE5;
+            color: #1C1C1C;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography utils */
+        .text-outline {
+            color: transparent;
+            -webkit-text-stroke: 1.5px #1C1917;
+        }
+
+        /* Grain / Noise Filter */
+        .noise {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 9999;
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAAAAP///8AODg6qqqp2dnafMTGfMzOPL/yWAAAAAXRSTlMAQObVGgAAAJNJREFUOMuV1NEJwzAMBVDfD/n5Xy2ZIFvoP0wQoRCDrC/1yEHT95h2/B2hXN8+yvV7pPpdUh2tTqo+vupotXqq+viXo/XfTqve/7V43E6rz+149Xw+j1ePp1UfL6tVP1+OVofTqtezo9Xz+Txe9b9Vv19Hq4/DqvfrsOr37Wj1vB2vnq/Hq9evw6rPs8Oqz1x1uAH7FzK2p8d+4gAAAABJRU5ErkJggg==");
+            background-repeat: repeat;
+        }
+
+        /* Ocultar barra de rolagem mas manter funcionalidade */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #EAEAE5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #d6d3d1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a29e;
+        }
+
+        /* Acessibilidade - Foco Outline */
+        *:focus-visible {
+            outline: 2px solid #a8a29e;
+            outline-offset: 2px;
+        }
+
+        /* Flashlight Effect */
+        .flashlight-card::before {
+            content: "";
+            position: absolute;
+            inset: 0px;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
+                    rgba(255, 255, 255, 0.08),
+                    transparent 40%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .flashlight-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Animations: prefers reduced motion fallback */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        /* Animação de Scroll Down Line */
+        @keyframes scrollAnim {
+            0% {
+                transform: translateY(-100%);
+            }
+
+            100% {
+                transform: translateY(100%);
+            }
+        }
+
+        /* Animação Inicial Oculta (Evita o Pop in antes do carregamento completo do animador) */
+        #hero-badge,
+        #hero-desc,
+        #hero-buttons,
+        #scroll-indicator,
+        .reveal-text {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Hide scrollbar for Vault horizontal scroll */
+        .hide-scroll-mobile::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scroll-mobile {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        .mask-fade {
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        @keyframes scrollAnim {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+
+            /* Halfway point for seamless loop if duplicated */
+        }
+    </style>
+
+    <!-- Microsoft Clarity (Analytics & Heatmaps) -->
+    <script type="text/javascript">
+            (function (c, l, a, r, i, t, y) {
+                c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+                t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+                y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+            })(window, document, "clarity", "script", "vo60894vb9");
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4XMBRM6SFK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-4XMBRM6SFK');
+    </script>
+</head>
+
+<body id="home" class="selection:bg-stone-800 selection:text-white">
+
+    <!-- Efeito granulado (REMOVIDO: Chromium sofre lag severo ao compor transparência sobre 100% dos pixels a 60fps) -->
+
+    <!-- NAVBAR MINIMALISTA -->
+    <nav class="fixed top-0 left-0 w-full z-50 py-4 px-6 md:px-12 flex justify-between items-center bg-[#EAEAE5]/95 border-b border-stone-300 shadow-sm transition-all duration-300"
+        aria-label="Navegação principal">
+        <div class="font-display font-medium tracking-tight text-lg text-stone-900 flex items-center">
+            Tobias <span class="text-stone-400 ml-1">Estivalete</span>
+        </div>
+
+
+
+
+    </nav>
+
+    <!-- WRAPPER GERAL -->
+    <div class="max-w-[1440px] mx-auto border-x border-stone-300 relative bg-[#EAEAE5] shadow-2xl shadow-stone-200">
+
+        <!-- SEÇÃO VAULT DESTRANCADA -->
+        <section id="vault"
+            class="relative z-10 w-full min-h-[90vh] bg-[#F9F9F8] py-32 px-6 md:px-12 flex flex-col items-center text-center">
+
+            <!-- Fundo dinâmico da área VIP -->
+            <div
+                class="absolute inset-0 bg-gradient-to-b from-stone-100 to-[#F9F9F8] z-0 pointer-events-none opacity-50">
+            </div>
+
+            <div class="max-w-6xl mx-auto flex flex-col items-center w-full mt-10 md:mt-24 relative z-10">
+
+                <!-- Cabeçalho de Sucesso/Acesso -->
+                <div
+                    class="mb-6 flex items-center justify-center gap-2 text-[10px] md:text-xs uppercase font-mono tracking-widest text-emerald-700/80 bg-emerald-50 px-4 py-2 border border-emerald-100 rounded-full shadow-sm">
+                    <i data-lucide="unlock" class="w-3.5 h-3.5"></i>
+                    Acesso Autenticado
+                </div>
+
+                <h1
+                    class="font-serif text-[#1c1917] text-4xl md:text-6xl lg:text-[4.5rem] leading-[1.1] font-normal tracking-tight mb-8">
+                    Vault Destrancado.
+                </h1>
+
+                <p class="font-sans text-[#78716C] text-[15px] md:text-[17px] max-w-2xl leading-[1.6] font-light mb-16">
+                    Abaixo estão os ativos gratuitos iniciais para estruturar a sua visão e escalar sua execução.
+                    Materiais premium e novos acessos serão notificados na sua caixa de entrada.
+                </p>
+
+                <!-- Grid de Materiais Dinâmico (Google Sheets) -->
+                <div id="vault-grid"
+                    class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left relative z-20">
+                    <!-- Carregamento Incial -->
+                    <div class="col-span-full flex flex-col items-center justify-center py-20 text-stone-400">
+                        <i data-lucide="loader-2" class="w-8 h-8 animate-spin mb-4"></i>
+                        <span class="font-mono uppercase text-[10px] tracking-[0.2em]">Descriptografando
+                            arquivos...</span>
+                    </div>
+                </div>
+
+                <div class="mt-20 flex justify-center pb-10">
+                    <a href="../index.html"
+                        class="inline-flex items-center text-[10px] font-mono uppercase tracking-[0.2em] text-[#1c1917]/50 hover:text-[#1c1917] transition-colors relative z-20">
+                        <i data-lucide="arrow-left" class="w-3 h-3 mr-2"></i> Voltar ao site principal
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Footer Simplificado -->
+        <section
+            class="relative z-10 w-full bg-[#EAEAE5] border-t border-[#d4d4d0]/50 pt-10 pb-12 overflow-hidden flex flex-col items-center">
+
+            <a href="mailto:estivaletetobias@gmail.com"
+                class="text-[10px] font-mono uppercase tracking-[0.2em] text-stone-500 hover:text-stone-800 transition-colors mb-20 relative z-20">
+                Qualquer dúvida responda por email
+            </a>
+
+            <!-- Tipografia Gigante em 2 Linhas -->
+            <div
+                class="opacity-[0.08] pointer-events-none select-none overflow-hidden w-full z-0 px-4 md:px-12 max-w-screen-2xl mx-auto flex flex-col items-center">
+                <span
+                    class="text-[20vw] md:text-[14vw] lg:text-[11.5vw] font-bold font-serif leading-[0.7] tracking-tighter uppercase block w-full text-[#1c1917] text-left">
+                    Tobias
+                </span>
+                <span
+                    class="text-[17vw] md:text-[14vw] lg:text-[11.5vw] font-bold font-serif leading-[0.7] tracking-tighter uppercase block w-full text-[#1c1917] text-right mt-1 md:mt-0">
+                    Estivalete
+                </span>
+            </div>
+        </section>
+
+    </div> <!-- FIM DO WRAPPER GERAL -->
+
+    <!-- Motor de Sincronia de Banco de Dados via Planilha do Google (PapaParse) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+
+            const vaultGrid = document.getElementById('vault-grid');
+            const sheetId = '15qenJ8v-444LncgBOonfTkOoe-bNgxd6CUGXWGXZ3d0';
+            const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv`;
+
+            if (vaultGrid) {
+                Papa.parse(SHEET_CSV_URL, {
+                    download: true,
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: function (results) {
+                        const data = results.data;
+                        if (data && data.length > 0) {
+                            vaultGrid.innerHTML = ''; // Limpa o carregamento
+
+                            data.forEach((row, index) => {
+                                const num = row.numero ? String(row.numero).trim().padStart(2, '0') : String(index + 1).padStart(2, '0');
+                                const titulo = row.titulo ? row.titulo : 'Sem título';
+                                const desc = row.descricao ? row.descricao : '';
+                                const link = row.link ? row.link : '#';
+                                const rotulo = row.rotulo ? row.rotulo : 'Acessar';
+
+                                const clickBehavior = `target="_blank" rel="noopener noreferrer"`;
+
+                                // Animação Delay pra ficar em escadinha
+                                const delay = index * 100;
+
+                                const cardHTML = `
+                                    <a href="${link}" ${clickBehavior}
+                                        class="group bg-white border border-stone-200 p-8 flex flex-col justify-between min-h-[280px] w-full transition-all duration-500 hover:border-stone-400 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 relative overflow-hidden vault-card" style="opacity: 0; transform: translateY(20px);">
+                                        <div class="absolute top-0 left-0 w-full h-[3px] bg-stone-200 group-hover:bg-[#1c1917] transition-colors duration-500"></div>
+                                        <div>
+                                            <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-stone-400 mb-4 block">Arquivo ${num}</span>
+                                            <h4 class="font-serif text-2xl text-[#1c1917] mb-3 group-hover:text-black transition-colors">${titulo}</h4>
+                                            <p class="font-sans text-[13px] text-stone-500 leading-relaxed font-light">${desc}</p>
+                                        </div>
+                                        <div class="mt-8 flex items-center justify-between">
+                                            <span class="text-[11px] font-sans font-medium uppercase tracking-widest text-[#1c1917]">${rotulo}</span>
+                                            <i data-lucide="external-link" class="w-4 h-4 text-stone-300 group-hover:text-[#1c1917] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"></i>
+                                        </div>
+                                    </a>
+                                `;
+                                vaultGrid.insertAdjacentHTML('beforeend', cardHTML);
+                            });
+
+                            if (window.lucide) lucide.createIcons();
+
+                            // Anima os cards garantindo que ficarão visíveis
+                            if (window.gsap) {
+                                gsap.to(".vault-card", {
+                                    opacity: 1,
+                                    y: 0,
+                                    duration: 1.2,
+                                    stagger: 0.15,
+                                    ease: "power3.out"
+                                });
+                            }
+                        } else {
+                            vaultGrid.innerHTML = '<div class="col-span-full text-center text-stone-500 font-sans">O cofre está vazio no momento.</div>';
+                        }
+                    },
+                    error: function (err) {
+                        vaultGrid.innerHTML = '<div class="col-span-full text-center text-stone-400 font-mono text-sm tracking-widest uppercase">Falha na conexão com a central.</div>';
+                        console.error('Erro de sincronia Vault:', err);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
