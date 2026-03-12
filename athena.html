@@ -11,7 +11,7 @@
     <meta name="description"
         content="Um sistema estratégico para mulheres que querem recuperar energia, foco e organização da saúde cognitiva e vascular.">
 
-    <!-- preload do vídeo se possível, mas como é grande, vamos apenas precarregar a estrutura -->
+    <!-- Preload -->
     <link rel="preload" href="assets/img/athena_hero_v2.png" as="image">
 
     <!-- Google Fonts -->
@@ -97,15 +97,6 @@
             border: 8px solid rgba(255, 255, 255, 1);
         }
 
-        .video-container::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
-            pointer-events: none;
-            border-radius: 24px;
-        }
-
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -128,12 +119,6 @@
             box-shadow: 0 30px 60px -10px rgba(197, 160, 89, 0.4);
         }
 
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1), transparent);
-            width: 100%;
-        }
-
         .bg-gradient-soft {
             background: radial-gradient(circle at top right, rgba(197, 160, 89, 0.05), transparent 40%),
                 radial-gradient(circle at bottom left, rgba(197, 160, 89, 0.05), transparent 40%);
@@ -152,49 +137,54 @@
 <body class="selection:bg-athena-gold selection:text-white bg-gradient-soft">
 
     <!-- NAVBAR -->
-    <nav class="fixed top-0 left-0 w-full z-50 py-5 px-6 md:px-12 flex justify-between items-center bg-white/70 backdrop-blur-xl border-b border-stone-200">
-        <a href="index.html" class="font-display font-bold tracking-tight text-xl text-stone-900 flex items-center group">
+    <nav class="fixed top-0 left-0 w-full z-50 py-4 px-6 md:px-12 flex justify-between items-center bg-white/80 backdrop-blur-xl border-b border-stone-200">
+        <a href="index.html" class="font-display font-bold tracking-tight text-lg md:text-xl text-stone-900 flex items-center group">
             <span class="w-8 h-8 bg-stone-900 text-white rounded-lg flex items-center justify-center mr-3 group-hover:bg-athena-gold transition-colors duration-500">
                 <i data-lucide="arrow-left" class="w-4 h-4"></i>
             </span>
             Tobias <span class="text-athena-gold ml-1">Estivalete</span>
         </a>
-        <div class="hidden md:flex items-center gap-8">
-            <a href="#checkout" class="btn-athena bg-athena-gold text-white px-8 py-3 rounded-full hover:bg-athena-gold/90 transition-all font-bold text-xs uppercase tracking-widest shadow-lg shadow-athena-gold/20">
-                Aderir ao Protocolo
+        <div class="flex items-center gap-4">
+            <div class="hidden md:flex items-center gap-8">
+                <a href="https://chk.eduzz.com/E9OOYGPQ9B" target="_blank" class="btn-athena bg-athena-gold text-white px-8 py-3 rounded-full hover:bg-athena-gold/90 transition-all font-bold text-xs uppercase tracking-widest shadow-lg shadow-athena-gold/20">
+                    Aderir ao Protocolo
+                </a>
+            </div>
+            <a href="https://chk.eduzz.com/E9OOYGPQ9B" target="_blank" class="md:hidden w-10 h-10 bg-athena-gold text-white rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-transform">
+                <i data-lucide="shopping-cart" class="w-5 h-5"></i>
             </a>
         </div>
-        <button class="md:hidden p-2 text-stone-900"><i data-lucide="menu" class="w-6 h-6"></i></button>
     </nav>
 
     <!-- 1. HERO SECTION -->
     <section class="relative min-h-screen pt-32 pb-24 px-6 md:px-12 flex flex-col items-center">
         <div class="max-w-6xl mx-auto w-full text-center">
-            <!-- Autoridade Topo -->
-            <div class="reveal-up flex flex-col items-center mb-10">
-                <div class="flex items-center gap-3 px-4 py-2 bg-stone-100 rounded-full border border-stone-200 mb-4">
-                    <span class="w-2 h-2 bg-athena-gold rounded-full animate-pulse"></span>
-                    <span class="text-[10px] font-mono font-bold text-stone-500 uppercase tracking-[0.2em]">Criado por Tobias Estivalete</span>
-                </div>
-                <p class="font-display text-xs md:text-sm text-stone-400 max-w-lg mx-auto uppercase tracking-widest leading-relaxed">
-                    Personal trainer com mais de 20 anos de experiência <br class="hidden md:block"> em saúde e performance feminina.
+            
+            <!-- 1.1 Autoridade Topo -->
+            <div class="reveal-up flex flex-col items-center mb-8">
+                <p class="font-display text-xs md:text-sm text-stone-900 font-bold uppercase tracking-[0.2em] mb-2 text-athena-gold">Criado por Tobias Estivalete</p>
+                <p class="font-display text-[10px] md:text-xs text-stone-400 max-w-lg mx-auto uppercase tracking-widest leading-relaxed">
+                    Personal trainer com mais de 20 anos de experiência em saúde e performance feminina.
                 </p>
             </div>
 
-            <!-- Título e Subtítulo -->
-            <header class="reveal-up mb-8 md:mb-16">
-                <h1 class="font-serif text-4xl md:text-8xl text-stone-900 leading-[1.1] mb-6 md:mb-10 tracking-tight italic">
+            <!-- 1.2 Headline -->
+            <header class="reveal-up mb-6">
+                <h1 class="font-serif text-4xl md:text-8xl text-stone-900 leading-[1.1] mb-6 tracking-tight italic">
                     Cansaço constante <br class="hidden md:block text-athena-gold">não é normal.
                 </h1>
-                <p class="font-display text-lg md:text-2xl text-stone-600 max-w-2xl mx-auto leading-relaxed font-light italic px-4">
-                    Existe uma forma mais inteligente de cuidar da sua energia, da sua cognição e da sua saúde cardiovascular.
-                </p>
             </header>
 
-            <!-- VÍDEO CENTRAL -->
-            <div class="reveal-up w-full max-w-[400px] mx-auto mb-10 md:mb-16 px-4 md:px-0">
+            <!-- 1.3 Subtítulo Humano -->
+            <div class="reveal-up mb-12">
+                <p class="font-display text-lg md:text-2xl text-stone-600 max-w-2xl mx-auto leading-relaxed font-light italic px-4">
+                    Existe uma forma mais inteligente de recuperar energia, clareza mental e cuidar da sua saúde cardiovascular.
+                </p>
+            </div>
+
+            <!-- 1.4 VÍDEO -->
+            <div class="reveal-up w-full max-w-[400px] mx-auto mb-12 px-4 md:px-0">
                 <div class="video-container aspect-[9/16] bg-stone-900 group relative shadow-2xl">
-                    <!-- YouTube Embed Otimizado para Vertical -->
                     <iframe 
                         id="vsl-video"
                         class="w-full h-full object-cover" 
@@ -204,8 +194,6 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                         allowfullscreen>
                     </iframe>
-                    
-                    <!-- Overlay de Som (Informativo, já que o YT silencia por padrão no autoplay) -->
                     <div id="unmute-overlay" class="absolute top-4 right-4 z-20 bg-black/60 backdrop-blur-md text-white px-4 py-2 rounded-full text-[10px] font-mono uppercase tracking-widest flex items-center gap-2 pointer-events-none opacity-80 transition-opacity duration-500 shadow-lg">
                         <i data-lucide="volume-x" class="w-3 h-3 text-athena-gold"></i>
                         Toque no player para som
@@ -213,42 +201,25 @@
                 </div>
             </div>
 
-            <!-- Botão Hero -->
-            <div class="reveal-up px-4">
-                <a href="#checkout" class="btn-athena w-full md:w-auto inline-flex items-center justify-center gap-4 bg-athena-gold text-white px-10 md:px-12 py-6 md:py-7 rounded-full text-xs md:text-sm font-bold uppercase tracking-[0.2em] shadow-2xl shadow-athena-gold/30">
-                    Conhecer o Protocolo Athena
-                    <i data-lucide="sparkles" class="w-5 h-5"></i>
+            <!-- 1.5 Preço + Parcelamento Hero -->
+            <div class="reveal-up mb-10 text-center">
+                <div class="flex flex-col items-center gap-1">
+                    <span class="font-serif text-3xl md:text-4xl text-stone-900 italic">R$ 397 à vista</span>
+                    <span class="text-athena-gold font-mono text-xs uppercase tracking-widest font-bold">ou 12x de R$ 33,08 sem juros</span>
+                </div>
+            </div>
+
+            <!-- 1.6 Botão Hero CTA -->
+            <div class="reveal-up px-4 flex flex-col items-center gap-4">
+                <a href="https://chk.eduzz.com/E9OOYGPQ9B" target="_blank" class="btn-athena w-full md:w-auto inline-flex items-center justify-center gap-4 bg-athena-gold text-white px-10 md:px-12 py-6 md:py-7 rounded-full text-sm md:text-base font-bold uppercase tracking-[0.2em] shadow-2xl shadow-athena-gold/40">
+                    Acessar o Protocolo Athena
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Adicionando script de interação para o som (Smartphones costumam exigir interação para som) -->
-    <script>
-        const video = document.getElementById('vsl-video');
-        const overlay = document.getElementById('unmute-overlay');
-        
-        if(video) {
-            video.addEventListener('click', () => {
-                if(video.muted) {
-                    video.muted = false;
-                    overlay.style.opacity = '0';
-                }
-            });
-            
-            // Tenta forçar o play caso o navegador bloqueie o autoplay automático
-            window.addEventListener('load', () => {
-                const playPromise = video.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(error => {
-                        console.log("Autoplay bloqueado pelo navegador, aguardando clique.");
-                    });
-                }
-            });
-        }
-    </script>
-
-    <!-- SEÇÃO — O PROBLEMA -->
+    <!-- 2. SEÇÃO — O CENÁRIO ATUAL (PROBLEMA) -->
     <section class="py-32 px-6 md:px-12 bg-stone-900 text-white overflow-hidden rounded-t-[60px]">
         <div class="max-w-4xl mx-auto">
             <header class="reveal-up text-center mb-20">
@@ -265,37 +236,45 @@
                     <p class="text-lg text-stone-400 font-light">
                         Muitas vezes a solução buscada é simplesmente tentar fazer mais. Mas energia feminina não depende apenas de esforço.
                     </p>
-                    <div class="p-6 border-l-2 border-athena-gold bg-white/5">
-                        <p class="text-xl font-serif italic text-white tracking-wide uppercase text-sm">Depende de estratégia.</p>
+                    <div class="p-10 border border-athena-gold/30 bg-white/5 rounded-[40px] text-center transform hover:scale-105 transition-transform duration-500 shadow-2xl shadow-athena-gold/10">
+                        <p class="text-3xl font-serif italic text-athena-gold tracking-wide uppercase">Depende de estratégia.</p>
                     </div>
                 </div>
 
-                <div class="reveal-up space-y-6">
+                <div class="reveal-up space-y-8">
                     <p class="text-stone-500 font-mono text-[10px] uppercase tracking-widest">O resultado aparece em forma de:</p>
-                    <ul class="space-y-4">
-                        <li class="flex items-center gap-4 group">
-                            <span class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-athena-gold group-hover:bg-athena-gold group-hover:text-white transition-all duration-500">•</span>
-                            <span class="text-xl font-light italic">Cansaço constante</span>
-                        </li>
-                        <li class="flex items-center gap-4 group">
-                            <span class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-athena-gold group-hover:bg-athena-gold group-hover:text-white transition-all duration-500">•</span>
-                            <span class="text-xl font-light italic">Queda de energia ao longo do dia</span>
-                        </li>
-                        <li class="flex items-center gap-4 group">
-                            <span class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-athena-gold group-hover:bg-athena-gold group-hover:text-white transition-all duration-500">•</span>
-                            <span class="text-xl font-light italic">Dificuldade de concentração</span>
-                        </li>
-                        <li class="flex items-center gap-4 group">
-                            <span class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-athena-gold group-hover:bg-athena-gold group-hover:text-white transition-all duration-500">•</span>
-                            <span class="text-xl font-light italic">Sensação de estar sempre no limite</span>
-                        </li>
-                    </ul>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="flex items-center gap-5 p-6 rounded-3xl bg-white/5 border border-white/10 group hover:border-athena-gold/50 transition-all duration-500">
+                            <div class="w-10 h-10 rounded-full bg-athena-gold/10 flex items-center justify-center text-athena-gold">
+                                <i data-lucide="battery-low" class="w-5 h-5"></i>
+                            </div>
+                            <span class="text-xl font-light italic text-stone-200">Cansaço constante</span>
+                        </div>
+                        <div class="flex items-center gap-5 p-6 rounded-3xl bg-white/5 border border-white/10 group hover:border-athena-gold/50 transition-all duration-500">
+                            <div class="w-10 h-10 rounded-full bg-athena-gold/10 flex items-center justify-center text-athena-gold">
+                                <i data-lucide="trending-down" class="w-5 h-5"></i>
+                            </div>
+                            <span class="text-xl font-light italic text-stone-200">Queda de energia ao longo do dia</span>
+                        </div>
+                        <div class="flex items-center gap-5 p-6 rounded-3xl bg-white/5 border border-white/10 group hover:border-athena-gold/50 transition-all duration-500">
+                            <div class="w-10 h-10 rounded-full bg-athena-gold/10 flex items-center justify-center text-athena-gold">
+                                <i data-lucide="cloud-off" class="w-5 h-5"></i>
+                            </div>
+                            <span class="text-xl font-light italic text-stone-200">Dificuldade de concentração</span>
+                        </div>
+                        <div class="flex items-center gap-5 p-6 rounded-3xl bg-white/5 border border-white/10 group hover:border-athena-gold/50 transition-all duration-500">
+                            <div class="w-10 h-10 rounded-full bg-athena-gold/10 flex items-center justify-center text-athena-gold">
+                                <i data-lucide="alert-circle" class="w-5 h-5"></i>
+                            </div>
+                            <span class="text-xl font-light italic text-stone-200">Sensação de estar sempre no limite</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SEÇÃO — A SOLUÇÃO -->
+    <!-- 3. SEÇÃO — A NOVA ESTRATÉGIA (SOLUÇÃO) -->
     <section class="py-32 px-6 md:px-12 bg-white rounded-b-[60px]">
         <div class="max-w-5xl mx-auto">
             <header class="reveal-up text-center mb-24">
@@ -315,18 +294,24 @@
                         O Protocolo Athena é um sistema estratégico que organiza três pilares fundamentais da saúde feminina:
                     </p>
                     <div class="grid grid-cols-1 gap-4">
-                        <div class="flex items-center gap-4 p-5 rounded-2xl bg-stone-50 border border-stone-100 group hover:border-athena-gold/30 transition-all duration-500">
+                        <div class="flex items-center gap-4 p-5 rounded-2xl bg-stone-50 border border-stone-100 italic font-serif text-xl text-stone-800">
                             <span class="w-2 h-2 rounded-full bg-athena-gold"></span>
-                            <span class="font-serif text-xl italic text-stone-800">Energia física</span>
+                            Energia física
                         </div>
-                        <div class="flex items-center gap-4 p-5 rounded-2xl bg-stone-50 border border-stone-100 group hover:border-athena-gold/30 transition-all duration-500">
+                        <div class="flex items-center gap-4 p-5 rounded-2xl bg-stone-50 border border-stone-100 italic font-serif text-xl text-stone-800">
                             <span class="w-2 h-2 rounded-full bg-athena-gold"></span>
-                            <span class="font-serif text-xl italic text-stone-800">Cognição</span>
+                            Cognição
                         </div>
-                        <div class="flex items-center gap-4 p-5 rounded-2xl bg-stone-50 border border-stone-100 group hover:border-athena-gold/30 transition-all duration-500">
+                        <div class="flex items-center gap-4 p-5 rounded-2xl bg-stone-50 border border-stone-100 italic font-serif text-xl text-stone-800">
                             <span class="w-2 h-2 rounded-full bg-athena-gold"></span>
-                            <span class="font-serif text-xl italic text-stone-800">Saúde cardiovascular</span>
+                            Saúde cardiovascular
                         </div>
+                    </div>
+                    <div class="bg-stone-900 text-white p-6 rounded-2xl shadow-xl">
+                        <p class="text-sm font-mono uppercase tracking-widest text-athena-gold mb-2">A Tangibilização</p>
+                        <p class="text-lg font-light leading-relaxed italic text-stone-200">
+                            Um protocolo com base científica + estrutura prática + assistente inteligente de adaptação da rotina.
+                        </p>
                     </div>
                     <p class="text-lg text-stone-500 font-light leading-relaxed">
                         A proposta não é adicionar mais tarefas à rotina. É estruturar o que realmente importa para sustentar energia e clareza mental ao longo do dia.
@@ -336,7 +321,7 @@
         </div>
     </section>
 
-    <!-- SEÇÃO — O QUE VOCÊ RECEBE -->
+    <!-- 4. SEÇÃO — AO ENTRAR NO ATHENA (RECURSOS) -->
     <section class="py-32 px-6 md:px-12 bg-[#F0EFEB]">
         <div class="max-w-6xl mx-auto">
             <header class="reveal-up text-center mb-24">
@@ -350,9 +335,9 @@
                     <div class="w-14 h-14 bg-stone-50 text-athena-gold rounded-2xl mb-8 flex items-center justify-center group-hover:bg-athena-gold group-hover:text-white transition-all duration-500">
                         <i data-lucide="book-open" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="font-serif text-2xl italic text-stone-900 mb-6">Dossiê científico Athena</h3>
+                    <h3 class="font-serif text-2xl italic text-stone-900 mb-6 font-bold">Dossiê científico Athena</h3>
                     <p class="text-stone-500 font-light leading-relaxed mb-6">
-                        Um material onde foram reunidas as publicações mais relevantes recentes sobre saúde feminina, cognição e sistema cardiovascular.
+                        Reúne as publicações mais relevantes recentes sobre saúde feminina, cognição e sistema cardiovascular.
                     </p>
                 </div>
 
@@ -361,9 +346,9 @@
                     <div class="w-14 h-14 bg-stone-50 text-athena-gold rounded-2xl mb-8 flex items-center justify-center group-hover:bg-athena-gold group-hover:text-white transition-all duration-500">
                         <i data-lucide="layout" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="font-serif text-2xl italic text-stone-900 mb-6">Apresentação estruturada</h3>
+                    <h3 class="font-serif text-2xl italic text-stone-900 mb-6 font-bold">Apresentação estruturada</h3>
                     <p class="text-stone-500 font-light leading-relaxed mb-6">
-                        Um guia claro mostrando como aplicar os princípios do método na prática, focado na rotina real de mulheres do mundo real.
+                        Mostra como aplicar os princípios do método na prática, de forma simples e adaptável à rotina real.
                     </p>
                 </div>
 
@@ -372,16 +357,16 @@
                     <div class="w-14 h-14 bg-stone-50 text-athena-gold rounded-2xl mb-8 flex items-center justify-center group-hover:bg-athena-gold group-hover:text-white transition-all duration-500">
                         <i data-lucide="bot" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="font-serif text-2xl italic text-stone-900 mb-6">Acesso ao Athena GPT</h3>
+                    <h3 class="font-serif text-2xl italic text-stone-900 mb-6 font-bold">Acesso ao Athena GPT</h3>
                     <p class="text-stone-500 font-light leading-relaxed mb-6">
-                        Um assistente inteligente que ajuda a adaptar o protocolo à sua rotina pessoal. Porque cada mulher tem uma realidade diferente.
+                        Ajuda a adaptar o protocolo à sua rotina pessoal, considerando sua realidade, seu tempo e seu contexto.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SEÇÃO — PARA QUEM É -->
+    <!-- 5. SEÇÃO — PARA QUEM FOI CRIADO (PÚBLICO) -->
     <section class="py-40 px-6 md:px-12 bg-white overflow-hidden">
         <div class="max-w-4xl mx-auto text-center">
             <header class="reveal-up mb-20 text-center flex flex-col items-center">
@@ -391,43 +376,56 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
                 <div class="reveal-up flex items-center gap-5 p-8 rounded-3xl bg-stone-50 border border-stone-100">
-                    <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center flex-shrink-0 text-athena-gold">
-                        <i data-lucide="users" class="w-5 h-5"></i>
+                    <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center flex-shrink-0 text-athena-gold animate-pulse">
+                        <i data-lucide="check-circle" class="w-5 h-5"></i>
                     </div>
-                    <span class="text-xl font-light italic text-stone-700">Mulheres que vivem rotinas intensas</span>
+                    <span class="text-lg font-light italic text-stone-700">Para mulheres que vivem rotinas intensas</span>
                 </div>
                 <div class="reveal-up flex items-center gap-5 p-8 rounded-3xl bg-stone-50 border border-stone-100">
                     <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center flex-shrink-0 text-athena-gold">
-                        <i data-lucide="sun" class="w-5 h-5"></i>
+                        <i data-lucide="check-circle" class="w-5 h-5"></i>
                     </div>
-                    <span class="text-xl font-light italic text-stone-700">Quem quer melhorar energia e clareza mental</span>
+                    <span class="text-lg font-light italic text-stone-700">Para quem quer melhorar energia e clareza mental</span>
                 </div>
                 <div class="reveal-up flex items-center gap-5 p-8 rounded-3xl bg-stone-50 border border-stone-100">
                     <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center flex-shrink-0 text-athena-gold">
-                        <i data-lucide="target" class="w-5 h-5"></i>
+                        <i data-lucide="check-circle" class="w-5 h-5"></i>
                     </div>
-                    <span class="text-xl font-light italic text-stone-700">Quem deseja cuidar da saúde de forma estratégica</span>
+                    <span class="text-lg font-light italic text-stone-700">Para quem deseja cuidar da saúde de forma estratégica</span>
                 </div>
                 <div class="reveal-up flex items-center gap-5 p-8 rounded-3xl bg-stone-50 border border-stone-100">
                     <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center flex-shrink-0 text-athena-gold">
-                        <i data-lucide="brain" class="w-5 h-5"></i>
+                        <i data-lucide="check-circle" class="w-5 h-5"></i>
                     </div>
-                    <span class="text-xl font-light italic text-stone-700">Procura um sistema inteligente, não apenas esforço</span>
+                    <span class="text-lg font-light italic text-stone-700">Para quem procura um sistema inteligente, e não apenas mais esforço</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SEÇÃO — ACESSO -->
-    <section id="checkout" class="py-32 px-6 md:px-12 bg-stone-50 pb-48">
+    <!-- 6. SEÇÃO — URGÊNCIA (NOVA) -->
+    <section class="py-24 px-6 md:px-12 bg-stone-100 border-y border-stone-200">
+        <div class="max-w-4xl mx-auto text-center reveal-up">
+            <span class="inline-block px-6 py-2 bg-stone-900 text-white text-[10px] uppercase tracking-[0.4em] font-bold rounded-full mb-8 animate-pulse">
+                Disponível apenas neste ciclo de abertura
+            </span>
+            <h3 class="font-serif text-3xl md:text-5xl text-stone-800 italic leading-tight mb-6">
+                O Protocolo Athena 1.0 está disponível apenas <br class="hidden md:block"> durante este período de lançamento.
+            </h3>
+            <p class="font-display text-stone-400 uppercase tracking-widest text-xs">Esta não é uma oferta permanente.</p>
+        </div>
+    </section>
+
+    <!-- 7. SEÇÃO — OFERTA FINAL -->
+    <section id="checkout" class="py-32 px-6 md:px-12 bg-white pb-48">
         <div class="max-w-4xl mx-auto">
             <div class="reveal-up glass-card p-12 md:p-20 rounded-[60px] border border-stone-200 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center gap-16">
                 <div class="absolute -top-24 -right-24 w-64 h-64 bg-athena-gold/10 rounded-full blur-[100px]"></div>
                 
                 <div class="w-full md:w-1/2">
                     <header class="mb-10">
-                        <span class="text-athena-gold font-mono text-[10px] uppercase tracking-[0.4em] mb-4 block">Oferta Exclusiva</span>
-                        <h2 class="font-serif text-4xl md:text-5xl text-stone-900 italic leading-tight mb-8">Acesso ao <br>Protocolo Athena</h2>
+                        <span class="text-athena-gold font-mono text-[10px] uppercase tracking-[0.4em] mb-4 block">Oferta de Lançamento</span>
+                        <h2 class="font-serif text-4xl md:text-5xl text-stone-900 italic leading-tight mb-8 font-bold">Acesso ao <br>Protocolo Athena</h2>
                     </header>
                     <ul class="space-y-5 mb-12">
                         <li class="flex items-center gap-4 text-stone-600 font-light italic">
@@ -445,28 +443,28 @@
                     </ul>
                 </div>
 
-                <div class="w-full md:w-1/2 flex flex-col items-center bg-white p-12 rounded-[40px] shadow-xl border border-stone-100">
-                    <span class="text-stone-400 font-mono text-[10px] uppercase tracking-widest mb-4">Investimento Total</span>
-                    <div class="flex flex-col items-center gap-2 mb-10">
-                        <span class="font-serif text-6xl md:text-7xl text-stone-900 italic">R$ 397</span>
-                        <span class="text-stone-400 text-sm font-mono tracking-widest uppercase">à vista</span>
+                <div class="w-full md:w-1/2 flex flex-col items-center bg-white p-8 md:p-12 rounded-[40px] shadow-xl border border-stone-100 relative z-10 scale-105 ring-1 ring-athena-gold/20">
+                    <span class="text-stone-400 font-mono text-[10px] uppercase tracking-widest mb-4">Valor Especial</span>
+                    <div class="flex flex-col items-center gap-2 mb-8">
+                        <span class="font-serif text-6xl md:text-8xl text-stone-900 italic font-bold">R$ 397</span>
+                        <span class="text-stone-400 text-sm font-mono tracking-widest uppercase italic font-bold">à vista</span>
                     </div>
-                    <div class="text-center mb-10">
-                        <p class="text-stone-600 font-light italic text-lg mb-1">ou 12x de <span class="text-stone-900 font-bold">R$ 33,08</span></p>
-                        <p class="text-athena-gold font-mono text-[10px] uppercase tracking-widest font-bold">sem juros</p>
+                    <div class="text-center mb-10 w-full p-6 bg-stone-50 rounded-2xl border border-stone-100">
+                        <p class="text-stone-600 font-light italic text-xl mb-1">ou 12x de <span class="text-stone-900 font-extrabold">R$ 33,08</span></p>
+                        <p class="text-athena-gold font-mono text-xs uppercase tracking-widest font-bold">sem juros no cartão</p>
                     </div>
-                    <a href="https://chk.eduzz.com/E9OOYGPQ9B" class="btn-athena w-full bg-athena-gold text-white py-6 rounded-2xl text-center text-xs font-bold uppercase tracking-[0.3em] shadow-xl shadow-athena-gold/30">
+                    <a href="https://chk.eduzz.com/E9OOYGPQ9B" target="_blank" class="btn-athena w-full bg-athena-gold text-white py-6 rounded-2xl text-center text-sm font-bold uppercase tracking-[0.3em] shadow-xl shadow-athena-gold/30 block">
                         Acessar o Protocolo Athena
                     </a>
                     <p class="mt-8 text-stone-400 text-[10px] font-mono uppercase tracking-widest flex items-center gap-2 italic">
-                        <i data-lucide="shield-check" class="w-4 h-4 text-athena-gold"></i> 7 dias de garantia
+                        <i data-lucide="shield-check" class="w-4 h-4 text-athena-gold"></i> 7 dias de garantia incondicional
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SEÇÃO FINAL -->
+    <!-- 8. SEÇÃO FINAL -->
     <section class="py-32 px-6 md:px-12 bg-stone-900 text-white text-center relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 grayscale pointer-events-none">
             <img src="assets/img/athena_hero_v2.png" alt="" class="w-full h-full object-cover">
@@ -482,8 +480,8 @@
                 </p>
             </div>
             <div class="reveal-up">
-                <a href="#checkout" class="btn-athena inline-block bg-white text-stone-900 px-16 py-7 rounded-full text-xs font-bold uppercase tracking-[0.3em] shadow-2xl hover:bg-stone-100">
-                    Começar agora
+                <a href="https://chk.eduzz.com/E9OOYGPQ9B" target="_blank" class="btn-athena inline-block bg-white text-stone-900 px-16 py-7 rounded-full text-xs font-bold uppercase tracking-[0.3em] shadow-2xl hover:bg-stone-100">
+                    Acessar o Protocolo Athena
                 </a>
             </div>
         </div>
@@ -523,14 +521,13 @@
             gsap.to(elem, {
                 scrollTrigger: {
                     trigger: elem,
-                    start: "top 90%",
+                    start: "top 95%",
                     toggleActions: "play none none none"
                 },
                 opacity: 1,
                 y: 0,
                 duration: 1.5,
-                ease: "expo.out",
-                stagger: 0.2
+                ease: "expo.out"
             });
         });
     </script>
