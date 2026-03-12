@@ -194,19 +194,21 @@
             <!-- VÍDEO CENTRAL -->
             <div class="reveal-up w-full max-w-[400px] mx-auto mb-10 md:mb-16 px-4 md:px-0">
                 <div class="video-container aspect-[9/16] bg-stone-900 group relative shadow-2xl">
-                    <!-- Autoplay, Muted e Playsinline são CRÍTICOS para rodar em smartphones sem bloqueio do navegador -->
-                    <video id="vsl-video" class="w-full h-full object-cover" 
-                           autoplay muted playsinline loop controls
-                           poster="assets/img/athena_hero_v2.png">
-                        <source src="assets/vid/video_athena.mov" type="video/quicktime">
-                        <source src="assets/vid/video_athena.mov" type="video/mp4">
-                        Seu navegador não suporta vídeos.
-                    </video>
+                    <!-- YouTube Embed Otimizado para Vertical -->
+                    <iframe 
+                        id="vsl-video"
+                        class="w-full h-full object-cover" 
+                        src="https://www.youtube.com/embed/6EgnnI-MNlQ?autoplay=1&mute=1&loop=1&playlist=6EgnnI-MNlQ&controls=1&rel=0&modestbranding=1&playsinline=1" 
+                        title="Protocolo Athena VSL" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
                     
-                    <!-- Overlay de Som -->
-                    <div id="unmute-overlay" class="absolute top-4 right-4 z-20 bg-black/60 backdrop-blur-md text-white px-4 py-2 rounded-full text-[10px] font-mono uppercase tracking-widest flex items-center gap-2 pointer-events-none opacity-100 transition-opacity duration-500 shadow-lg">
+                    <!-- Overlay de Som (Informativo, já que o YT silencia por padrão no autoplay) -->
+                    <div id="unmute-overlay" class="absolute top-4 right-4 z-20 bg-black/60 backdrop-blur-md text-white px-4 py-2 rounded-full text-[10px] font-mono uppercase tracking-widest flex items-center gap-2 pointer-events-none opacity-80 transition-opacity duration-500 shadow-lg">
                         <i data-lucide="volume-x" class="w-3 h-3 text-athena-gold"></i>
-                        Toque para som
+                        Toque no player para som
                     </div>
                 </div>
             </div>
