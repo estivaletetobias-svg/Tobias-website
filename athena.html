@@ -182,41 +182,69 @@
             </div>
 
             <!-- Título e Subtítulo -->
-            <header class="reveal-up mb-16">
-                <h1 class="font-serif text-5xl md:text-8xl text-stone-900 leading-[1] mb-10 tracking-tight italic">
+            <header class="reveal-up mb-8 md:mb-16">
+                <h1 class="font-serif text-4xl md:text-8xl text-stone-900 leading-[1.1] mb-6 md:mb-10 tracking-tight italic">
                     Cansaço constante <br class="hidden md:block text-athena-gold">não é normal.
                 </h1>
-                <p class="font-display text-xl md:text-2xl text-stone-600 max-w-3xl mx-auto leading-relaxed font-light italic">
+                <p class="font-display text-lg md:text-2xl text-stone-600 max-w-2xl mx-auto leading-relaxed font-light italic px-4">
                     Existe uma forma mais inteligente de cuidar da sua energia, da sua cognição e da sua saúde cardiovascular.
                 </p>
             </header>
 
             <!-- VÍDEO CENTRAL -->
-            <div class="reveal-up w-full max-w-5xl mx-auto mb-16 px-2">
-                <div class="video-container aspect-video bg-stone-900 group">
-                    <video class="w-full h-full object-cover" controls poster="assets/img/athena_hero_v2.png">
+            <div class="reveal-up w-full max-w-5xl mx-auto mb-10 md:mb-16 px-0 md:px-2">
+                <div class="video-container aspect-video bg-stone-900 group relative">
+                    <!-- Autoplay, Muted e Playsinline são CRÍTICOS para rodar em smartphones sem bloqueio do navegador -->
+                    <video id="vsl-video" class="w-full h-full object-cover" 
+                           autoplay muted playsinline loop controls
+                           poster="assets/img/athena_hero_v2.png">
                         <source src="assets/vid/video_athena.mov" type="video/quicktime">
                         <source src="assets/vid/video_athena.mov" type="video/mp4">
                         Seu navegador não suporta vídeos.
                     </video>
-                    <!-- Play Overlay (visual only) -->
-                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none group-hover:opacity-0 transition-opacity duration-500">
-                        <div class="w-20 h-20 bg-athena-gold/90 text-white rounded-full flex items-center justify-center backdrop-blur-sm shadow-2xl">
-                            <i data-lucide="play" class="w-8 h-8 fill-current translate-x-1"></i>
-                        </div>
+                    
+                    <!-- Overlay de Som (Opcional, mas ajuda no UX de VSL) -->
+                    <div id="unmute-overlay" class="absolute top-4 right-4 z-20 bg-black/40 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-[10px] font-mono uppercase tracking-widest flex items-center gap-2 pointer-events-none opacity-100 transition-opacity duration-500">
+                        <i data-lucide="volume-x" class="w-3 h-3 text-athena-gold"></i>
+                        Vídeo Mudo (toque para som)
                     </div>
                 </div>
             </div>
 
             <!-- Botão Hero -->
-            <div class="reveal-up">
-                <a href="#checkout" class="btn-athena inline-flex items-center gap-4 bg-athena-gold text-white px-12 py-7 rounded-full text-sm font-bold uppercase tracking-[0.2em] shadow-2xl shadow-athena-gold/30">
+            <div class="reveal-up px-4">
+                <a href="#checkout" class="btn-athena w-full md:w-auto inline-flex items-center justify-center gap-4 bg-athena-gold text-white px-10 md:px-12 py-6 md:py-7 rounded-full text-xs md:text-sm font-bold uppercase tracking-[0.2em] shadow-2xl shadow-athena-gold/30">
                     Conhecer o Protocolo Athena
                     <i data-lucide="sparkles" class="w-5 h-5"></i>
                 </a>
             </div>
         </div>
     </section>
+
+    <!-- Adicionando script de interação para o som (Smartphones costumam exigir interação para som) -->
+    <script>
+        const video = document.getElementById('vsl-video');
+        const overlay = document.getElementById('unmute-overlay');
+        
+        if(video) {
+            video.addEventListener('click', () => {
+                if(video.muted) {
+                    video.muted = false;
+                    overlay.style.opacity = '0';
+                }
+            });
+            
+            // Tenta forçar o play caso o navegador bloqueie o autoplay automático
+            window.addEventListener('load', () => {
+                const playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("Autoplay bloqueado pelo navegador, aguardando clique.");
+                    });
+                }
+            });
+        }
+    </script>
 
     <!-- SEÇÃO — O PROBLEMA -->
     <section class="py-32 px-6 md:px-12 bg-stone-900 text-white overflow-hidden rounded-t-[60px]">
