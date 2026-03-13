@@ -366,16 +366,23 @@
                     
                     <div class="relative reveal-up">
                         <div class="aspect-video glass-card rounded-3xl overflow-hidden relative group">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="w-20 h-20 rounded-full bg-royal-blue/20 flex items-center justify-center group-hover:scale-110 transition-transform cursor-pointer">
-                                    <i data-lucide="play" class="w-8 h-8 text-royal-blue fill-royal-blue"></i>
-                                </div>
-                            </div>
-                            <img src="https://images.unsplash.com/photo-1532187875605-1ef6c237b129?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover opacity-20" alt="Tech Background">
+                            <video 
+                                autoplay 
+                                muted 
+                                loop 
+                                playsinline 
+                                class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700"
+                            >
+                                <source src="Esquilo Vídeo.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                             
+                            <!-- Overlay gradient to maintain readability and aesthetic -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-deep-black/80 via-transparent to-deep-black/20 pointer-events-none"></div>
+
                             <!-- Floating Data -->
-                            <div class="absolute top-6 left-6 p-3 bg-deep-black/60 rounded border border-white/5 font-mono text-[8px] text-slate-400">
-                                <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-green-500 rounded-full"></div> LNX_PROTOCOL: SYNCED</div>
+                            <div class="absolute top-6 left-6 p-3 bg-deep-black/60 rounded border border-white/5 font-mono text-[8px] text-slate-400 z-20">
+                                <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div> LNX_PROTOCOL: SYNCED</div>
                             </div>
                         </div>
                         
