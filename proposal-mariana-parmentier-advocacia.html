@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <title>Proposta Digital | Mariana Parmentier - Tobias Estivalete</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Lenis -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        serif: ['Libre Baskerville', 'serif'],
+                    },
+                    colors: {
+                        stone: {
+                            50: '#fafaf9',
+                            100: '#f5f5f4',
+                            200: '#e7e5e4',
+                            300: '#d6d3d1',
+                            400: '#a8a29e',
+                            500: '#78716c',
+                            600: '#57534e',
+                            700: '#44403c',
+                            800: '#292524',
+                            900: '#1c1917',
+                        },
+                        'surface-light': '#EAEAE5',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #EAEAE5;
+            color: #1C1C1C;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .proposal-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-premium {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            letter-spacing: 0.25em;
+        }
+
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 9999;
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAAAAP///8AODg6qqqp2dnafMTGfMzOPL/yWAAAAAXRSTlMAQObVGgAAAJNJREFUOMuV1NEJwzAMBVDfD/n5Xy2ZIFvoP0wQoRCDrC/1yEHT95h2/B2hXN8+yvV7pPpdUh2tTqo+vupotXqq+viXo/XfTqve/7V43E6rz+149Xw+j1ePp1UfL6tVP1+OVofTqtezo9Xz+Txe9b9Vv19Hq4/DqvfrsOr37Wj1vB2vnq/Hq9evw6rPs8Oqz1x1uAH7FzK2p8d+4gAAAABJRU5ErkJggg==");
+        }
+
+        .mockup-container {
+            perspective: 1000px;
+        }
+
+        .mockup-image {
+            transform: rotateY(-5deg) rotateX(5deg);
+            box-shadow: -20px 40px 80px rgba(0,0,0,0.1);
+            transition: all 0.8s ease;
+        }
+
+        .mockup-image:hover {
+            transform: rotateY(0deg) rotateX(0deg);
+        }
+    </style>
+</head>
+
+<body class="selection:bg-stone-800 selection:text-white">
+
+    <div class="noise-overlay"></div>
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 w-full z-50 py-6 px-6 md:px-12 flex justify-between items-center bg-[#EAEAE5]/80 backdrop-blur-md border-b border-stone-300">
+        <div class="font-display font-medium tracking-tight text-lg text-stone-900 group">
+            Tobias <span class="text-stone-400 ml-1 transition-colors group-hover:text-stone-600">Estivalete</span>
+        </div>
+        <div class="text-[10px] font-mono uppercase tracking-[0.3em] text-stone-500">
+            Proposta Digital v1.0
+        </div>
+    </nav>
+
+    <!-- 1. HERO -->
+    <header class="relative min-h-screen pt-48 pb-24 px-6 md:px-12 flex flex-col items-center justify-center text-center overflow-hidden">
+        <div class="max-w-4xl mx-auto z-10">
+            <span class="reveal-up inline-block text-[10px] font-mono uppercase tracking-[0.4em] text-stone-500 mb-6 bg-white/50 px-4 py-1.5 rounded-full border border-stone-300">
+                Proposta Exclusiva Para
+            </span>
+            <h1 class="reveal-up font-serif text-5xl md:text-8xl text-stone-900 leading-[1] mb-8 italic">
+                Mariana <br>Parmentier
+            </h1>
+            <p class="reveal-up font-display text-lg md:text-xl text-stone-600 max-w-2xl mx-auto leading-relaxed font-light mb-12">
+                A estruturação de uma presença digital jurídica que une autoridade, sofisticação e conversão estratégica.
+            </p>
+            <div class="reveal-up flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#proposta" class="btn-premium px-10 py-5 bg-stone-900 text-white text-[11px] font-mono uppercase tracking-[0.2em] rounded-full shadow-2xl hover:bg-stone-800">
+                    Ver Proposta Completa
+                </a>
+            </div>
+        </div>
+        
+        <!-- Abstract background elements -->
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-stone-300/20 blur-[120px] rounded-full"></div>
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-stone-300/30 blur-[120px] rounded-full"></div>
+    </header>
+
+    <!-- 2. VISÃO DO PROJETO -->
+    <section id="visao" class="py-32 px-6 md:px-12 border-t border-stone-300">
+        <div class="max-w-[1440px] mx-auto grid md:grid-cols-2 gap-20 items-center">
+            <div class="reveal-up">
+                <span class="text-xs font-mono uppercase text-stone-500 mb-4 block tracking-widest">01 / Visão</span>
+                <h2 class="text-4xl md:text-6xl text-stone-900 font-serif italic mb-8">Autoridade em um mercado saturado.</h2>
+                <div class="space-y-6 text-stone-600 font-light leading-relaxed text-lg">
+                    <p>No Direito, a primeira impressão não é apenas visual; é uma demonstração de competência técnica e organização.</p>
+                    <p>A proposta para Mariana Parmentier em Florianópolis foca em criar um hub digital que não apenas apresenta serviços, mas estabelece o padrão de excelência esperado por clientes de Direito Empresarial e Tributário.</p>
+                </div>
+            </div>
+            <div class="reveal-up mockup-container">
+                <img src="assets/img/mariana_parmentier_mockup.png" alt="Preview da Plataforma" class="w-full h-auto rounded-2xl mockup-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. PLATAFORMA PROPOSTA -->
+    <section id="proposta" class="py-32 px-6 md:px-12 bg-white">
+        <div class="max-w-4xl mx-auto text-center reveal-up mb-24">
+            <span class="text-xs font-mono uppercase text-stone-400 mb-4 block tracking-widest">02 / A Solução</span>
+            <h2 class="text-4xl md:text-6xl text-stone-900 font-serif italic mb-8">Plataforma de Autoridade Jurídica</h2>
+            <p class="text-stone-500 font-light text-xl italic">Um sistema desenhado para captar e converter.</p>
+        </div>
+
+        <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+            <div class="reveal-up p-10 border border-stone-200 rounded-[40px] hover:border-stone-900 transition-colors duration-700 bg-stone-50/50">
+                <div class="w-12 h-12 bg-stone-900 text-white rounded-xl flex items-center justify-center mb-8">
+                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                </div>
+                <h3 class="font-serif text-2xl italic text-stone-900 mb-4">Autoridade Superior</h3>
+                <p class="text-stone-500 font-light leading-relaxed">Design que comunica experiência em questões complexas de Direito Empresarial e Tributário.</p>
+            </div>
+            <div class="reveal-up p-10 border border-stone-200 rounded-[40px] hover:border-stone-900 transition-colors duration-700 bg-stone-50/50 md:translate-y-8">
+                <div class="w-12 h-12 bg-stone-900 text-white rounded-xl flex items-center justify-center mb-8">
+                    <i data-lucide="target" class="w-6 h-6"></i>
+                </div>
+                <h3 class="font-serif text-2xl italic text-stone-900 mb-4">Captura Eficiente</h3>
+                <p class="text-stone-500 font-light leading-relaxed">Fluxos otimizados para que o cliente em potencial chegue ao seu WhatsApp em poucos cliques.</p>
+            </div>
+            <div class="reveal-up p-10 border border-stone-200 rounded-[40px] hover:border-stone-900 transition-colors duration-700 bg-stone-50/50 md:translate-y-16">
+                <div class="w-12 h-12 bg-stone-900 text-white rounded-xl flex items-center justify-center mb-8">
+                    <i data-lucide="search" class="w-6 h-6"></i>
+                </div>
+                <h3 class="font-serif text-2xl italic text-stone-900 mb-4">Visibilidade SEO</h3>
+                <p class="text-stone-500 font-light leading-relaxed">Arquitetura preparada para Google, focada no seu mercado em Florianópolis e atuação remota.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. ESTRUTURA DO SITE -->
+    <section class="py-32 px-6 md:px-12 bg-stone-900 text-white">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-20">
+            <div class="md:w-1/3 reveal-up">
+                <span class="text-xs font-mono uppercase text-stone-500 mb-4 block tracking-widest">03 / Estrutura</span>
+                <h2 class="text-4xl md:text-6xl font-serif italic mb-8">Entregáveis do Projeto</h2>
+                <p class="text-stone-400 font-light">Tudo o que está incluso no desenvolvimento completo.</p>
+            </div>
+            <div class="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-12 reveal-up">
+                <div class="space-y-4">
+                    <div class="h-px bg-stone-800 w-full mb-8"></div>
+                    <h4 class="font-serif text-xl italic text-stone-200">Website Principal</h4>
+                    <p class="text-stone-500 font-light text-sm">Design moderno, premium e 100% responsivo para todos os dispositivos.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="h-px bg-stone-800 w-full mb-8"></div>
+                    <h4 class="font-serif text-xl italic text-stone-200">Áreas de Atuação</h4>
+                    <p class="text-stone-500 font-light text-sm">Páginas específicas detalhando consultoria empresarial, tributária e atuação judicial.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="h-px bg-stone-800 w-full mb-8"></div>
+                    <h4 class="font-serif text-xl italic text-stone-200">Conteúdo Jurídico</h4>
+                    <p class="text-stone-500 font-light text-sm">Seção estruturada para publicação de artigos e análises, gerando autoridade técnica.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="h-px bg-stone-800 w-full mb-8"></div>
+                    <h4 class="font-serif text-xl italic text-stone-200">Integração Total</h4>
+                    <p class="text-stone-500 font-light text-sm">Botões flutuantes e chamadas de ação diretas para o seu WhatsApp pessoal ou profissional.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="h-px bg-stone-800 w-full mb-8"></div>
+                    <h4 class="font-serif text-xl italic text-stone-200">SEO & Performance</h4>
+                    <p class="text-stone-500 font-light text-sm">Otimização técnica para carregamento ultra-rápido e indexação correta no Google.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="h-px bg-stone-800 w-full mb-8"></div>
+                    <h4 class="font-serif text-xl italic text-stone-200">Publicação Online</h4>
+                    <p class="text-stone-500 font-light text-sm">Configuração final no servidor e domínio para que o site esteja ativo em 24h pós entrega.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. INVESTIMENTO -->
+    <section class="py-32 px-6 md:px-12 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal-up text-center mb-24">
+                <span class="text-xs font-mono uppercase text-stone-400 mb-4 block tracking-widest">04 / Investimento</span>
+                <h2 class="text-4xl md:text-7xl text-stone-900 font-serif italic mb-8 italic">Valores e Condições</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 items-stretch">
+                <!-- Card Principal -->
+                <div class="reveal-up p-12 md:p-16 bg-stone-50 border border-stone-200 rounded-[60px] flex flex-col justify-between">
+                    <div>
+                        <span class="text-[10px] font-mono uppercase tracking-[0.3em] font-bold text-stone-400 mb-8 block">Projeto Completo</span>
+                        <h3 class="font-serif text-3xl md:text-4xl italic text-stone-900 mb-10">Desenvolvimento de Plataforma</h3>
+                        <div class="flex flex-col gap-2 mb-12">
+                            <span class="text-stone-400 text-sm font-mono uppercase italic tracking-widest">Total do Projeto</span>
+                            <span class="font-serif text-6xl md:text-7xl font-bold text-stone-900 italic">R$ 4.000</span>
+                        </div>
+                        <ul class="space-y-4 mb-16 text-stone-600 font-light italic">
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-stone-900"></i> Entrega em 7 a 10 dias úteis</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-stone-900"></i> 50% de sinal / 50% na entrega</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-stone-900"></i> Design exclusivo e premium</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card Manutenção -->
+                <div class="reveal-up p-12 md:p-16 bg-white border border-stone-200 rounded-[60px] flex flex-col justify-between relative overflow-hidden group hover:border-stone-900 transition-colors duration-700">
+                    <div>
+                        <span class="text-[10px] font-mono uppercase tracking-[0.3em] font-bold text-stone-400 mb-8 block">Opcional</span>
+                        <h3 class="font-serif text-3xl md:text-4xl italic text-stone-900 mb-10">Manutenção & Suporte</h3>
+                        <div class="flex flex-col gap-2 mb-12">
+                            <span class="text-stone-400 text-sm font-mono uppercase italic tracking-widest">Recorrência Mensal</span>
+                            <span class="font-serif text-6xl md:text-7xl font-bold text-stone-900 italic">R$ 97<span class="text-2xl">/mês</span></span>
+                        </div>
+                        <p class="text-stone-500 font-light mb-10 italic">Garanta que seu site esteja sempre online, seguro e atualizado sem preocupações técnicas.</p>
+                        <ul class="space-y-4 text-stone-600 font-light italic">
+                            <li class="flex items-center gap-3"><i data-lucide="cloud" class="w-4 h-4 text-stone-400"></i> Hospedagem inclusa</li>
+                            <li class="flex items-center gap-3"><i data-lucide="shield" class="w-4 h-4 text-stone-400"></i> Atualizações de segurança</li>
+                            <li class="flex items-center gap-3"><i data-lucide="settings" class="w-4 h-4 text-stone-400"></i> Pequenas alterações mensais</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. PRÓXIMOS PASSOS -->
+    <section class="py-32 px-6 md:px-12 bg-stone-50">
+        <div class="max-w-4xl mx-auto text-center reveal-up">
+            <h2 class="text-3xl md:text-5xl font-serif italic text-stone-900 mb-16 italic">Fluxo de Início</h2>
+            <div class="grid md:grid-cols-3 gap-8 text-left">
+                <div class="p-8 bg-white rounded-3xl border border-stone-200">
+                    <span class="text-[10px] font-mono text-stone-400 mb-4 block">01</span>
+                    <h4 class="font-serif italic text-xl mb-3 text-stone-800">Aprovação</h4>
+                    <p class="text-sm font-light text-stone-500">Acordo formal e pagamento inicial (50%) por PIX ou cartão.</p>
+                </div>
+                <div class="p-8 bg-white rounded-3xl border border-stone-200">
+                    <span class="text-[10px] font-mono text-stone-400 mb-4 block">02</span>
+                    <h4 class="font-serif italic text-xl mb-3 text-stone-800">Briefing</h4>
+                    <p class="text-sm font-light text-stone-500">Envio de materiais básicos (logotipo, fotos e textos iniciais).</p>
+                </div>
+                <div class="p-8 bg-white rounded-3xl border border-stone-200">
+                    <span class="text-[10px] font-mono text-stone-400 mb-4 block">03</span>
+                    <h4 class="font-serif italic text-xl mb-3 text-stone-800">Execução</h4>
+                    <p class="text-sm font-light text-stone-500">Desenvolvimento total e publicação em até 10 dias.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. CTA / SEÇÃO FINAL WHATSAPP -->
+    <section class="py-40 px-6 md:px-12 bg-white text-center flex flex-col items-center">
+        <div class="max-w-3xl mx-auto reveal-up">
+            <div class="w-16 h-1 bg-stone-900 mx-auto mb-16"></div>
+            <h2 class="font-serif text-4xl md:text-7xl text-stone-900 italic leading-tight mb-8 font-bold">
+                Vamos falar sobre a proposta?
+            </h2>
+            <p class="font-display text-xl text-stone-600 mb-16 font-light italic leading-relaxed">
+                Se esta proposta fizer sentido para você, podemos conversar rapidamente para alinhar os próximos passos e iniciar o projeto.
+            </p>
+            <a href="https://wa.me/5548999165612" target="_blank" class="btn-premium inline-flex items-center gap-4 bg-stone-900 text-white px-12 py-7 rounded-full text-xs font-mono uppercase tracking-[0.3em] shadow-2xl hover:bg-stone-800 transition-all">
+                Falar com Tobias no WhatsApp
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-16 px-6 md:px-12 bg-white border-t border-stone-200">
+        <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="font-display font-medium tracking-tight text-lg text-stone-900">
+                Tobias <span class="text-stone-400 ml-1">Estivalete</span>
+            </div>
+            <div class="text-[10px] font-mono text-stone-400 uppercase tracking-[0.3em]">
+                © 2026 — Estruturando Performance Digital
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        lucide.createIcons();
+
+        // Lenis Smooth Scroll
+        const lenis = new Lenis();
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray('.reveal-up').forEach((elem) => {
+            gsap.to(elem, {
+                scrollTrigger: {
+                    trigger: elem,
+                    start: "top 90%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1.5,
+                ease: "expo.out"
+            });
+        });
+    </script>
+</body>
+
+</html>
