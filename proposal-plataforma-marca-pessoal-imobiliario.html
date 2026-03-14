@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <title>Proposta | Eduardo Comerlatto - Tobias Estivalete</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Lenis -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        serif: ['Libre Baskerville', 'serif'],
+                    },
+                    colors: {
+                        stone: {
+                            50: '#fafaf9',
+                            100: '#f5f5f4',
+                            200: '#e7e5e4',
+                            300: '#d6d3d1',
+                            400: '#a8a29e',
+                            500: '#78716c',
+                            600: '#57534e',
+                            700: '#44403c',
+                            800: '#292524',
+                            900: '#1c1917',
+                        },
+                        'navy-deep': '#0A0E1A',
+                        'navy-accent': '#1B2436',
+                        'blue-soft': '#A5B4FC',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0E1A;
+            color: #E2E8F0;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .glass-dark {
+            background: rgba(27, 36, 54, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-executive {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-executive:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -10px rgba(165, 180, 252, 0.3);
+            letter-spacing: 0.45em;
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at top right, rgba(165, 180, 252, 0.08), transparent 50%),
+                        radial-gradient(circle at bottom left, rgba(16, 24, 40, 0.6), transparent 50%);
+        }
+
+        .noise {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 9999;
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAAAAP///8AODg6qqqp2dnafMTGfMzOPL/yWAAAAAXRSTlMAQObVGgAAAJNJREFUOMuV1NEJwzAMBVDfD/n5Xy2ZIFvoP0wQoRCDrC/1yEHT95h2/B2hXN8+yvV7pPpdUh2tTqo+vupotXqq+viXo/XfTqve/7V43E6rz+149Xw+j1ePp1UfL6tVP1+OVofTqtezo9Xz+Txe9b9Vv19Hq4/DqvfrsOr37Wj1vB2vnq/Hq9evw6rPs8Oqz1x1uAH7FzK2p8d+4gAAAABJRU5ErkJggg==");
+        }
+
+        .portrait-mask {
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+        }
+    </style>
+</head>
+
+<body class="selection:bg-blue-soft selection:text-navy-deep hero-gradient">
+
+    <div class="noise"></div>
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 w-full z-50 py-6 px-6 md:px-12 flex justify-between items-center bg-[#0A0E1A]/80 backdrop-blur-xl border-b border-white/5">
+        <div class="font-display font-medium tracking-tight text-lg text-white group">
+            Tobias <span class="text-stone-500 ml-1 transition-colors group-hover:text-blue-soft">Estivalete</span>
+        </div>
+        <div class="text-[10px] font-mono uppercase tracking-[0.4em] text-stone-500">
+            Executive Proposal v2.0
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="relative min-h-screen pt-48 pb-24 px-6 md:px-12 flex flex-col items-center justify-center text-center overflow-hidden">
+        <div class="max-w-5xl mx-auto z-10">
+            <span class="reveal-up inline-block text-[10px] font-mono uppercase tracking-[0.5em] text-blue-soft mb-8 bg-blue-soft/5 px-6 py-2 rounded-full border border-blue-soft/10">
+                Apresentação Estratégica
+            </span>
+            <h1 class="reveal-up font-serif text-5xl md:text-8xl text-white leading-[1] mb-10 italic">
+                Eduardo <br>Comerlatto
+            </h1>
+            <p class="reveal-up font-display text-lg md:text-2xl text-stone-400 max-w-3xl mx-auto leading-relaxed font-light mb-16">
+                Estrutura estratégica para apresentar a trajetória, os projetos e a visão profissional de um empresário do setor imobiliário.
+            </p>
+            <div class="reveal-up flex flex-col sm:flex-row gap-6 justify-center">
+                <a href="#proposta" class="btn-executive px-12 py-6 bg-white text-navy-deep text-[11px] font-mono uppercase tracking-[0.4em] font-bold rounded-full shadow-2xl">
+                    Iniciar Projeto
+                </a>
+            </div>
+        </div>
+        
+        <!-- Portrait in Hero (Subtle/Sophisticated) -->
+        <div class="absolute right-0 bottom-0 z-0 h-full w-full md:w-1/2 opacity-30 pointer-events-none">
+            <img src="assets/img/eduardo_portrait.png" alt="" class="h-full w-full object-cover object-top portrait-mask grayscale contrast-125">
+        </div>
+    </header>
+
+    <!-- VISÃO DO PROJETO -->
+    <section class="py-40 px-6 md:px-12 border-y border-white/5 relative bg-navy-accent/10">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-24 items-center">
+            <div class="reveal-up order-2 md:order-1 relative">
+                <div class="absolute -inset-4 border border-blue-soft/20 rounded-3xl translate-x-8 translate-y-8 z-0"></div>
+                <img src="assets/img/eduardo_portrait.png" alt="Eduardo Comerlatto" class="relative z-10 w-full h-auto rounded-3xl shadow-2xl border border-white/10 grayscale hover:grayscale-0 transition-all duration-1000">
+            </div>
+            <div class="reveal-up order-1 md:order-2">
+                <span class="text-xs font-mono uppercase text-stone-500 mb-6 block tracking-widest italic">Personalidade & Autoridade</span>
+                <h2 class="text-4xl md:text-6xl text-white font-serif italic mb-10">Consolidando sua trajetória.</h2>
+                <div class="space-y-8 text-stone-400 font-light leading-relaxed text-lg italic">
+                    <p>Muitos empresários possuem presença digital fragmentada. Um site pessoal bem estruturado permite centralizar sua influência corporativa e pessoal em um único hub de alta sofisticação.</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-4"><span class="w-1.5 h-1.5 bg-blue-soft rounded-full"></span> Apresentar sua trajetória única</li>
+                        <li class="flex items-center gap-4"><span class="w-1.5 h-1.5 bg-blue-soft rounded-full"></span> Organizar seus projetos e marcas</li>
+                        <li class="flex items-center gap-4"><span class="w-1.5 h-1.5 bg-blue-soft rounded-full"></span> Compartilhar ideias e visão de mercado</li>
+                        <li class="flex items-center gap-4"><span class="w-1.5 h-1.5 bg-blue-soft rounded-full"></span> Fortalecer posicionamento profissional</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- A PLATAFORMA PROPOSTA -->
+    <section id="proposta" class="py-40 px-6 md:px-12 text-center">
+        <div class="max-w-4xl mx-auto reveal-up mb-24">
+            <h2 class="text-4xl md:text-7xl text-white font-serif italic mb-10">A Solução</h2>
+            <p class="text-stone-500 font-light text-xl italic leading-relaxed">Transformando a marca pessoal de Eduardo Comerlatto em uma presença digital elegante, organizada e profissional.</p>
+        </div>
+
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+            <div class="reveal-up glass-dark p-12 rounded-[40px] border-t border-white/10 group hover:bg-navy-accent/40 transition-colors">
+                <i data-lucide="award" class="w-10 h-10 text-blue-soft mb-8 group-hover:scale-110 transition-transform"></i>
+                <h3 class="font-serif text-2xl text-white mb-4 italic">Marca Pessoal</h3>
+                <p class="text-stone-500 font-light leading-relaxed">Apresentação institucional e biografia profissional desenhadas para transmitir autoridade.</p>
+            </div>
+            <div class="reveal-up glass-dark p-12 rounded-[40px] border-t border-white/10 md:translate-y-8 group hover:bg-navy-accent/40 transition-colors">
+                <i data-lucide="layers" class="w-10 h-10 text-blue-soft mb-8 group-hover:scale-110 transition-transform"></i>
+                <h3 class="font-serif text-2xl text-white mb-4 italic">Projetos</h3>
+                <p class="text-stone-500 font-light leading-relaxed">Página dedicada a empreendimentos e marcas, servindo como seu portfólio executivo principal.</p>
+            </div>
+            <div class="reveal-up glass-dark p-12 rounded-[40px] border-t border-white/10 md:translate-y-16 group hover:bg-navy-accent/40 transition-colors">
+                <i data-lucide="calendar" class="w-10 h-10 text-blue-soft mb-8 group-hover:scale-110 transition-transform"></i>
+                <h3 class="font-serif text-2xl text-white mb-4 italic">Agenda & Hub</h3>
+                <p class="text-stone-500 font-light leading-relaxed">Integração com agenda pública e redes sociais, facilitando conexões estratégicas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOCKUP DESIGN PREVIEW -->
+    <section class="py-24 px-6 md:px-12 overflow-hidden">
+        <div class="max-w-6xl mx-auto flex flex-col items-center">
+            <div class="reveal-up w-full text-center mb-16">
+                 <span class="text-xs font-mono uppercase text-stone-500 mb-6 block tracking-widest italic">Design System Privado</span>
+                 <h2 class="text-4xl text-white font-serif italic mb-4">Prévia da Plataforma</h2>
+            </div>
+            <div class="reveal-up relative w-full max-w-5xl">
+                <div class="absolute -inset-10 bg-blue-soft/5 blur-[100px] rounded-full"></div>
+                <img src="assets/img/eduardo_mockup.png" alt="Preview Layout" class="relative z-10 w-full h-auto rounded-[40px] shadow-3xl">
+            </div>
+        </div>
+    </section>
+
+    <!-- OPÇÕES DE INVESTIMENTO -->
+    <section class="py-40 px-6 md:px-12 bg-white text-navy-deep rounded-[80px] mx-4 md:mx-12 my-20">
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal-up text-center mb-24 text-navy-deep">
+                <span class="text-xs font-mono uppercase text-stone-400 mb-6 block tracking-widest font-bold italic">Configurações de Projeto</span>
+                <h2 class="text-4xl md:text-8xl font-serif italic mb-8 italic">Investimento</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-stretch">
+                <!-- Opção 1 -->
+                <div class="reveal-up p-12 md:p-20 border border-stone-200 rounded-[60px] flex flex-col justify-between hover:border-navy-deep/20 transition-all bg-stone-50/30">
+                    <div>
+                        <div class="flex justify-between items-start mb-12">
+                            <div>
+                                <span class="text-[10px] font-mono uppercase tracking-[0.4em] font-bold text-stone-400 mb-3 block">Configuração 01</span>
+                                <h3 class="font-serif text-4xl italic font-bold">Marca Pessoal</h3>
+                            </div>
+                            <div class="text-right">
+                                <span class="font-serif text-3xl italic font-bold">R$ 4.000</span>
+                                <p class="text-[8px] font-mono uppercase tracking-widest text-stone-400 mt-1">À Vista</p>
+                            </div>
+                        </div>
+                        <div class="h-px bg-stone-200/50 w-full mb-12"></div>
+                        <ul class="space-y-5 mb-12 text-stone-600 font-light italic text-[15px]">
+                            <li class="flex items-center gap-4"><i data-lucide="check" class="w-5 h-5 text-navy-deep"></i> Home, Sobre, Projetos, Artigos, Contato</li>
+                            <li class="flex items-center gap-4"><i data-lucide="check" class="w-5 h-5 text-navy-deep"></i> Galeria de imagens & Biografia</li>
+                            <li class="flex items-center gap-4"><i data-lucide="check" class="w-5 h-5 text-navy-deep"></i> Integração com WhatsApp e Sociais</li>
+                            <li class="flex items-center gap-4 text-stone-400"><i data-lucide="clock" class="w-5 h-5"></i> 7 a 10 dias úteis</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Opção 2 -->
+                <div class="reveal-up p-12 md:p-20 bg-navy-deep text-white rounded-[60px] flex flex-col justify-between shadow-3xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-12">
+                        <span class="px-6 py-2 bg-blue-soft text-navy-deep rounded-full text-[10px] font-mono uppercase tracking-[0.2em] font-bold shadow-xl">Recomendado</span>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-start mb-12">
+                            <div>
+                                <span class="text-[10px] font-mono uppercase tracking-[0.4em] font-bold text-blue-soft/50 mb-3 block">Configuração 02</span>
+                                <h3 class="font-serif text-4xl italic font-bold text-white">Plataforma Executiva</h3>
+                            </div>
+                            <div class="text-right">
+                                <span class="font-serif text-3xl italic font-bold text-blue-soft">R$ 7.500</span>
+                                <p class="text-[8px] font-mono uppercase tracking-widest text-blue-soft/50 mt-1">À Vista</p>
+                            </div>
+                        </div>
+                        <div class="h-px bg-white/10 w-full mb-12"></div>
+                        <ul class="space-y-5 mb-12 text-stone-400 font-light italic text-[15px]">
+                            <li class="flex items-center gap-4 text-white"><i data-lucide="plus" class="w-5 h-5 text-blue-soft"></i> Estrutura de posicionamento completa</li>
+                            <li class="flex items-center gap-4"><i data-lucide="check" class="w-5 h-5 text-blue-soft"></i> Integração Google Agenda (Pública)</li>
+                            <li class="flex items-center gap-4"><i data-lucide="check" class="w-5 h-5 text-blue-soft"></i> Biblioteca de Insights & Pensamentos</li>
+                            <li class="flex items-center gap-4"><i data-lucide="check" class="w-5 h-5 text-blue-soft"></i> Calendário estratégico de conteúdo</li>
+                            <li class="flex items-center gap-4 text-stone-600"><i data-lucide="clock" class="w-5 h-5"></i> 10 a 14 dias úteis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRÓXIMOS PASSOS -->
+    <section class="py-40 px-6 md:px-12">
+        <div class="max-w-5xl mx-auto reveal-up">
+            <h2 class="text-3xl md:text-6xl font-serif italic text-white text-center mb-24 italic">Próximos Passos</h2>
+            <div class="grid md:grid-cols-4 gap-12 text-center md:text-left">
+                <div class="relative">
+                    <span class="text-7xl font-serif italic text-white/5 absolute -top-12 -left-4">01</span>
+                    <h4 class="font-serif italic text-2xl mb-4 text-white">Aprovação</h4>
+                    <p class="text-sm font-light text-stone-500 italic leading-relaxed">Alinhamento final de escopo e cronograma.</p>
+                </div>
+                <div class="relative">
+                    <span class="text-7xl font-serif italic text-white/5 absolute -top-12 -left-4">02</span>
+                    <h4 class="font-serif italic text-2xl mb-4 text-white">Diretrizes</h4>
+                    <p class="text-sm font-light text-stone-500 italic leading-relaxed">Reunião rápida para definir os pilares da sua narrativa.</p>
+                </div>
+                <div class="relative">
+                    <span class="text-7xl font-serif italic text-white/5 absolute -top-12 -left-4">03</span>
+                    <h4 class="font-serif italic text-2xl mb-4 text-white">Desenvolvimento</h4>
+                    <p class="text-sm font-light text-stone-500 italic leading-relaxed">Criação da arquitetura por Tobias Estivalete.</p>
+                </div>
+                <div class="relative">
+                    <span class="text-7xl font-serif italic text-white/5 absolute -top-12 -left-4">04</span>
+                    <h4 class="font-serif italic text-2xl mb-4 text-white">Entrega</h4>
+                    <p class="text-sm font-light text-stone-500 italic leading-relaxed">Lançamento oficial da sua plataforma executiva.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / SEÇÃO FINAL -->
+    <section class="py-40 px-6 md:px-12 text-center flex flex-col items-center relative overflow-hidden">
+        <div class="reveal-up max-w-4xl z-10 w-full">
+            <h2 class="font-serif text-5xl md:text-8xl text-white italic leading-[1] mb-12 font-bold">
+                Pronto para seu <br>posicionamento de elite?
+            </h2>
+            <p class="font-display text-xl text-stone-400 mb-20 font-light italic leading-relaxed max-w-3xl mx-auto">
+                Se essa proposta fizer sentido para você, podemos iniciar a construção da sua plataforma digital profissional ainda hoje.
+            </p>
+            
+            <div class="p-16 md:p-24 glass-dark rounded-[80px] border border-white/5 w-full shadow-3xl">
+                <h3 class="font-serif text-4xl text-white mb-8 italic">Vamos falar sobre a proposta?</h3>
+                <p class="text-stone-500 font-light italic mb-16 text-lg">Estou disponível para uma conversa rápida sobre o projeto ou para tirar suas dúvidas.</p>
+                <a href="https://wa.me/5548999165612" target="_blank" class="btn-executive inline-flex items-center gap-8 bg-white text-navy-deep px-16 py-8 rounded-full text-xs font-mono uppercase tracking-[0.5em] font-bold shadow-2xl">
+                    Falar com Tobias no WhatsApp
+                    <i data-lucide="message-square" class="w-6 h-6"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Subtle Glow -->
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[60vh] bg-blue-soft/10 blur-[180px] rounded-full -mb-[30vh]"></div>
+    </header>
+
+    <!-- FOOTER -->
+    <footer class="py-24 px-6 md:px-12 border-t border-white/5">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="font-display font-medium tracking-tight text-lg text-white">
+                Tobias <span class="text-stone-700 ml-1">Estivalete</span>
+            </div>
+            <div class="text-[10px] font-mono text-stone-700 uppercase tracking-[0.4em]">
+                © 2026 — Estruturando Presença Digital Executiva
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        lucide.createIcons();
+
+        // Lenis Smooth Scroll
+        const lenis = new Lenis();
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray('.reveal-up').forEach((elem) => {
+            gsap.to(elem, {
+                scrollTrigger: {
+                    trigger: elem,
+                    start: "top 95%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 1,
+                y: 0,
+                duration: 2,
+                ease: "expo.out"
+            });
+        });
+    </script>
+</body>
+
+</html>
